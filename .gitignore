@@ -1,0 +1,57 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+dist/
+build/
+kgot.egg-info/
+
+# Installer logs
+pip-log.txt
+
+# IDEs
+.idea/
+*.vscode/
+*.pycproj
+*.user
+*.pyproj.user
+
+# Data
+*.out
+*.err
+
+# Environments
+env/
+venv/
+
+# Config File
+**/config.json
+
+
+# settings
+*.ctrl
+
+# Results
+logs/*
+!logs/current_runs/
+snapshots/
+!logs/current_runs/**/snapshots
+apicache/
+
+# MacOsX
+.DS_Store
+
+# logs
+output.log
+llm_cost.json
+!logs/current_runs/**/output.log
+!logs/current_runs/**/llm_cost.json
+
+# Downloaded files
+kgot/tools/downloads/*
+

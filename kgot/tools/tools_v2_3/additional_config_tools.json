@@ -1,0 +1,8 @@
+[
+  {
+    "name": "HUGGINGFACE",
+    "env": {
+      "HUGGINGFACE_TOKEN": ""
+    }
+  }
+]

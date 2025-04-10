@@ -1,0 +1,11 @@
+{"type":"node","id":"0","labels":["ASEAN_bloc"]}
+{"type":"node","id":"1","labels":["Country"],"properties":{"capital":"Bandar Seri Begawan","capital_latitude":4.8909,"name":"Brunei","capital_longitude":114.9424}}
+{"type":"node","id":"2","labels":["Country"],"properties":{"capital":"Phnom Penh","capital_latitude":11.5783,"name":"Cambodia","capital_longitude":104.881}}
+{"type":"node","id":"3","labels":["Country"],"properties":{"capital":"Jakarta","capital_latitude":-6.2088,"name":"Indonesia","capital_longitude":106.8456}}
+{"type":"node","id":"4","labels":["Country"],"properties":{"capital":"Vientiane","capital_latitude":17.9757,"name":"Laos","capital_longitude":102.6331}}
+{"type":"node","id":"5","labels":["Country"],"properties":{"capital":"Kuala Lumpur","capital_latitude":3.139,"name":"Malaysia","capital_longitude":101.6869}}
+{"type":"relationship","id":"0","label":"contains","start":{"id":"0","labels":["ASEAN_bloc"]},"end":{"id":"1","labels":["Country"],"properties":{"capital":"Bandar Seri Begawan","capital_latitude":4.8909,"name":"Brunei","capital_longitude":114.9424}}}
+{"type":"relationship","id":"1","label":"contains","start":{"id":"0","labels":["ASEAN_bloc"]},"end":{"id":"2","labels":["Country"],"properties":{"capital":"Phnom Penh","capital_latitude":11.5783,"name":"Cambodia","capital_longitude":104.881}}}
+{"type":"relationship","id":"2","label":"contains","start":{"id":"0","labels":["ASEAN_bloc"]},"end":{"id":"3","labels":["Country"],"properties":{"capital":"Jakarta","capital_latitude":-6.2088,"name":"Indonesia","capital_longitude":106.8456}}}
+{"type":"relationship","id":"3","label":"contains","start":{"id":"0","labels":["ASEAN_bloc"]},"end":{"id":"4","labels":["Country"],"properties":{"capital":"Vientiane","capital_latitude":17.9757,"name":"Laos","capital_longitude":102.6331}}}
+{"type":"relationship","id":"4","label":"contains","start":{"id":"0","labels":["ASEAN_bloc"]},"end":{"id":"5","labels":["Country"],"properties":{"capital":"Kuala Lumpur","capital_latitude":3.139,"name":"Malaysia","capital_longitude":101.6869}}}

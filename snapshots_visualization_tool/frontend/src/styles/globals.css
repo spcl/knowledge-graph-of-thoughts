@@ -1,0 +1,24 @@
+/* Copyright (c) 2025 ETH Zurich.
+                   All rights reserved.
+
+Use of this source code is governed by a BSD-style license that can be
+found in the LICENSE file.
+
+Main authors: Lorenzo Paleari */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes moving-bar {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-moving-bar {
+  animation: moving-bar 1s linear infinite;
+}

@@ -1,0 +1,33 @@
+services:
+  neo4j:
+    container_name: knowledge_graph_neo4j
+    image: neo4j:5.26.2
+    ports:
+      - "${NEO4J_HTTP_PORT}:7474"
+      - "${NEO4J_BOLT_PORT}:7687"
+    environment:
+      - NEO4J_dbms_security_procedures_unrestricted=apoc.export.*,apoc.meta.*
+      - NEO4J_dbms_security_procedures_allowlist=apoc.*
+      - NEO4J_apoc_export_file_enabled=true
+      - NEO4J_apoc_import_file_enabled=true
+      - NEO4J_apoc_import_file_use__neo4j__config=true
+      - NEO4J_AUTH=${NEO4J_AUTH}
+      - NEO4J_PLUGINS=["apoc"]
+    volumes:
+      - ./snapshots:/import
+    user: "${UID}:${GID}"
+    healthcheck:
+      test: wget http://neo4j_knowledge_graph:7474/ || exit 1
+      interval: 10s
+      timeout: 20s
+      retries: 3
+      start_period: 20s
+    networks:
+      knowledge_graph:
+        aliases:
+          - neo4j_knowledge_graph
+
+networks:
+  knowledge_graph:
+    name: knowledge_graph
+    driver: bridge

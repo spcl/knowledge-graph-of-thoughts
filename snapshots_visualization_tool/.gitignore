@@ -1,0 +1,22 @@
+.vscode
+.DS_Store
+
+# ignore IntelliJ related files
+/.idea/
+
+# ignore local python virtual environment folder
+.venv/
+/venv
+venv
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# apoc extended procedures
+apoc-extended.jar
+
+# Ignore import files
+import/
+

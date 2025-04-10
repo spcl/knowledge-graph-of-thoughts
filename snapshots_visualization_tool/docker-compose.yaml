@@ -1,0 +1,80 @@
+version: "3"
+
+services:
+  neo4j:
+    container_name: visualization_tool_neo4j
+    image: neo4j:5.26.2
+    ports:
+      - "${NEO4J_HTTP_PORT}:7474"
+      - "${NEO4J_BOLT_PORT}:7687"
+    environment:
+      - NEO4J_AUTH=none
+      - NEO4J_dbms_security_procedures_unrestricted=apoc.export.*,apoc.import.*
+      - NEO4J_dbms_security_procedures_allowlist=apoc.*
+      - NEO4J_apoc_export_file_enabled=true
+      - NEO4J_apoc_import_file_enabled=true
+      - NEO4J_apoc_import_file_use__neo4j__config=true
+      - NEO4J_PLUGINS=["apoc"]
+    volumes:
+      - ./backend/db/import/files:/import/files
+    user: "${UID}:${GID}"
+    healthcheck:
+      test: wget http://${NEO4J_INTERNAL_HOST}:7474/ || exit 1
+      interval: 20s
+      timeout: 20s
+      retries: 3
+      start_period: 20s
+    networks:
+      visualization_tool:
+        aliases:
+          - neo4j
+  
+  next-app:
+    container_name: visualization_tool_frontend
+    build:
+      context: ./frontend
+      dockerfile: prod.Dockerfile
+      args:
+        API_URL: ${API_URL}
+        NEXT_PUBLIC_HOST: ${NEXT_PUBLIC_HOST}
+        NEO4J_EXTERNAL_HOST: ${NEO4J_EXTERNAL_HOST}
+        NEO4J_HTTP_PORT: ${NEO4J_HTTP_PORT}
+        NEO4J_BOLT_PORT: ${NEO4J_BOLT_PORT}
+    restart: always
+    ports:
+      - "${FRONTEND_PORT}:3000"
+    depends_on:
+      neo4j:
+        condition: service_healthy
+    networks:
+      visualization_tool:
+        aliases:
+          - frontend
+
+  visualization-tool-api:
+    container_name: visualization_tool_api
+    build:
+      context: ./backend/
+      dockerfile: Dockerfile
+      args:
+        API_PORT: ${API_PORT}
+        NEO4J_INTERNAL_HOST: ${NEO4J_INTERNAL_HOST}
+        UID: ${UID}
+        GID: ${GID}
+    ports:
+      - "${API_PORT}:443"
+    volumes:
+      - ./backend/db/import/files:/import/files
+    user: "${UID}:${GID}"
+    depends_on:
+      neo4j:
+        condition: service_healthy
+    networks:
+      visualization_tool:
+        aliases:
+          - api
+
+networks:
+  visualization_tool:
+    name: visualization_tool
+    driver: bridge

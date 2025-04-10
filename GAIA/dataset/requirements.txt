@@ -1,0 +1,2 @@
+huggingface_hub==0.30.1
+python-dotenv==1.1.0

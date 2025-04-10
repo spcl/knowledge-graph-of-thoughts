@@ -1,0 +1,21 @@
+{"type":"node","id":"0","labels":["ASEAN_bloc"]}
+{"type":"node","id":"1","labels":["Country"],"properties":{"capital":"Bandar Seri Begawan","capital_latitude":4.8909,"name":"Brunei","capital_longitude":114.9424}}
+{"type":"node","id":"2","labels":["Country"],"properties":{"capital":"Phnom Penh","capital_latitude":11.5783,"name":"Cambodia","capital_longitude":104.881}}
+{"type":"node","id":"3","labels":["Country"],"properties":{"capital":"Jakarta","capital_latitude":-6.2088,"name":"Indonesia","capital_longitude":106.8456}}
+{"type":"node","id":"4","labels":["Country"],"properties":{"capital":"Vientiane","capital_latitude":17.9757,"name":"Laos","capital_longitude":102.6331}}
+{"type":"node","id":"5","labels":["Country"],"properties":{"capital":"Kuala Lumpur","capital_latitude":3.139,"name":"Malaysia","capital_longitude":101.6869}}
+{"type":"node","id":"6","labels":["Country"],"properties":{"capital":"Naypyidaw","capital_latitude":19.7633,"name":"Myanmar","capital_longitude":96.0785}}
+{"type":"node","id":"7","labels":["Country"],"properties":{"capital":"Manila","capital_latitude":14.5995,"name":"Philippines","capital_longitude":120.9842}}
+{"type":"node","id":"8","labels":["Country"],"properties":{"capital":"Singapore","capital_latitude":1.3521,"name":"Singapore","capital_longitude":103.8198}}
+{"type":"node","id":"9","labels":["Country"],"properties":{"capital":"Bangkok","capital_latitude":13.7563,"name":"Thailand","capital_longitude":100.5018}}
+{"type":"node","id":"10","labels":["Country"],"properties":{"capital":"Hanoi","capital_latitude":21.0285,"name":"Vietnam","capital_longitude":105.8542}}
+{"type":"relationship","id":"0","label":"contains","start":{"id":"0","labels":["ASEAN_bloc"]},"end":{"id":"1","labels":["Country"],"properties":{"capital":"Bandar Seri Begawan","capital_latitude":4.8909,"name":"Brunei","capital_longitude":114.9424}}}
+{"type":"relationship","id":"1","label":"contains","start":{"id":"0","labels":["ASEAN_bloc"]},"end":{"id":"2","labels":["Country"],"properties":{"capital":"Phnom Penh","capital_latitude":11.5783,"name":"Cambodia","capital_longitude":104.881}}}
+{"type":"relationship","id":"2","label":"contains","start":{"id":"0","labels":["ASEAN_bloc"]},"end":{"id":"3","labels":["Country"],"properties":{"capital":"Jakarta","capital_latitude":-6.2088,"name":"Indonesia","capital_longitude":106.8456}}}
+{"type":"relationship","id":"3","label":"contains","start":{"id":"0","labels":["ASEAN_bloc"]},"end":{"id":"4","labels":["Country"],"properties":{"capital":"Vientiane","capital_latitude":17.9757,"name":"Laos","capital_longitude":102.6331}}}
+{"type":"relationship","id":"4","label":"contains","start":{"id":"0","labels":["ASEAN_bloc"]},"end":{"id":"5","labels":["Country"],"properties":{"capital":"Kuala Lumpur","capital_latitude":3.139,"name":"Malaysia","capital_longitude":101.6869}}}
+{"type":"relationship","id":"5","label":"contains","start":{"id":"0","labels":["ASEAN_bloc"]},"end":{"id":"6","labels":["Country"],"properties":{"capital":"Naypyidaw","capital_latitude":19.7633,"name":"Myanmar","capital_longitude":96.0785}}}
+{"type":"relationship","id":"6","label":"contains","start":{"id":"0","labels":["ASEAN_bloc"]},"end":{"id":"7","labels":["Country"],"properties":{"capital":"Manila","capital_latitude":14.5995,"name":"Philippines","capital_longitude":120.9842}}}
+{"type":"relationship","id":"7","label":"contains","start":{"id":"0","labels":["ASEAN_bloc"]},"end":{"id":"8","labels":["Country"],"properties":{"capital":"Singapore","capital_latitude":1.3521,"name":"Singapore","capital_longitude":103.8198}}}
+{"type":"relationship","id":"8","label":"contains","start":{"id":"0","labels":["ASEAN_bloc"]},"end":{"id":"9","labels":["Country"],"properties":{"capital":"Bangkok","capital_latitude":13.7563,"name":"Thailand","capital_longitude":100.5018}}}
+{"type":"relationship","id":"9","label":"contains","start":{"id":"0","labels":["ASEAN_bloc"]},"end":{"id":"10","labels":["Country"],"properties":{"capital":"Hanoi","capital_latitude":21.0285,"name":"Vietnam","capital_longitude":105.8542}}}

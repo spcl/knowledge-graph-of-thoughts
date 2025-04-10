@@ -1,0 +1,6 @@
+fastapi==0.95.1
+neo4j==5.20.0
+pip==22.0.2
+setuptools==59.6.0
+uvicorn==0.22.0
+pydantic==1.10.7

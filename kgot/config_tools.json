@@ -1,0 +1,8 @@
+[
+  {
+    "name": "SERPAPI",
+    "env": {
+      "SERPAPI_API_KEY": ""
+    }
+  }
+]
