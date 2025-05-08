@@ -222,7 +222,9 @@ for ((run=1; run<=num_runs; run++)); do
         --controller_choice $CONTROLLER_CHOICE \
         --db_choice $DB_CHOICE \
         --tool_choice $TOOL_CHOICE \
-        --max_iterations $MAX_ITERATIONS"
+        --max_iterations $MAX_ITERATIONS \
+        --llm_execution_model $LLM_EXECUTION_MODEL \
+        --llm_execution_temperature $LLM_EXECUTION_TEMPERATURE "
 
         # Add additional arguments from the ARGS array
         SCRIPT="$SCRIPT ${ARGS[@]}"
