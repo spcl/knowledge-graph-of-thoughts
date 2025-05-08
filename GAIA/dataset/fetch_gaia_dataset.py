@@ -6,10 +6,11 @@
 #
 # Main author: Jón Gunnar Hannesson
 
-import os
-import json
-import shutil
 import argparse
+import json
+import os
+import shutil
+
 from dotenv import load_dotenv
 from huggingface_hub import snapshot_download
 

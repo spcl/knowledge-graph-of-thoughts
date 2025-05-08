@@ -1,4 +1,4 @@
-FROM lpaleari/kgot:latest
+FROM spcleth/kgot:latest
 
 WORKDIR /home/knowledge_graph_of_thoughts
 

@@ -164,19 +164,19 @@ def collect_stats(func_name=None) -> Callable:
                 usage_statistics = possible_object.usage_statistics if hasattr(possible_object, 'usage_statistics') else None
 
                 if llm is not None:
-                    model_name = llm.model_name if hasattr(llm, 'model_name') else llm.name if hasattr(llm, 'name') else 'unknown_model'
+                    model_name = llm.model_name if hasattr(llm, 'model_name') else llm.model if hasattr(llm, 'model') else 'unknown_model'
                 else:
-                    model_name = possible_object.model_name if hasattr(possible_object, 'model_name') else possible_object.name if hasattr(possible_object, 'name') else 'unknown_model'
+                    model_name = possible_object.model_name if hasattr(possible_object, 'model_name') else possible_object.model if hasattr(possible_object, 'model') else 'unknown_model'
             else:
                 model_name = args[0] if isinstance(args[0], str) else 'unknown_model'
-
+            
             if usage_statistics is None:
                 usage_statistics = args[-1] if isinstance(args[-1], UsageStatistics) else kwargs.get('usage_statistics', None)
                 if usage_statistics is None:
                     usage_statistics = State.usage_statistics(file_name='llm_cost.json')
             
             if not isinstance(model_name, str):
-                model_name = model_name.model_name if hasattr(args[0], 'model_name') else model_name.name if hasattr(args[0], 'name') else 'unknown_model'
+                model_name = model_name.model_name if hasattr(args[0], 'model_name') else model_name.model if hasattr(args[0], 'model') else 'unknown_model'
 
             with get_openai_callback() as cb:
                 time_before = time()

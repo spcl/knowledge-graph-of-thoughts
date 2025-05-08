@@ -15,7 +15,6 @@ from typing import List, Type
 
 from langchain_core.tools import BaseTool
 from pydantic import BaseModel, Field
-from transformers.agents import Tool
 
 logger = logging.getLogger("Controller.ExtractZipTool")
 
