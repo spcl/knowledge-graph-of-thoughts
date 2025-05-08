@@ -7,13 +7,14 @@
 # Main authors: Lorenzo Paleari, Ales Kubicek, Andrea Jiang
 
 import argparse
+import importlib
 import logging
 import os
 import sys
 from typing import Any
-import importlib
 
 from dotenv import load_dotenv
+
 
 class CustomFormatter(argparse.RawTextHelpFormatter, argparse.ArgumentDefaultsHelpFormatter):
     """Custom help formatter to align default values nicely."""
