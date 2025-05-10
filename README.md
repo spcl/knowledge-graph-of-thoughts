@@ -51,6 +51,11 @@ Please update the API keys, if necessary, for the language models you intend to 
 You can also add new models by incorporating their information into the JSON file.
 The object key is the language model identifier used in KGoT, and the various attributes contain the information needed to run the model.
 
+Local models are expected to be hosted using **[Ollama](https://ollama.com/)**. KGoT assumes that the model is accessible at the default Ollama API endpoint (`http://localhost:11434`) and integrates with it through **ChatOllama** via the [LangChain](https://www.langchain.com/) framework.
+
+> [!NOTE]
+> **Please be aware** that the values for `num_ctx`, `num_predict`, and `num_batch` in the configuration are based on the specific GPU type and VRAM capacity used during our experiments. You may need to adjust these parameters based on your own hardware setup to avoid out-of-memory errors or suboptimal performance.
+
 For the `SurferAgent` tool we rely on SerpAPI for browsing necessary external information from the Internet.
 To use this tool, please set the API key within the [`kgot/config_tools.json`](kgot/config_tools.json) file.
 
@@ -95,6 +100,7 @@ chmod +x ./run_multiple_gaia.sh # grant permission for logging etc.
 You can run `./run_multiple_gaia.sh --help` to check the supported arguments, that generally match the options found [here](GAIA/README.md#evaluate-kgot-on-gaia) for the `gaia.py` Python script.
 
 The following are the most commonly used arguments:
+
 ```
 Arguments:
   --log_base_folder     - Directory where logs will be stored [path/to/log_folder]
