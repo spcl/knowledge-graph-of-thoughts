@@ -26,6 +26,7 @@ import pathvalidate
 import requests
 from serpapi import GoogleSearch
 
+from kgot.tools.tools_v2_3.Cookies import COOKIES
 from kgot.tools.tools_v2_3.MdConverter import (
     FileConversionException,
     MarkdownConverter,
@@ -56,6 +57,7 @@ class SimpleTextBrowser:
         self.set_address(self.start_page)
         self.serpapi_key = serpapi_key
         self.request_kwargs = request_kwargs
+        self.request_kwargs["cookies"] = COOKIES
         self._mdconvert = MarkdownConverter()
         self._page_content: str = ""
 
