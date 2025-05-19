@@ -176,10 +176,11 @@ def generate_forced_solution(llm_planning, initial_query: str,
 
 
 @collect_stats("Controller.parse_solution_with_llm")
-def parse_solution_with_llm(llm_planning, initial_query: str, partial_solution: str,
+def parse_solution_with_llm(llm_planning, initial_query: str, partial_solution: str, gaia_formatter: bool,
                             *args, **kwargs):
     return parse_solution_with_llm_base(
-        llm_planning, initial_query, partial_solution, *args, **kwargs)
+        llm_planning, initial_query, partial_solution, gaia_formatter, *args, **kwargs
+    )
 
 
 @collect_stats("Controller.define_final_solution")

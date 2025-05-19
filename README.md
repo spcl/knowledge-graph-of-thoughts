@@ -98,6 +98,7 @@ chmod +x ./run_multiple_gaia.sh # grant permission for logging etc.
 ```
 
 You can run `./run_multiple_gaia.sh --help` to check the supported arguments, that generally match the options found [here](GAIA/README.md#evaluate-kgot-on-gaia) for the `gaia.py` Python script.
+For optimal results, we recommend enabling the '--gaia_formatter' option, which will format the output in a GAIA-compatible format.
 
 The following are the most commonly used arguments:
 
@@ -108,9 +109,9 @@ Arguments:
   --backend_choice      - Backend database type               [neo4j/networkX]
   --tool_choice         - Tool configuration                  [tools_v2_3]
   --max_iterations      - Max iterations for KGoT             [integers > 0]
-  --docker_run          - Run in Docker container             [True/False]
+  --gaia_formatter      - Use GAIA formatter for the output   [True/False]
 
-Example: ./run_multiple_gaia.sh --log_base_folder logs/test_1 --controller_choice directRetrieve --backend_choice networkX --tools "tools_v2_3" --max_iterations 5 --docker_run
+Example: ./run_multiple_gaia.sh --log_base_folder logs/test_1 --controller_choice directRetrieve --backend_choice networkX --tools "tools_v2_3" --max_iterations 5 --gaia_formatter
 ```
 
 We offer two choices for storing the [knowledge graph](kgot/knowledge_graph/README.md) (Neo4j and NetworkX) as well as for the [retrieval type](kgot/controller#knowledge-extraction) (direct and query-based retrevial).
