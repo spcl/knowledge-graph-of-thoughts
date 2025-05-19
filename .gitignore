@@ -32,6 +32,9 @@ venv/
 # Config File
 **/config.json
 
+config_llms.json
+*config_tools.json
+
 
 # settings
 *.ctrl

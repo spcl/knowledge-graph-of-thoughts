@@ -53,16 +53,19 @@ class ToolManagerInterface(ABC):
 
         # Check if the additional config file exists
         if additional_config_path is not None:
-            with open(additional_config_path, 'r') as file:
-                additional_config = json.load(file)
+            try:
+                with open(additional_config_path, 'r') as file:
+                    additional_config = json.load(file)
 
-            # Merge the additional config with the base config
-            for tool in additional_config:
-                if tool["name"] in config_dict:
-                    config_dict[tool["name"]].update(tool)
-                    continue 
+                # Merge the additional config with the base config
+                for tool in additional_config:
+                    if tool["name"] in config_dict:
+                        config_dict[tool["name"]].update(tool)
+                        continue 
 
-                config_dict[tool["name"]] = tool
+                    config_dict[tool["name"]] = tool
+            except FileNotFoundError:
+                print(f"Additional config file {additional_config_path} not found. Skipping.")
 
         for tool_config in config_dict.values():
             if 'env' in tool_config:

@@ -47,6 +47,16 @@ playwright install
 
 ### Configuring API Keys and Models
 
+To get started make a copy of the following template files inside the `kgot` directory:
+
+- `kgot/config_llms.template.json`
+- `kgot/config_tools.template.json`
+
+Then rename them as follows:
+
+- `config_llms.template.json` → `config_llms.json`
+- `config_tools.template.json` → `config_tools.json`
+
 Please update the API keys, if necessary, for the language models you intend to use in the [`kgot/config_llms.json`](kgot/config_llms.json) file.
 You can also add new models by incorporating their information into the JSON file.
 The object key is the language model identifier used in KGoT, and the various attributes contain the information needed to run the model.
