@@ -104,12 +104,12 @@ def main():
     tmp_dir = os.path.join(base_dir, "tmp")
     data_dir = os.path.join(tmp_dir, "2023", split)
     attachments_dir = os.path.join(base_dir, "attachments", split)
-    python_container_attachments_dir = os.path.join(base_dir, "..", "..", "docker_instances", "python_docker", "files", "GAIA", "dataset", "attachments", split)
+    python_container_attachments_dir = os.path.join(base_dir, "..", "..", "containers", "python", "files", "GAIA", "dataset", "attachments", split)
     
     download_dataset(hf_token, tmp_dir, split)
     setup_question_json(data_dir, split, with_dummy=args.dummy)
     shutil.copytree(data_dir, attachments_dir, dirs_exist_ok=True)                      # Copy attachments to attachments directory 
-    shutil.copytree(data_dir, python_container_attachments_dir, dirs_exist_ok=True)     # Copy attachments to python_docker directory
+    shutil.copytree(data_dir, python_container_attachments_dir, dirs_exist_ok=True)     # Copy attachments to python directory
     shutil.rmtree(tmp_dir)
 
     print(f"✅ Finished processing GAIA {split} dataset.")

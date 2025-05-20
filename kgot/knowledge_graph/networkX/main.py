@@ -43,7 +43,7 @@ class KnowledgeGraph(KnowledgeGraphInterface):
         Export the current state of the graph database to a JSON file.
         """
         export_file = f"nx_snapshot_{self.current_snapshot_id}.json"
-        export_file_path = f"./docker_instances/neo4j_docker/snapshots/{self.current_folder_name}/{export_file}"
+        export_file_path = f"./containers/neo4j/snapshots/{self.current_folder_name}/{export_file}"
 
         data = []
 
@@ -92,7 +92,7 @@ class KnowledgeGraph(KnowledgeGraphInterface):
         folder_name += f"snapshot_{index}"
         self.current_folder_name = folder_name
 
-        folder_dir = os.path.join("./docker_instances/neo4j_docker/snapshots", folder_name)
+        folder_dir = os.path.join("./containers/neo4j/snapshots", folder_name)
         if not os.path.exists(folder_dir):
             os.makedirs(folder_dir)
 

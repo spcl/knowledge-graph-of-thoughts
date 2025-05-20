@@ -1,0 +1,16 @@
+services:
+    python:
+        build:
+            context: ./files
+            dockerfile: Dockerfile
+        ports:
+            - ${PORT}:16000
+        networks:
+            knowledge_graph:
+                aliases:
+                    - python
+
+networks:
+    knowledge_graph:
+        name: knowledge_graph
+        driver: bridge

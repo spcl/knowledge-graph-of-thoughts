@@ -6,7 +6,7 @@ The script `fetch_gaia_dataset.py` downloads a specific split (`validation` or `
 The script defaults to fetching the validation dataset.
 The script optionally generates a dummy subset for quick testing.
 
-Additional files necessary for the evaluation of GAIA tasks, which we call attachments, are copied to the `./attachments` and `docker_instances/python_docker/files` directories.
+Additional files necessary for the evaluation of GAIA tasks, which we call attachments, are copied to the `./attachments` and `containers/python/files` directories.
 
 ### Requirements
 

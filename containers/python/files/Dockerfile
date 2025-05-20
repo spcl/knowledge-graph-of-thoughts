@@ -19,4 +19,4 @@ RUN pip3 install --no-cache-dir -r requirements.txt
 ENV FLASK_APP=python_executor.py
 
 # Run the application with Waitress when the container launches
-CMD ["waitress-serve", "--port=16000", "python_executor:app"]
+CMD ["waitress-serve", "--port=${PORT}", "python_executor:app"]

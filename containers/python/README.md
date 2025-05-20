@@ -6,7 +6,7 @@ If you intend to evaluate Knowledge Graph of Thoughts with the GAIA benchmark, p
 
 ## Steps to Run
 
-In order to build and run the Python Docker image, please navigate to the `python_docker` directory and execute:
+In order to build and run the Python Docker image, please navigate to the `python` directory and execute:
 
 ```bash
 docker-compose up 
