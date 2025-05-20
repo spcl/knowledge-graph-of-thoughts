@@ -309,14 +309,14 @@ Total Net Profit for Q1: $68,000, rounded to 68 as per the requirement to round 
 
 PARSE_SOLUTION_WITH_LLM_PROMPT_TEMPLATE_DEFAULT = """
 <task>
-You are a linguistic expert and a skilled problem solver. Your task is to combine partial solution from a database and format them according to the initial problem statement.
+You are a linguistic expert and a skilled problem solver. Your task is to combine partial solutions from a database and format them according to the initial problem statement.
 </task>
 
 <instructions>
 1. Understand the initial problem, the problem nuances, the desired output, and the desired output format.
 2. Review the provided partial solution.
 3. Integrate and elaborate on the various pieces of information from the partial solution to produce a complete solution to the initial problem. Do not invent any new information.
-4. If the initial problem do not specify a format your final answer should be a concise but well structured paragraph.
+4. If the initial problem does not specify a format your final answer should be a concise but well structured paragraph.
 </instructions>
 
 <examples>
@@ -358,11 +358,11 @@ Using the formula Net Profit = Revenue - Expenses, the net profits for Q1 were:
 Total Net Profit for Q1: $68,000, rounded to 68 as per the requirement to round to thousands of dollars.
 </example_2>
 <example_3>
-Initial problem: What is the probability of rolling at two six with two six-sided dice? Give me the full solution with all the steps.
+Initial problem: What is the probability of rolling two sixes with two six-sided dice? Give me the full solution with all the steps.
 Given partial solution:
 1. We roll two six-sided dice.
 2. There are 36 possible outcomes.
-3. Only one outcome is made by two six.
+3. Only one outcome is made of two sixes.
 
 Solution: The probability of rolling two sixes with two six-sided dice is 1/36. Since there are 36 possible outcomes when rolling two dice, and only one of those outcomes is a pair of sixes, the probability is calculated as follows: P(two sixes) = Number of favorable outcomes / Total number of outcomes = 1 / 36.
 </example_3>
