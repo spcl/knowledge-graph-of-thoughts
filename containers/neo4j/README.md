@@ -1,4 +1,4 @@
-# Neo4j Docker Image Setup
+# Neo4j Image Setup
 
 ## Initial Setup
 
@@ -45,7 +45,7 @@ id
 # Based on the setup we are going to use either 999 or 1000 if we changed ownership/permissions.
 ```
 
-## Running
+## Steps to Run (Docker)
 
 Please execute the following commands. Depending on the operating system you may need privileged rights.
 
@@ -61,6 +61,15 @@ docker-compose up -d
 
 The Neo4j ports can also be changed inside the environment file [`.env`](/containers/neo4j/.env), in order to prevent failure due to already used ports by other services you may have active on your machine.
 
-### Knowledge Graph Snapshots
+## Steps to Run (Sarus)
+
+```bash
+cd neo4j
+
+chmod +x sarus_launcher.sh     # If needed
+./sarus_launcher.sh
+```
+
+## Knowledge Graph Snapshots
 
 Snapshots of the Neo4j database will be stored in the `neo4j/snapshots` directory. We provide a [tool](/snapshots_visualization_tool) to visualize these snapshots as well as changes to the knowledge graph.
