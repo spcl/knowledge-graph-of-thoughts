@@ -48,4 +48,4 @@ sarus pull spcleth/kgot:latest
 Then run the containers using the provided scripts:
 
 - You can run python and neo4j together `./sarus_launcher.sh`
-- You can enter a sub-folder of the ``containers`` folder and run the respective script to start the container: `./sarus_launcher.sh`
+- You can enter a sub-folder of the ``containers`` folder and run the respective script to start the single container: `./sarus_launcher.sh`
