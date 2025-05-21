@@ -258,5 +258,5 @@ done
 
 # Move the snapshots to the log folder
 if [ "$ZERO_SHOT" = false ]; then
-    mv docker_instances/neo4j_docker/snapshots/$LOG_FOLDER_BASE $LOG_FOLDER_BASE/snapshots
+    mv containers/neo4j/snapshots/$LOG_FOLDER_BASE $LOG_FOLDER_BASE/snapshots
 fi

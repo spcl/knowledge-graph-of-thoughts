@@ -1,16 +1,16 @@
-# Neo4j Docker Image Setup
+# Neo4j Image Setup
 
 ## Initial Setup
 
-- **Linux** - Please retrieve the current user IDs (**UID** and **GID**) with the command `id` and update the environment file [`env`](/docker_instances/neo4j_docker/.env) accordingly.
+- **Linux** - Please retrieve the current user IDs (**UID** and **GID**) with the command `id` and update the environment file [`env`](/containers/neo4j/.env) accordingly.
 - **MacOS/Windows** - No steps necessary
 
-If you are running inside a virtual machine and using a `shared folder`, please update **UID** and **GID** inside [`env`](/docker_instances/neo4j_docker/.env) with the **IDs** of the snapshots folder owner or group.
+If you are running inside a virtual machine and using a `shared folder`, please update **UID** and **GID** inside [`env`](/containers/neo4j/.env) with the **IDs** of the snapshots folder owner or group.
 
 ### Example
 
 ```bash
-cd docker_instances/neo4j_docker/neo4j_docker/
+cd containers/neo4j/neo4j/
 
 ls -la
 # drwxrwx---  3 root  vboxsf  96 Jun 25 17:12 .
@@ -28,7 +28,7 @@ We do not want applications inside the Docker image to run with sudo permission.
 `vboxsf` should be used as user for the Docker image because of its **rw** access. If this situation does not correspond to yours, please *change permissions or ownership* of the folder.
 
 ```bash
-cd neo4j_docker
+cd neo4j
 
 # Allow everyone to have access
 chmod -R 777 snapshots 
@@ -45,12 +45,12 @@ id
 # Based on the setup we are going to use either 999 or 1000 if we changed ownership/permissions.
 ```
 
-## Running
+## Steps to Run (Docker)
 
 Please execute the following commands. Depending on the operating system you may need privileged rights.
 
 ```bash
-cd neo4j_docker
+cd neo4j
 
 docker compose up -d 
 # or
@@ -59,8 +59,17 @@ docker-compose up -d
 
 `-d` detaches the terminal from the container.
 
-The Neo4j ports can also be changed inside the environment file [`.env`](/docker_instances/neo4j_docker/.env), in order to prevent failure due to already used ports by other services you may have active on your machine.
+The Neo4j ports can also be changed inside the environment file [`.env`](/containers/neo4j/.env), in order to prevent failure due to already used ports by other services you may have active on your machine.
 
-### Knowledge Graph Snapshots
+## Steps to Run (Sarus)
 
-Snapshots of the Neo4j database will be stored in the `neo4j_docker/snapshots` directory. We provide a [tool](/snapshots_visualization_tool) to visualize these snapshots as well as changes to the knowledge graph.
+```bash
+cd neo4j
+
+chmod +x sarus_launcher.sh     # If needed
+./sarus_launcher.sh
+```
+
+## Knowledge Graph Snapshots
+
+Snapshots of the Neo4j database will be stored in the `neo4j/snapshots` directory. We provide a [tool](/snapshots_visualization_tool) to visualize these snapshots as well as changes to the knowledge graph.

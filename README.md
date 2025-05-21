@@ -76,17 +76,17 @@ In order to provide a secure & consistent execution environment, we containerize
 #### Running the Docker Instances
 
 ```bash
-cd docker_instances/
-chmod -R 777 neo4j_docker/snapshots # grant permission for snapshots logging
-docker compose --env-file neo4j_docker/.env up
+cd containers/
+chmod -R 777 neo4j/snapshots # grant permission for snapshots logging
+docker compose --env-file neo4j/.env up
 ```
 
 > [!NOTE]
-> Further instructions on customizing the Docker images can be found under [Docker Image Setup](docker_instances/README.md).
+> Further instructions on customizing the Docker images can be found under [Docker Image Setup](containers/README.md).
 
 > [!WARNING]
 > The initial building phase can take a while (15 minutes), so be patient.
-> If you need to make adjustments simply stop the instances and restart them with the following command `docker compose --env-file docker_instances/neo4j_docker/.env up --build`
+> If you need to make adjustments simply stop the instances and restart them with the following command `docker compose --env-file containers/neo4j/.env up --build`
 > Changes to `README.md`, `LICENSE`, `pyproject.toml`, `kgot/__init__.py` and `kgot/__main__.py` will cause the Docker instances to be rebuilt from scratch.
 
 ## Quick Start

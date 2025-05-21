@@ -72,9 +72,9 @@ class ToolManager(ToolManagerInterface):
         ])
             
         # Test for python docker
-        self._test_python_docker(run_python_tool)
+        self._test_python_container(run_python_tool)
 
-    def _test_python_docker(self, python_tool: RunPythonCodeTool) -> None:
+    def _test_python_container(self, python_tool: RunPythonCodeTool) -> None:
         """
         Test the Python Docker service by running a simple code snippet.
         If the service is not running, an exception is raised.

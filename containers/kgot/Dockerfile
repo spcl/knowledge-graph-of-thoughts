@@ -24,6 +24,6 @@ COPY GAIA GAIA
 ADD run_multiple_gaia* .
 RUN chmod +x run_multiple_gaia*
 
-RUN mkdir -p ./docker_instances/neo4j_docker/snapshots
+RUN mkdir -p ./containers/neo4j/snapshots
 
 ENTRYPOINT [ "/bin/bash", "-c"]

@@ -42,7 +42,7 @@ def check_answers(solver_function, gaia_data, already_solved, log_folder_base, c
         print(f"\n\n\nSolving question {row_idx}:")
         try:
             # the snapshot(s) will be saved in a subfolder with the same path as log_folder_base,
-            #   but from kgot/neo4j_docker/snapshots/
+            #   but from kgot/neo4j/snapshots/
             returned_answer, iterations_taken = solver_function(question,
                                               file_path,
                                               [file_name],
