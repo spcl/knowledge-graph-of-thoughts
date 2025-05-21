@@ -96,6 +96,7 @@ def single_command(args: Any, neo4j_uri: str, neo4j_user: str, neo4j_password: s
         db_choice=args.db_choice,
         controller_choice=args.controller_choice,
         tool_choice=args.tool_choice,
+        gaia_formatter=args.gaia_formatter,
         config_llm_path=args.config_llm_path,
         max_retrieve_query_retry=args.max_retrieve_query_retry,
         max_cypher_fixing_retry=args.max_cypher_fixing_retry,
@@ -134,6 +135,7 @@ def main() -> None:
         f"  NEO4J_USER            Neo4j database user.\t\t(current: {neo4j_user})\n"
         f"  NEO4J_PASSWORD        Neo4j database password.\t(current: {neo4j_password})\n"
         f"  PYTHON_EXECUTOR_URI   Python execution server URI.\t(current: {python_executor_uri})\n\n"
+        "Note: You can set these variables in a .env file in the current directory.\n"
         "For more details, refer to the official documentation at:\n"
         "https://github.com/spcl/knowledge-graph-of-thoughts"
     )
@@ -186,6 +188,8 @@ def main() -> None:
                             help="Database choice for the agent.")
     parser.add_argument("--tool_choice", metavar='\b', type=str, default="tools_v2_3",
                             help="Tool choice for the agent.")
+    parser.add_argument("--gaia_formatter", action="store_true",
+                            help="Use GAIA formatter instead of the default one. GAIA formatter is used to output GAIA benchmark compatible results, which consist in the final solution in a numeric, list or string format, no paragraph or other text.")
     
     parser.add_argument("--zero_shot", action="store_true",
                             help="Use zero-shot instead of the agent.")

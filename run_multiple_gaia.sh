@@ -69,6 +69,8 @@ if [ "$1" == "--help" ]  || [ "$1" = "-h" ]; then
     echo "  --controller_choice            Controller choice (options: queryRetrieve, directRetrieve; default: queryRetrieve)"
     echo "  --db_choice                    Database choice (options: neo4j, networkX; default: neo4j)"
     echo "  --tool_choice                  Tool choice (default: tools_v2_3)"
+    echo "  --gaia_formatter               Use GAIA formatter"
+    echo ""
     echo "  --zero_shot                    Use zero-shot mode"
     echo ""
     exit 0
@@ -99,6 +101,7 @@ NEO4J_URI=""
 PYTHON_EXECUTOR_URI=""
 LLM_EXECUTION_MODEL=""
 LLM_EXECUTION_TEMPERATURE=""
+GAIA_FORMATTER=false
 ZERO_SHOT=false
 
 # Parse CLI arguments
@@ -108,7 +111,7 @@ neo4j_uri:,neo4j_username:,neo4j_password:,python_executor_uri:,\
 max_iterations:,num_next_steps_decision:,max_retrieve_query_retry:,max_cypher_fixing_retry:,\
 max_final_solution_parsing:,max_tool_retries:,max_llm_retries:,\
 llm_planning_model:,llm_planning_temperature:,llm_execution_model:,llm_execution_temperature:,\
-controller_choice:,db_choice:,tool_choice:,zero_shot \
+controller_choice:,db_choice:,tool_choice:,gaia_formatter,zero_shot \
   -n 'run_multiple_gaia.sh' -- "$@")
 
 if [ $? != 0 ]; then
@@ -132,6 +135,7 @@ while true; do
         --python_executor_uri) PYTHON_EXECUTOR_URI="$2"; shift 2 ;;
         --llm_execution_model) LLM_EXECUTION_MODEL="$2"; shift 2 ;;
         --llm_execution_temperature) LLM_EXECUTION_TEMPERATURE="$2"; shift 2 ;;
+        --gaia_formatter) GAIA_FORMATTER=true; shift ;;
         --zero_shot) ZERO_SHOT=true; shift ;;
         --) shift; break ;;
         *)
@@ -148,6 +152,11 @@ done
 # Add zero_shot flag if set
 if [ "$ZERO_SHOT" = true ]; then
     ARGS+=("--zero_shot")
+fi
+
+# Add gaia_formatter flag if set
+if [ "$GAIA_FORMATTER" = true ]; then
+    ARGS+=("--gaia_formatter")
 fi
 
 
@@ -177,6 +186,7 @@ echo "  attachment_folder:   $ATTACHMENT_FOLDER"
 echo "  controller_choice:   $CONTROLLER_CHOICE"
 echo "  db_choice:           $DB_CHOICE"
 echo "  tool_choice:         $TOOL_CHOICE"
+echo "  gaia_formatter:      $GAIA_FORMATTER"
 echo
 
 #------------------------------------------------------------------------------

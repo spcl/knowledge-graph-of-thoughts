@@ -226,14 +226,14 @@ class Controller(ControllerInterface):
 
                 for i in range(self.max_final_solution_parsing):
                     array_parsed_solutions.append(
-                        parse_solution_with_llm(self.llm_planning, query, sol, self.usage_statistics))
+                        parse_solution_with_llm(self.llm_planning, query, sol, self.gaia_formatter, self.usage_statistics))
             # Check if all the parsed solutions are empty
             if all(not parsed_sol.strip() for parsed_sol in array_parsed_solutions if parsed_sol):
                 self.logger.info("All parsed solutions are empty. Forcing generation of a solution.")
                 print("All parsed solutions are empty. Forcing generation of a solution.")
                 # Force generation of a solution
                 forced_solution = generate_forced_solution(self.llm_planning, query, existing_entities_and_relationships, self.usage_statistics)
-                solution = parse_solution_with_llm(self.llm_planning, query, forced_solution, self.usage_statistics)
+                solution = parse_solution_with_llm(self.llm_planning, query, forced_solution, self.gaia_formatter, self.usage_statistics)
             else:
                 # we have a series of solutions, we need to choose the best one
                 self.logger.info(f"Solution list for final solution choose: {str(solutions)} {str(array_parsed_solutions)}")
