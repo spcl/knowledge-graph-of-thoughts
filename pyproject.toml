@@ -41,7 +41,7 @@ dependencies = [
   "langchain_openai>=0.1.20",
   "lxml>=5.2.2",
   "mammoth>=1.8.0,<2.0.0",
-  "markdownify>=0.13.1,<0.14",
+  "markdownify>=0.14.1,<0.15",
   "matplotlib>=3.8.4",
   "neo4j==5.23.1",
   "networkx", # xlsx files

@@ -174,6 +174,7 @@ class CostPlot(PlotOperation):
                 continue
 
             values = data[metric]
+            ax.bar(range(len(values)), values, color=config['color'], alpha=0.85, edgecolor='none')
             
             # Configure axes
             ax.set_title(config['ylabel'], pad=20, fontsize=PLOT_STYLE['AXES_TITLE_SIZE'], fontweight='bold')
