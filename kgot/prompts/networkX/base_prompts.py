@@ -118,7 +118,77 @@ To complete this task, follow these steps:
 </partial_solution>
 """
 
-PARSE_SOLUTION_WITH_LLM_PROMPT_TEMPLATE = """
+PARSE_SOLUTION_WITH_LLM_PROMPT_TEMPLATE_DEFAULT = """
+<task>
+You are a linguistic expert and a skilled problem solver. Your task is to combine partial solutions from a graph database and format them according to the initial problem statement.
+</task>
+
+<instructions>
+1. Understand the initial problem, the problem nuances, the desired output, and the desired output format.
+2. Review the provided partial solution.
+3. Integrate and elaborate on the various pieces of information from the partial solution to produce a complete solution to the initial problem. Do not invent any new information.
+4. If the initial problem does not specify a format your final answer should be a concise but well structured paragraph.
+</instructions>
+
+<examples>
+<example_1>
+Initial problem: What are the preferred ice cream flavors in the household? Sort the solution from most common to least common. Separate them using commas, and in case of a tie, sort alphabetically.
+Given partial solution:
+- Mom likes Cream
+- Dad likes Chocolate
+- Uncle likes Strawberry
+- Auntie likes Strawberry
+- Grandpa likes Pistachio
+- Grandma likes Lemon
+
+Solution: Strawberry, Chocolate, Cream, Lemon, Pistachio
+Reasoning:
+Strawberry is liked by 2 people, while the other flavors are each liked by 1 person. Therefore, Strawberry comes first, and the rest are sorted alphabetically.
+</example_1>
+<example_2>
+Initial problem: What is the net profit for Q1 of the company? (Answer rounded to thousands of dollars)
+Given partial solution:
+1. Revenue:
+   - January: $50000
+   - February: $55000
+   - March: $60000
+2. Expenses:
+   - January: $30000
+   - February: $32000
+   - March: $35000
+3. Net Profit Calculation:
+   - Net Profit = Revenue - Expenses
+
+Solution: 68
+Reasoning:
+Using the formula Net Profit = Revenue - Expenses, the net profits for Q1 were:
+- January: $20000
+- February: $23000
+- March: $25000
+
+Total Net Profit for Q1: $68,000, rounded to 68 as per the requirement to round to thousands of dollars.
+</example_2>
+<example_3>
+Initial problem: What is the probability of rolling two sixes with two six-sided dice? Give me the full solution with all the steps.
+Given partial solution:
+1. We roll two six-sided dice.
+2. There are 36 possible outcomes.
+3. Only one outcome is made of two sixes.
+
+Solution: The probability of rolling two sixes with two six-sided dice is 1/36. Since there are 36 possible outcomes when rolling two dice, and only one of those outcomes is a pair of sixes, the probability is calculated as follows: P(two sixes) = Number of favorable outcomes / Total number of outcomes = 1 / 36.
+</example_3>
+</examples>
+
+<initial_problem>
+{initial_query}
+</initial_problem>
+
+<given_partial_solution>
+{partial_solution}
+</given_partial_solution>
+"""
+
+PARSE_SOLUTION_WITH_LLM_PROMPT_TEMPLATE_GAIA_VERSION = """
 <task>
 You are a formatter and extractor. Your task is to combine partial solution from a graph database and format them according to the initial problem statement.
 </task>
@@ -339,3 +409,12 @@ Total Net Profit for Q1: $68,000, rounded to 68 as per the requirement to round 
 {list_final_solutions}
 </list_final_solutions>
 """
+
+def get_formatter(gaia_formatter: bool) -> str:
+    """
+    This function is used to enable the gaia formatter.
+    """
+    if gaia_formatter:
+        return PARSE_SOLUTION_WITH_LLM_PROMPT_TEMPLATE_GAIA_VERSION
+    else:
+        return PARSE_SOLUTION_WITH_LLM_PROMPT_TEMPLATE_DEFAULT

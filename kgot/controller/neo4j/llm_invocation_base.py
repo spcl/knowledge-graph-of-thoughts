@@ -22,7 +22,7 @@ from kgot.prompts.neo4j.base_prompts import (
     DEFINE_TOOL_CALLS_PROMPT_TEMPLATE,
     FIX_CYPHER_PROMPT_TEMPLATE,
     PARSE_FINAL_SOLUTION_WITH_LLM_PROMPT_TEMPLATE,
-    PARSE_SOLUTION_WITH_LLM_PROMPT_TEMPLATE,
+    get_formatter,
 )
 from kgot.utils.llm_utils import invoke_with_retry
 
@@ -180,7 +180,7 @@ def define_need_for_math_before_parsing_base(llm_planning, initial_query: str, p
     return response.need_for_math
 
 
-def parse_solution_with_llm_base(llm_planning, initial_query: str, partial_solution: str,
+def parse_solution_with_llm_base(llm_planning, initial_query: str, partial_solution: str, gaia_formatter: bool,
                             *args, **kwargs):
     # Define the output parser model
     class Solution(BaseModel):
@@ -188,7 +188,7 @@ def parse_solution_with_llm_base(llm_planning, initial_query: str, partial_solut
 
     prompt_template = PromptTemplate(
         input_variables=["initial_query", "partial_solution"],
-        template=PARSE_SOLUTION_WITH_LLM_PROMPT_TEMPLATE,
+        template=get_formatter(gaia_formatter),
     )
 
     # Create the chain to invoke (see RunnableSequence)

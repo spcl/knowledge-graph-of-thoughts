@@ -8,14 +8,6 @@
 #               Andrea Jiang
 #               Diana Khimey
 
-from kgot.prompts.networkX.base_prompts import (
-    DEFINE_MATH_TOOL_CALL_PROMPT_TEMPLATE,
-    DEFINE_NEED_FOR_MATH_PROMPT_TEMPLATE,
-    DEFINE_REASON_TO_INSERT_PROMPT_TEMPLATE,
-    PARSE_FINAL_SOLUTION_WITH_LLM_PROMPT_TEMPLATE,
-    PARSE_SOLUTION_WITH_LLM_PROMPT_TEMPLATE,
-    UPDATE_GRAPH_GIVEN_NEW_INFORMATION_PROMPT_TEMPLATE,
-)
 
 DEFINE_NEXT_STEP_PROMPT_TEMPLATE = """
 <task>
@@ -125,8 +117,6 @@ query_type: INSERT
 {tool_calls_made}
 </tool_calls_made>
 """
-
-DEFINE_REASON_TO_INSERT_PROMPT_TEMPLATE = DEFINE_REASON_TO_INSERT_PROMPT_TEMPLATE
 
 DEFINE_RETRIEVE_QUERY_PROMPT_TEMPLATE = """
 <task>
@@ -317,8 +307,6 @@ query: "Alice"
 </existing_data>
 """
 
-UPDATE_GRAPH_GIVEN_NEW_INFORMATION_PROMPT_TEMPLATE = UPDATE_GRAPH_GIVEN_NEW_INFORMATION_PROMPT_TEMPLATE
-
 DEFINE_TOOL_CALLS_PROMPT_TEMPLATE = """
 <task>
 You are an information retriever tasked with populating a NetworkX directed graph database with the necessary information to solve the given initial problem.
@@ -395,14 +383,6 @@ Please review the following list of previous tool calls before proposing a new o
 {tool_calls_made}
 </tool_calls_made>
 """
-
-DEFINE_MATH_TOOL_CALL_PROMPT_TEMPLATE = DEFINE_MATH_TOOL_CALL_PROMPT_TEMPLATE
-
-PARSE_SOLUTION_WITH_LLM_PROMPT_TEMPLATE = PARSE_SOLUTION_WITH_LLM_PROMPT_TEMPLATE
-
-DEFINE_NEED_FOR_MATH_PROMPT_TEMPLATE = DEFINE_NEED_FOR_MATH_PROMPT_TEMPLATE
-
-PARSE_FINAL_SOLUTION_WITH_LLM_PROMPT_TEMPLATE = PARSE_FINAL_SOLUTION_WITH_LLM_PROMPT_TEMPLATE
 
 FIX_CODE_PROMPT_TEMPLATE = """
 <task>
