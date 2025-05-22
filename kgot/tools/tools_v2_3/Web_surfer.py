@@ -89,8 +89,8 @@ class FullPageSummaryTool(Tool):
             self.graph_config = {
                 "llm": {
                     "model": "openai/" + model_name,
-                    "api_key": os.environ.get("OPENAI_API_KEY"),
-                    "organization": os.environ.get("OPENAI_API_ORGANIZATION"),
+                    "api_key": model_config["api_key"],
+                    "organization": model_config["organization"],
                     "temperature": temperature,
                 },
                 "max_images": 5
