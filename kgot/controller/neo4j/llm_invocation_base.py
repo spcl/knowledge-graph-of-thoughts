@@ -245,7 +245,7 @@ def fix_cypher_base(llm_planning, cypher_to_fix: str, error_log: str, *args, **k
     # Create the chain to invoke (see RunnableSequence)
     chain = llm_planning.with_structured_output(CorrectJSON, method="json_schema")
     response = invoke_with_retry(chain, completed_prompt)
-    logger.info(f"Newly fixed cypher:\n{pformat(response, width=160)}")
+    logger.info(f"Newly fixed Cypher:\n{pformat(response, width=160)}")
     
     cypher = response.cypher
     return cypher

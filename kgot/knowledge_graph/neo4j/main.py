@@ -105,7 +105,7 @@ class KnowledgeGraph(KnowledgeGraphInterface):
         folder_name += f"snapshot_{index}"
         self.current_folder_name = folder_name
 
-        folder_dir = os.path.join("./containers/neo4j/snapshots", folder_name)
+        folder_dir = os.path.join("./kgot/knowledge_graph/_snapshots", folder_name)
         if not os.path.exists(folder_dir):
             os.makedirs(folder_dir)
 

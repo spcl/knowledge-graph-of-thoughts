@@ -5,7 +5,7 @@ set -a
 source .env
 set +a
 
-NEO4J_IMPORT_DIR=$(realpath ./snapshots)
+NEO4J_IMPORT_DIR=$(realpath ../../kgot/knowledge_graph/_snapshots)
 
 bash -c "
 nohup sarus run \

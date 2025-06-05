@@ -67,7 +67,7 @@ class _API_DATABASE:
             
         @router.post("/reset_dbms")
         async def reset_neo4j():
-            # Command to delete every relatioshpip, node, label and schema in the database 
+            # Command to delete every relationship, node, label and schema in the database 
             result = dbms_reset_neo4j()
 
             if result:

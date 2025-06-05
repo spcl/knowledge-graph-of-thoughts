@@ -185,7 +185,7 @@ class Controller(ControllerInterface):
                         f"Failed the write query. Retry number: {retry_i} out of {self.max_cypher_fixing_retry}")
 
                     self.logger.error(
-                        f"trying to fix error encountered when executing cypher query: {single_query}\nError: {write_response[1]}")
+                        f"Trying to fix error encountered when executing cypher query: {single_query}\nError: {write_response[1]}")
                     single_query = fix_code(self.llm_planning, single_query, write_response[1], existing_entities_and_relationships, self.usage_statistics)
                     write_response = self.graph.write_query(single_query)
                     self.logger.info(f"Write query result after fixing: {write_response}")

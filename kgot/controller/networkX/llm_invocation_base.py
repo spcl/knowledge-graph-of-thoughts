@@ -51,7 +51,7 @@ def define_write_query_given_new_information_base(llm_planning, initial_query: s
                                               *args, **kwargs):
     # Define the output parser model
     class NewInformationWriteQueries(BaseModel):
-        queries: list[str] = Field(description="The list of write queries. If a query need more than one python command, it needs to be separated by a newline. Put every command related to the same query in the same string.")
+        queries: list[str] = Field(description="The list of write queries. If a query need more than one Python command, it needs to be separated by a newline. Put every command related to the same query in the same string.")
 
     prompt_template = PromptTemplate(
         input_variables=["initial_query",
