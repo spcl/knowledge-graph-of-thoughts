@@ -20,10 +20,8 @@ RUN . venv/bin/activate && \
 # The copy process is done later, so that all Python dependencies are installed before copying the code and thus cached if code changes.
 # Copy KGoT code to the container
 COPY kgot kgot
-COPY GAIA GAIA
-ADD run_multiple_gaia* .
-RUN chmod +x run_multiple_gaia*
-
-RUN mkdir -p ./containers/neo4j/snapshots
+COPY benchmarks benchmarks
+ADD run_multiple_* .
+RUN chmod +x run_multiple_*
 
 ENTRYPOINT [ "/bin/bash", "-c"]

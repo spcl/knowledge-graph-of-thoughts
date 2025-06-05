@@ -36,7 +36,6 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-
 Citation
 ========
 
@@ -44,6 +43,7 @@ Any published work which uses this software should include the
 following citation:
 
 ----------------------------------------------------------------------
+
 Maciej Besta, Lorenzo Paleari, Jia Hao Andrea Jiang, Robert
 Gerstenberger, You Wu, Patrick Iff, Ales Kubicek, Piotr Nyczyk, Diana
 Khimey, Jón Gunnar Hannesson, Grzegorz Kwaśniewski, Marcin Copik,
@@ -51,19 +51,19 @@ Hubert Niewiadomski, Torsten Hoefler: Affordable AI Assistants with
 Knowledge Graph of Thoughts. In: arXiv preprint arXiv:2504.02670
 ----------------------------------------------------------------------
 
-Knowledge Graph of Thoughts uses code from Microsoft's Autogen team, 
+Knowledge Graph of Thoughts uses code from Microsoft's Autogen team,
 Huggingface's GAIA leaderboard repository as well as the Beating GAIA
 with Transformers Agents repository.
 
-
 Microsoft's Autogen GAIA Multiagent
-(https://github.com/microsoft/autogen/tree/gaia_multiagent_v01_march_1st)
+(<https://github.com/microsoft/autogen/tree/gaia_multiagent_v01_march_1st>)
 =========================================================================
 
-Knowledge Graph of Thoughts uses browser and file conversion utilities from 
+Knowledge Graph of Thoughts uses browser and file conversion utilities from
 Microsoft's Autogen team. Its license can be found below.
 
 ------------------------------------------------------------------------
+
 Qingyun Wu, Gagan Bansal, Jieyu Zhang, Yiran Wu, Beibin Li, Erkang Zhu,
 Li Jiang, Xiaoyun Zhang, Shaokun Zhang, Jiale Liu, Ahmed Hassan
 Awadallah, Ryen W. White, Doug Burger, Chi Wang: AutoGen: Enabling
@@ -93,8 +93,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE
 
-
-Beating GAIA with Transformers Agents (https://github.com/aymeric-roucher/GAIA)
+Beating GAIA with Transformers Agents (<https://github.com/aymeric-roucher/GAIA>)
 ===============================================================================
 
 Knowledge Graph of Thoughts uses code from the Beating GAIA with Transformers
@@ -303,9 +302,8 @@ found below.
    See the License for the specific language governing permissions and
    limitations under the License.
 
-
 Huggingface's GAIA Leaderboard Repository
-(https://huggingface.co/spaces/gaia-benchmark/leaderboard/tree/main)
+(<https://huggingface.co/spaces/gaia-benchmark/leaderboard/tree/main>)
 ====================================================================
 
 Knowledge Graph of Thoughts uses code from the Huggingface GAIA leaderboard

@@ -1,0 +1,28 @@
+{
+  "corpus_embedding": {
+    "token_count": 128881,
+    "cost_per_1k": 0.0001,
+    "total_cost": 0.012888100000000001
+  },
+  "query_embedding": {
+    "num_queries": 165,
+    "avg_query_tokens": 100,
+    "total_tokens": 16500,
+    "cost_per_1k": 0.0001,
+    "total_cost": 0.00165
+  },
+  "llm_processing": {
+    "avg_tokens_per_question": 1699.3333333333333,
+    "avg_prompt_tokens": 1574.4363636363637,
+    "avg_completion_tokens": 124.89696969696969,
+    "avg_cost_per_question": 0.00031110363636363634,
+    "num_questions": 165,
+    "total_cost": 0.0513321
+  },
+  "total_cost": 0.0658702,
+  "cost_breakdown": {
+    "corpus_embedding_pct": 19.565903853335804,
+    "query_embedding_pct": 2.504926355165158,
+    "llm_processing_pct": 77.92916979149904
+  }
+}

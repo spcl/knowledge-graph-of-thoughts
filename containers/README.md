@@ -25,6 +25,8 @@ If you want to start them separately, please refer to the respective READMEs:
 - [Neo4j](/containers/neo4j/README.md)
 - [Python](/containers/python/README.md)
 
+If you want to run the dockerized instance of KGoT, please refer to the [KGoT README](/containers/kgot/README.md).
+
 ### Rebuilding Images
 
 If you modify the setup of the images, such as mounting new datasets as attachments for Docker instances to access or updating the code within the Python code executor, you may want to force a rebuild of the containers without using the cache:
@@ -43,6 +45,7 @@ First download the necessary images:
 sarus pull python:3.12-slim
 sarus pull neo4j:5.26.2
 sarus pull spcleth/kgot:latest
+sarus pull spcleth/kgot-rdf4j:latest
 ```
 
 Then run the containers using the provided scripts:

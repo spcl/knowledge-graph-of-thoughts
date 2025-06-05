@@ -14,7 +14,7 @@ services:
             - NEO4J_AUTH=${AUTH}
             - NEO4J_PLUGINS=["apoc"]
         volumes:
-            - ./neo4j/snapshots:/import
+            - ../kgot/knowledge_graph/_snapshots:/import
         user: "${UID}:${GID}"
         healthcheck:
             test: wget http://neo4j_knowledge_graph:7474/ || exit 1

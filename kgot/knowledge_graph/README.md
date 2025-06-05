@@ -139,3 +139,80 @@ After the code execution, the correct solution `47` is obtained.
 
 We observe that NetworkX/Python excels in tasks that require traversals of longer paths, in which many intermediate computational steps are performed.
 For the same question using Neo4j, even though the task query is successfully transformed into a KG representation, the LLM Graph Executor consistently requires more iterations until it selects the SOLVE pathway.
+
+### RDF4J
+The RDF4J implementation provides additionally utility functions with error handling for connecting and interacting with the Neo4j graph database.
+We provide a containerized environment for interaction with the database.
+The RDF4J implementation uses standard SPARQL 1.1 queries.
+As with the Neo4j implementation, the RDF4J implementation interacts with the graph store using `get_query` in the SOLVE pathway and `write_query` in the ENHANCE pathway.
+
+The RDF4J implementation requires two endpoints to be provided, a `write` endpoint for `write_query` and a `read` endpoint for `get_query`.
+
+Additionally, users can obtain a comprehensive state of the current KG by calling the `get_current_graph_state` function, which queries the database server to export all nodes and relations within the current graph database with the following Cypher query:
+
+```sparql
+CONSTRUCT {
+    ?s ?p ?o .
+}
+WHERE {
+    ?s ?p ?o .
+}
+```
+
+The above query is statically defined, and guarantees the retrieval of the full KG state into a format, that allows for further data analysis by ensuring consistency of the acquired snapshot.
+
+#### Example: Resolving Question 51 with RDF4J 
+
+<p align="center">
+  <img src="../../paper/pics/q51_task_representation.svg" width="80%">
+  <br>
+  <em><strong>Example of a tree structure.</strong> This level 2 GAIA task requires 6 intermediate steps and the usage of 2 tools. The expected solution is 'Alfonso Visconti'.</em>
+</p>
+
+The KGoT framework initially invokes the Surfer Agent to search for information on the portrait and additional information on the consecrators and co-consecrators. Once the information is successfully retrieved it is used for enhancing the constructed KG.
+
+```python3
+# at iteration 1
+@prefix : <http://example.org/> .
+
+<http://example.org/person/Fernando_Niño_de_Guevara> a :Cardinal ;
+    :birthYear "1541" ;
+    :coConsecrators <http://example.org/person/Alfonso_Visconti>,
+        <http://example.org/person/Camillo_Borghese> ;
+    :consecratedBy <http://example.org/person/Pope_Clement_VIII> ;
+    :deathYear "1609" ;
+    :name "Fernando Niño de Guevara" ;
+    :position "Archbishop of Seville" ;
+    :role "Inquisitor General of Spain" .
+
+<http://example.org/portrait/29.100.5> a :Portrait ;
+    :accessionNumber "29.100.5" ;
+    :artist "El Greco" ;
+    :title "Cardinal Fernando Niño de Guevara" ;
+    :yearCreated "1600" .
+
+<http://example.org/person/Alfonso_Visconti> a :Bishop ;
+    :name "Alfonso Visconti" ;
+    :neverBecamePope "true" .
+
+<http://example.org/person/Camillo_Borghese> a :Pope ;
+    :becamePope "Pope Paul V" ;
+    :name "Camillo Borghese" .
+
+<http://example.org/person/Pope_Clement_VIII> a :Pope ;
+    :name "Pope Clement VIII" .
+```
+
+The following retrieve query is used to obtain the correct solution:
+
+```sparql
+SELECT ?name
+WHERE {
+  ?bishop a :Bishop ;
+          :neverBecamePope "true" ;
+          :name ?name .
+  ?cardinal :coConsecrators ?bishop .
+  ?cardinal a :Cardinal ;
+            :name "Fernando Niño de Guevara" .
+}
+```

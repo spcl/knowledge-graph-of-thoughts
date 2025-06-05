@@ -90,7 +90,7 @@ class ImageQuestionTool(BaseTool):
                 if response.status_code != 200:
                     return "The URL provided is not valid."
 
-                # OpenAI does NOT support svg, therefore convert ot png
+                # OpenAI does NOT support svg, therefore convert to png
                 # Check the content type to determine if it's an SVG
                 content_type = response.headers.get('Content-Type', '')
                 if 'image/svg+xml' in content_type:

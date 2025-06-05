@@ -10,6 +10,8 @@ __pycache__/
 dist/
 build/
 kgot.egg-info/
+kgot_simpleqa.egg-info/
+kgot_gaia.egg-info/
 
 # Installer logs
 pip-log.txt
@@ -28,6 +30,7 @@ pip-log.txt
 # Environments
 env/
 venv/
+.env
 
 # Config File
 **/config.json
@@ -45,6 +48,10 @@ logs/*
 snapshots/
 !logs/current_runs/**/snapshots
 apicache/
+
+results/current_runs/*
+!results/current_runs/archive.tar.*
+!results/current_runs/README.md
 
 # MacOsX
 .DS_Store

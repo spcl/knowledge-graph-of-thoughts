@@ -27,7 +27,7 @@ The KGoT system is designed as a modular and flexible framework that consists of
 </p>
 
 - The [Controller](kgot/controller/README.md) component offers fine-grained control over the customizable parameters in the KGoT pipeline and orchestrates the KG-based reasoning procedure.
-- The [Graph Store](kgot/knowledge_graph/README.md) component provides a modular interface for supporting various *Knowledge Graph Backends*. We initially support Neo4j and NetworkX.
+- The [Graph Store](kgot/knowledge_graph/README.md) component provides a modular interface for supporting various *Knowledge Graph Backends*. We initially support Neo4j, NetworkX and SPARQL.
 - The [Integrated Tools](kgot/tools/README.md) component allows for flexible and extensible *Tool Usage* and enables the multi-modal reasoning capabilities of the framework.
 
 ## Setup Guide
@@ -71,43 +71,76 @@ To use this tool, please set the API key within the [`kgot/config_tools.json`](k
 
 ### Setting Up the Containerized Environment
 
-In order to provide a secure & consistent execution environment, we containerize critical modules such as the **Neo4j graph database** and the **Python Code Tool**. This allows the safe execution of LLM-generated code without security concerns.
+In order to provide a secure & consistent execution environment, we containerize critical modules such as the **Neo4j graph database**, the **RDF4J database** and the **Python Code Tool**. This allows the safe execution of LLM-generated code without security concerns.
 
-#### Running the Docker Instances
+#### Running the Containers Instances
+
+We provide a Docker and Sarus setup for the KGoT framework. The Docker setup is recommended for local development, while Sarus is intended for HPC environments.
 
 ```bash
 cd containers/
-chmod -R 777 neo4j/snapshots # grant permission for snapshots logging
-docker compose --env-file neo4j/.env up
+
+# Docker
+chmod -R 777 ../kgot/knowledge_graph/_snapshots # grant permission for snapshots logging
+docker compose up
+
+# Sarus
+chmod +x sarus_launcher.sh # grant permission for execution
+./sarus_launcher.sh
 ```
 
+This will build and start the default container images for KGoT, which include:
+
+- Neo4j image
+- Python image
+
+```bash
+cd containers/kgot/
+
+# Docker
+docker compose up
+
+# Sarus
+chmod +x sarus_launcher.sh # grant permission for execution
+./sarus_launcher.sh
+```
+
+This will build and start:
+
+- KGoT image
+
 > [!NOTE]
-> Further instructions on customizing the Docker images can be found under [Docker Image Setup](containers/README.md).
+> Further instructions on RDF4J and on customizing the container images can be found under [Containers Image Setup](containers/README.md).
 
 > [!WARNING]
-> The initial building phase can take a while (15 minutes), so be patient.
-> If you need to make adjustments simply stop the instances and restart them with the following command `docker compose --env-file containers/neo4j/.env up --build`
-> Changes to `README.md`, `LICENSE`, `pyproject.toml`, `kgot/__init__.py` and `kgot/__main__.py` will cause the Docker instances to be rebuilt from scratch.
+> The initial building phase of the KGoT docker image can take a while (15 minutes), so be patient.
+> If you need to make adjustments simply stop the instances and restart them with the following command `docker compose up --build` from the `containers/kgot` directory.
+> Changes to `README.md`, `LICENSE`, `pyproject.toml`, `kgot/__init__.py` and `kgot/__main__.py` will cause the Docker instance to be rebuilt from scratch.
 
 ## Quick Start
 
-We primarily evaluated the Knowledge Graph of Thoughts framework with the GAIA benchmark, which we discuss first and subsequently alternative ways to run KGoT.
+We primarily evaluated the Knowledge Graph of Thoughts framework with the GAIA and SimpleQA benchmarks, which we discuss first and subsequently alternative ways to run KGoT.
 
-### Installing GAIA Dataset
+### Installing Datasets (GAIA and SimpleQA)
 
-To avoid sharing the GAIA dataset in a crawlable format, we do not directly provide the dataset inside the repository. Instead, we offer a download script to help you acquire the dataset.
-Please refer to the [installation guide](GAIA/dataset/README.md) inside the `GAIA` directory for further instructions.
+To avoid sharing the GAIA and SimpleQA datasets in a crawlable format, we do not directly provide the datasets inside the repository. Instead, we offer a download script to help you acquire the datasets.
+Please refer to the [installation guide](benchmarks/datasets/README.md) inside the `benchmarks` directory for further instructions.
 
-#### Evaluating KGoT on the GAIA Dataset
+#### Evaluating KGoT on the Datasets (GAIA and SimpleQA)
 
-We provide a run script for evaluating KGoT on the GAIA dataset.
+We provide two run scripts for evaluating KGoT on the datasets.
 
 ```bash
 chmod +x ./run_multiple_gaia.sh # grant permission for logging etc.
 ./run_multiple_gaia.sh          # perform the actual run with default parameters
+
+chmod +x ./run_multiple_simpleqa.sh # grant permission for logging etc.
+./run_multiple_simpleqa.sh          # perform the actual run with default parameters
 ```
 
-You can run `./run_multiple_gaia.sh --help` to check the supported arguments, that generally match the options found [here](GAIA/README.md#evaluate-kgot-on-gaia) for the `gaia.py` Python script.
+The following instructions apply to the `run_multiple_gaia.sh` script, but are also applicable to the `run_multiple_simpleqa.sh` script, for more detailed instructions please refer to the coplete guide [here](benchmarks/README.md).
+
+You can run `./run_multiple_gaia.sh --help` to check the supported arguments, that generally match the options found [here](benchmarks/README.md) for the `gaia.py` Python script.
 For optimal results, we recommend enabling the '--gaia_formatter' option, which will format the output in a GAIA-compatible format.
 
 The following are the most commonly used arguments:
@@ -116,7 +149,7 @@ The following are the most commonly used arguments:
 Arguments:
   --log_base_folder     - Directory where logs will be stored [path/to/log_folder]
   --controller_choice   - Type of solver to use               [directRetrieve/queryRetrieve]
-  --backend_choice      - Backend database type               [neo4j/networkX]
+  --backend_choice      - Backend database type               [neo4j/networkX/sparql]
   --tool_choice         - Tool configuration                  [tools_v2_3]
   --max_iterations      - Max iterations for KGoT             [integers > 0]
   --gaia_formatter      - Use GAIA formatter for the output   [True/False]
@@ -124,13 +157,13 @@ Arguments:
 Example: ./run_multiple_gaia.sh --log_base_folder logs/test_1 --controller_choice directRetrieve --backend_choice networkX --tools "tools_v2_3" --max_iterations 5 --gaia_formatter
 ```
 
-We offer two choices for storing the [knowledge graph](kgot/knowledge_graph/README.md) (Neo4j and NetworkX) as well as for the [retrieval type](kgot/controller#knowledge-extraction) (direct and query-based retrevial).
+We offer three choices for storing the [knowledge graph](kgot/knowledge_graph/README.md) (Neo4j, NetworkX and Sparql) as well as two choices for the [retrieval type](kgot/controller#knowledge-extraction) (direct and query-based retrevial).
 
 ### Using Knowledge Graph of Thoughts
 
-We offer two ways to evaluate KGoT on the GAIA dataset as well as a way to use KGoT directly with any task description.
+We offer two ways to evaluate KGoT on the datasets as well as a way to use KGoT directly with any task description.
 
-As discussed above, you can use the `run_multiple_gaia.sh` script to evaluate KGoT on the GAIA dataset, which acts as a frontend for the `gaia.py` Python script.
+As discussed above, you can use the `run_multiple_gaia.sh` or `run_multiple_simpleqa.sh` scripts to evaluate KGoT on the GAIA  and/or SimpleQA datasets, which act as frontends for the `gaia.py` and `simpleqa.py` Python scripts.
 It allows to evaluate multiple subsets of the GAIA datasets or to do multiple runs on these subsets, while also transfering the knowledge graph snapshots as well as plotting the results with various metrics.
 We further discuss the use of the script [here](GAIA#evaluating-multiple-subsets).
 Please note, that if you use your own Neo4j server instead of the one inside the Docker container, the transfer of the knowledge graph snapshots will fail or needs to be adapted.

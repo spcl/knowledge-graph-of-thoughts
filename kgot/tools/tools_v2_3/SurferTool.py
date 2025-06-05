@@ -7,16 +7,14 @@
 # Main authors: Lorenzo Paleari
 #               Jón Gunnar Hannesson
 #
-# Most of the code below is from the Beating GAIA with Transformers Agents 🚀 repository.
+# Most of the code below is from the Beating GAIA with Transformers Agents repository.
 # https://github.com/aymeric-roucher/GAIA/blob/main/gaia_custom_multiagent.py
 #
 # Copyright 2024 Aymeric Roucher
 #
 # Some minor modification and addition of tools to adapt the code to our needs were performed
 
-import json
 import logging
-import os
 from typing import Any, Type
 
 from langchain.schema import AIMessage, HumanMessage, SystemMessage

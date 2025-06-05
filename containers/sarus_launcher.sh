@@ -5,7 +5,7 @@ set -a
 source .env
 set +a
 
-NEO4J_IMPORT_DIR=$(realpath ./neo4j/snapshots)
+NEO4J_IMPORT_DIR=$(realpath ../kgot/knowledge_graph/_snapshots)
 PYTHON_APP_DIR=$(realpath ./python/files)
 
 bash -c "
