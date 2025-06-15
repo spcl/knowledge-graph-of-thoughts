@@ -23,7 +23,7 @@ from kgot.utils import UsageStatistics
 
 def check_answers(solver_function, simpleqa_data, already_solved, log_folder_base, correct_stats_json_file_path, attachments_folder):
     
-    # Get api key from config_llms.json
+    # Get API key from config_llms.json
     with open("kgot/config_llms.json", 'r') as f:
         config_llms = json.load(f)
     model = config_llms['gpt-4o']
@@ -50,13 +50,13 @@ def check_answers(solver_function, simpleqa_data, already_solved, log_folder_bas
         print(f"\n\n\nSolving question {row_idx}:")
         try:
             # the snapshot(s) will be saved in a subfolder with the same path as log_folder_base,
-            #   but from kgot/knowledge_graph/_snapshots/
+            # but from kgot/knowledge_graph/_snapshots/
             returned_answer, iterations_taken = solver_function(question,
                                               file_path,
                                               [file_name],
                                               row_idx, log_folder_base)
         except Exception as e:
-            # If modifying this error code, please modify also the plot_maker.py in benchmarks
+            # If you are modifying this error code, please also update the respective code in benchmarks/plotters/plot_maker.py
             returned_answer = f"error during execution, skipped. {e}\n{traceback.format_exc()}"
             iterations_taken = -1
 

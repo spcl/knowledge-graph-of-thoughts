@@ -19,7 +19,7 @@ from benchmarks.plotters.plot_operations import PlotOperation
 
 class AnswerPlotSimpleQA(PlotOperation):
     """
-    The AnswerPlot class handles the plotting of results from querying.
+    The AnswerPlot class handles the plotting of results from querying the SimpleQA benchmark.
 
     Inherits from the PlotOperation class and implements its abstract methods.
     """
@@ -161,7 +161,7 @@ class AnswerPlotSimpleQA(PlotOperation):
         plt.grid(True, axis='y', linestyle='--', alpha=0.7)
         plt.tight_layout()
         
-        plt.savefig(os.path.join(self.result_dir_path, f"{filename}.png"))
+        plt.savefig(os.path.join(self.result_dir_path, f"{filename}.pdf"))
         plt.close()
 
     def _plot_all_stats(self, df: pd.DataFrame, filename: str) -> None:
@@ -216,5 +216,5 @@ class AnswerPlotSimpleQA(PlotOperation):
         plt.grid(True, axis='y', linestyle='--', alpha=0.7)
         plt.tight_layout()
         
-        plt.savefig(os.path.join(self.result_dir_path, f"{filename}.png"))
+        plt.savefig(os.path.join(self.result_dir_path, f"{filename}.pdf"))
         plt.close()

@@ -4,7 +4,7 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 #
-# Main authors: Tao Zhang
+# Main author: Tao Zhang
 
 import json
 import logging
@@ -88,7 +88,7 @@ def get_model_configurations(model_name: str) -> Dict[str, Any]:
             "temperature": 0.0,
         }
     
-    # Always ensure API keys from environment
+    # Always use API keys from environment
     config["api_key"] = os.getenv("OPENAI_API_KEY")
     config["organization"] = os.getenv("OPENAI_ORG_ID")
     
@@ -178,4 +178,4 @@ class UsageStatistics:
         print(f"Total cost: ${total_cost:.4f}")
         print(f"Total tokens: {total_tokens} (Prompt: {total_prompt_tokens}, Completion: {total_completion_tokens})")
         for model, stats in model_stats.items():
-            print(f"Model {model}: ${stats['cost']:.4f}, {stats['prompt_tokens'] + stats['completion_tokens']} tokens") 
+            print(f"Model {model}: ${stats['cost']:.4f}, {stats['prompt_tokens'] + stats['completion_tokens']} tokens")

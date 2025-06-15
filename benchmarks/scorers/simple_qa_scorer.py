@@ -4,8 +4,8 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 #
-# Main author: Peiran Ma
-#              Lorenzo Paleari
+# Main authors: Peiran Ma
+#               Lorenzo Paleari
 #
 # The code below is taken from the simple-evals repository with slight modifications
 # https://github.com/openai/simple-evals

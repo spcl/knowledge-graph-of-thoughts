@@ -42,7 +42,7 @@ class Controller(ControllerInterface):
     Controller class for managing the interaction between the LLM and the Neo4j database.
     This class is responsible for executing tasks, retrieving information, and managing the state of the knowledge graph.
 
-    The retrieve method is Cypher-based, meaning it uses Cypher queries to interact with the Neo4j database.
+    The retrieve method is query-based, meaning it uses Python queries to interact with the NetworkX graph storage.
 
     Attributes:
         graph (State.knowledge_graph): The knowledge graph instance for interacting with the Neo4j database.
@@ -186,7 +186,7 @@ class Controller(ControllerInterface):
                         f"Failed the write query. Retry number: {retry_i} out of {self.max_cypher_fixing_retry}")
 
                     self.logger.error(
-                        f"Trying to fix error encountered when executing cypher query: {single_query}\nError: {write_response[1]}")
+                        f"Trying to fix error encountered when executing Python query: {single_query}\nError: {write_response[1]}")
                     single_query = fix_code(self.llm_planning, single_query, write_response[1], existing_entities_and_relationships, self.usage_statistics)
                     write_response = self.graph.write_query(single_query)
                     self.logger.info(f"Write query result after fixing: {write_response}")

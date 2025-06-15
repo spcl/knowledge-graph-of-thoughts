@@ -236,7 +236,7 @@ class Controller(ControllerInterface):
                 forced_solution = generate_forced_solution(self.llm_planning, query, existing_entities_and_relationships, self.usage_statistics)
                 solution = parse_solution_with_llm(self.llm_planning, query, forced_solution, self.usage_statistics)
             else:
-                # we have a series of solutions, we need to choose the best one
+                # We have a series of solutions, we need to choose the best one
                 self.logger.info(f"Solution list for final solution choose: {str(solutions)} {str(array_parsed_solutions)}")
                 solution = define_final_solution(self.llm_planning, query, str(solutions), array_parsed_solutions,
                                                  self.usage_statistics)
@@ -260,7 +260,7 @@ class Controller(ControllerInterface):
         for retrieve_query in retrieve_queries:
             # Attempt to retrieve using the initial retrieve query
             get_result = self.graph.get_query(
-                retrieve_query)  # returns a tuple (result, success_flag, exception, index_failed_query)
+                retrieve_query)  # Returns a tuple (result, success_flag, exception, index_failed_query)
             self.logger.info(f"Retrieved result: {get_result}")
 
             # Retry the retrieve query if it fails
@@ -280,7 +280,7 @@ class Controller(ControllerInterface):
                     self.logger.info(
                         f"Failed the retrieve query. Trying to fix the SPARQL query. Retry number: {fix_retry_i} out of {self.max_cypher_fixing_retry} of SPARQL query fixes")
                     self.logger.error(
-                        f"Trying to fix error encountered when executing RETRIEVE sparql query: {retrieve_query}\nError: {get_result[2]}")
+                        f"Trying to fix error encountered when executing RETRIEVE SPARQL query: {retrieve_query}\nError: {get_result[2]}")
                     retrieve_query = fix_sparql(self.llm_planning, retrieve_query, get_result[2],
                                                 self.usage_statistics)
 
@@ -346,4 +346,3 @@ class Controller(ControllerInterface):
             outputs.append(tool_output)
 
         return outputs
-

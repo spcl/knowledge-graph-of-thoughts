@@ -1,3 +1,11 @@
+# Copyright (c) 2025 ETH Zurich.
+#                    All rights reserved.
+#
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+#
+# Main author: Tao Zhang
+
 import asyncio
 import os
 import pickle
@@ -153,7 +161,6 @@ def retrieve_context_per_question(question, chunks_query_retriever):
     docs = chunks_query_retriever.get_relevant_documents(question)
 
     # Concatenate document content
-    # context = " ".join(doc.page_content for doc in docs)
     context = [doc.page_content for doc in docs]
 
     return context
@@ -260,13 +267,13 @@ def bm25_retrieval(bm25: BM25Okapi, cleaned_texts: List[str], query: str, k: int
     Perform BM25 retrieval and return the top k cleaned text chunks.
 
     Args:
-    bm25 (BM25Okapi): Pre-computed BM25 index.
-    cleaned_texts (List[str]): List of cleaned text chunks corresponding to the BM25 index.
-    query (str): The query string.
-    k (int): The number of text chunks to retrieve.
+        bm25 (BM25Okapi): Pre-computed BM25 index.
+        cleaned_texts (List[str]): List of cleaned text chunks corresponding to the BM25 index.
+        query (str): The query string.
+        k (int): The number of text chunks to retrieve.
 
     Returns:
-    List[str]: The top k cleaned text chunks based on BM25 scores.
+        List[str]: The top k cleaned text chunks based on BM25 scores.
     """
     # Tokenize the query
     query_tokens = query.split()
@@ -351,7 +358,7 @@ def get_langchain_embedding_provider(provider: EmbeddingProvider, model_id: str 
 
     Args:
         provider (EmbeddingProvider): The embedding provider to use.
-        model_id (str): Optional -  The specific embeddings model ID to use .
+        model_id (str): Optional -  The specific embeddings model ID to use.
 
     Returns:
         A LangChain embedding provider instance.
@@ -379,7 +386,7 @@ def encode_corpus_file(corpus_path, save_dir=None):
     
     Args:
         corpus_path (str): Path to the corpus file (corpus_?.txt)
-        save_dir (str, optional): Directory to save intermediate results. If None, results won't be saved.
+        save_dir (str, optional): Directory to store (intermediate) results. If None, results won't be saved.
     
     Returns:
         FAISS: A vector store containing the encoded chunks.
@@ -439,6 +446,3 @@ def encode_corpus_file(corpus_path, save_dir=None):
         print(f"Saved FAISS index to {faiss_index_path}")
     
     return vectorstore
-
-# Example usage:
-# vectorstore = encode_corpus_file("rag_gaia/corpus_4.txt", save_dir="rag_gaia/vector_db")

@@ -188,7 +188,7 @@ class Controller(ControllerInterface):
                         f"Failed the write query. Retry number: {retry_i} out of {self.max_cypher_fixing_retry}")
 
                     self.logger.error(
-                        f"Trying to fix error encountered when executing cypher query: {single_query}\nError: {write_response[1]}")
+                        f"Trying to fix error encountered when executing Cypher query: {single_query}\nError: {write_response[1]}")
                     single_query = fix_cypher(self.llm_planning, single_query, write_response[1],
                                                 self.usage_statistics)
                     write_response = self.graph.write_query(single_query)
@@ -278,9 +278,9 @@ class Controller(ControllerInterface):
                         solution)) and fix_retry_i < self.max_cypher_fixing_retry:
                     fix_retry_i += 1
                     self.logger.info(
-                        f"Failed the retrieve query. Trying to fix the cypher. Retry number: {fix_retry_i} out of {self.max_cypher_fixing_retry} of cypher query fixes")
+                        f"Failed the retrieve query. Trying to fix the Cypher query. Retry number: {fix_retry_i} out of {self.max_cypher_fixing_retry} of Cypher query fixes")
                     self.logger.error(
-                        f"Trying to fix error encountered when executing RETRIEVE cypher query: {retrieve_query}\nError: {get_result[2]}")
+                        f"Trying to fix error encountered when executing RETRIEVE Cypher query: {retrieve_query}\nError: {get_result[2]}")
                     retrieve_query = fix_cypher(self.llm_planning, retrieve_query, get_result[2],
                                                 self.usage_statistics)
 

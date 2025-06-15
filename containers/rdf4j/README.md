@@ -19,7 +19,7 @@ chmod +x sarus_launcher.sh     # If needed
 ./sarus_launcher.sh
 ```
 
-## Steps to create a local KGoT image
+## Steps to Create a Local KGoT Image
 
 We provide an already built KGoT image `spcleth/kgot-rdf4j:latest`, that is the default image used in the [`docker-compose`](./docker-compose.yaml) file.
 If you want to build the image locally, please follow these steps:
@@ -31,7 +31,7 @@ cd rdf4j_image
 docker build -t kgot-rdf4j:latest .
 ```
 
-- Modify the [`docker-compose`](./docker-compose.yaml) / `sarus_launcher.sh` to use the local image instead of the `spcleth/kgot-rdf4j:latest` image. Substitute `spcleth/kgot-rdf4j:latest` with `kgot-rdf4j:latest` in the `docker-compose` and `sarus_launcher.sh` files.
+- Modify [`docker-compose`](./docker-compose.yaml) and/or [`sarus_launcher.sh`](./sarus_launcher.sh) to use a local image instead of the provided image by substituting `spcleth/kgot-rdf4j:latest` with `kgot-rdf4j:latest`.
 
 - If you want to use the local image with Sarus an additional step is needed. You need to save the image as a tar file and load it into Sarus. You can do this with the following command:
 
@@ -39,5 +39,3 @@ docker build -t kgot-rdf4j:latest .
 docker save --output kgot-rdf4j.tar kgot-rdf4j:latest
 sarus load ./kgot-rdf4j.tar kgot-rdf4j:latest
 ```
-
-- Read steps above to run the KGoT image with Docker or Sarus.

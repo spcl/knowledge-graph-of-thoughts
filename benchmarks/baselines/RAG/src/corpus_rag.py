@@ -4,7 +4,7 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 #
-# Main authors: Tao Zhang
+# Main author: Tao Zhang
 
 import argparse
 import os
@@ -230,4 +230,4 @@ def main(args):
 
 if __name__ == '__main__':
     # Call the main function with parsed arguments
-    main(parse_args()) 
+    main(parse_args())

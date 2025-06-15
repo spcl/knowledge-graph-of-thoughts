@@ -271,7 +271,7 @@ class ToolPlot(PlotOperation):
         )
 
         # Save outputs
-        kaleido.write_fig_sync(fig, os.path.join(self.result_dir_path, f"{filename}.png"))
+        kaleido.write_fig_sync(fig, os.path.join(self.result_dir_path, f"{filename}.pdf"))
 
     def _plot_sankey(self, df: pd.DataFrame, filename: str) -> None:
         """Create sankey flow diagram showing tool correctness to GAIA success"""
@@ -336,7 +336,7 @@ class ToolPlot(PlotOperation):
             width=600,
             margin=dict(t=100, l=50, r=50, b=100)
         )
-        kaleido.write_fig_sync(fig, os.path.join(self.result_dir_path, f"{filename}.png"))
+        kaleido.write_fig_sync(fig, os.path.join(self.result_dir_path, f"{filename}.pdf"))
 
     def _plot_kgot_tool_usage(self, df: pd.DataFrame, filename: str) -> None:
         """Create a pie chart showing KGoT tool usage distribution."""
@@ -390,7 +390,7 @@ class ToolPlot(PlotOperation):
         )
         
         # Save output
-        kaleido.write_fig_sync(fig, os.path.join(self.result_dir_path, f"{filename}.png"))
+        kaleido.write_fig_sync(fig, os.path.join(self.result_dir_path, f"{filename}.pdf"))
 
     def _plot_category_success_bar(self, df: pd.DataFrame, filename: str) -> None:
         """Create grouped bar chart showing GAIA categories success"""
@@ -439,4 +439,4 @@ class ToolPlot(PlotOperation):
         )
         
         # Save the figure
-        kaleido.write_fig_sync(fig, os.path.join(self.result_dir_path, f"{filename}.png"))
+        kaleido.write_fig_sync(fig, os.path.join(self.result_dir_path, f"{filename}.pdf"))

@@ -4,7 +4,7 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 #
-# Main authors: Tao Zhang
+# Main author: Tao Zhang
 
 import argparse
 import asyncio
@@ -642,8 +642,8 @@ def main():
     parser.add_argument('--log_folder_base', type=str, required=True, help='Folder to store logs')
     
     # Optional parameters with defaults
-    parser.add_argument('--gaia_file', type=str, default='benchmarks/datasets/GAIA/validation/merged_dataset.json', help='GAIA dataset file')
-    parser.add_argument('--attachments_folder', type=str, default='GAIA/dataset/validation/attachments', help='Folder containing problem attachments')
+    parser.add_argument('--gaia_file', type=str, default='../../../../datasets/GAIA/validation/merged_dataset.json', help='GAIA dataset file')
+    parser.add_argument('--attachments_folder', type=str, default='../../../../datasets/GAIA/attachments/validation', help='Folder containing problem attachments')
     parser.add_argument('--index_path', type=str, default='vector_db/corpus_2.txt_faiss_index', help='Path to FAISS index for RAG')
     parser.add_argument('--llm_model', type=str, default='gpt-4o-mini', help='LLM model to use')
     parser.add_argument('--max_questions', type=int, default=3, help='Maximum number of questions to evaluate (0 for all)')
@@ -713,4 +713,4 @@ def main():
     print(f"Cost statistics are in {statistics_file_name}")
 
 if __name__ == "__main__":
-    main() 
+    main()

@@ -4,10 +4,9 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 #
-# Main author: Jón Gunnar Hannesson
-#              Lorenzo Paleari
-#              Peiran Ma
-
+# Main authors: Jón Gunnar Hannesson
+#               Lorenzo Paleari
+#               Peiran Ma
 
 import argparse
 import ast
@@ -86,7 +85,7 @@ def setup_question_json(input_dir: str, split: str, with_dummy: bool = False):
 
 def convert_csv_to_gaia_json(csv_filepath, json_filepath):
     """
-    Convert a specially formatted CSV file to the GAIA-expected JSON format.
+    Convert a specifically formatted CSV file into the JSON format, that we use for the GAIA benchmark.
 
     Args:
         csv_filepath (str): Input CSV file path.

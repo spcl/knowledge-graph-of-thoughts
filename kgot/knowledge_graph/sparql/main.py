@@ -44,7 +44,6 @@ class KnowledgeGraph(KnowledgeGraphInterface):
 
             self.sparql_writer = SPARQLWrapper(sparql_write_endpoint)
             self.sparql_writer.setMethod(POST)
-            # self.logger.info(f"Initialized SPARQL endpoint at {sparql_endpoint}")
             self._test_connection()
         except ConnectionError:
             print(
@@ -78,7 +77,7 @@ class KnowledgeGraph(KnowledgeGraphInterface):
 
     def _export_db(self) -> None:
         """
-        Export all nodes with a specific label to a XML file.
+        Export all nodes with a specific label to an XML file.
         """
         export_file = f"snapshot_{self.current_snapshot_id}.xml"  # Specify the export file name
         self.sparql_reader.setReturnFormat(XML)
@@ -115,8 +114,8 @@ class KnowledgeGraph(KnowledgeGraphInterface):
 
     def init_db(self, index: int = 0, snapshot_subdir: str = "", *args, **kwargs) -> None:
         """
-        Initialise the current database by deleting all nodes
-        It creates a folder to store the exported database.
+        Initialize the current database by deleting all nodes.
+        Create a folder to store the exported database.
         """
         # Delete all nodes
         self.sparql_writer.setQuery("""
@@ -186,7 +185,7 @@ class KnowledgeGraph(KnowledgeGraphInterface):
         Write data to the RDF graph (e.g., INSERT or DELETE).
 
         Args:
-            query (str): The SPARQL Update query to be executed.
+            query (str): The SPARQL UPDATE query to be executed.
 
         Returns:
             Tuple[bool, Exception]: The result of the query.

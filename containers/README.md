@@ -25,7 +25,7 @@ If you want to start them separately, please refer to the respective READMEs:
 - [Neo4j](/containers/neo4j/README.md)
 - [Python](/containers/python/README.md)
 
-If you want to run the dockerized instance of KGoT, please refer to the [KGoT README](/containers/kgot/README.md).
+If you want to run a containerized instance of KGoT, please refer to the [KGoT README](/containers/kgot/README.md).
 
 ### Rebuilding Images
 

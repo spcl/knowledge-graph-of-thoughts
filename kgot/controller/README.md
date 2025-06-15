@@ -41,5 +41,5 @@ The **LLM Tool Executor** decides which tools to use as well as handling the int
 We explore different approaches for knowledge extraction, once the knowledge graph has been sufficiently populated.
 In our reference implementation, the LLM can either solve the task by either directly embedding the knowledge graph in its context, called **Direct Retrieval (DR)**, or querying the graph store for specific insights with the help of a **Graph Query**.
 
-For the time being, we provide five control logic sets depending on the [backend type](../knowledge_graph/README.md) (Neo4j, NetworkX or SparQL) and the solution technique (DR or Graph Query).
+For the time being, we provide five control logic sets depending on the [backend type](../knowledge_graph/README.md) (Neo4j, NetworkX or RDF4J) and the solution technique (DR or Graph Query).
 In further versions, solution techniques could be selected and switched behind a single interface, providing more flexibility and removing code redundancy.

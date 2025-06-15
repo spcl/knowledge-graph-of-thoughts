@@ -204,7 +204,6 @@ for ((run=1; run<=num_runs; run++)); do
 
         # Extract the base name from the SimpleQA file path to construct the output file name
         base_name=$(basename "$simpleqa_file" .json)
-        # output_file="$log_folder/output_${base_name}_${iteration}.txt" # Note that this output file will be overwritten as it does NOT include the time
 
         echo "Running with SimpleQA file: $simpleqa_file and log folder: $log_folder and it is the [$i-th/${#simpleqa_files[@]}] elements"
         echo "Output will be saved into the log folder in the cmd_log.log file"
@@ -229,7 +228,6 @@ for ((run=1; run<=num_runs; run++)); do
         echo
         
         # Change the Python version if needed and run the script
-
         python3 $SCRIPT
     done
 

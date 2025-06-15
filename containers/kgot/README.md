@@ -30,9 +30,9 @@ chmod +x sarus_launcher.sh     # If needed
 ./sarus_launcher.sh
 ```
 
-## Steps to create a local KGoT image
+## Steps to Create a Local KGoT Image
 
-We provide an already built KGoT image `spcleth/kgot:latest`, that is the default image used in the [`Dockerfile`](./Dockerfile)
+We provide an already built KGoT image `spcleth/kgot:latest`, which is the default image used in the [`Dockerfile`](./Dockerfile).
 If you want to build the image locally, please follow these steps:
 
 - Create a local image with the following command:
@@ -42,7 +42,7 @@ cd kgot_image
 docker build -t kgot:latest .
 ```
 
-- Modify the [`Dockerfile`](./Dockerfile) / `sarus_launcher.sh` to use the local image instead of the `spcleth/kgot:latest` image. Substitute `spcleth/kgot:latest` with `kgot:latest` in the `Dockerfile` and `sarus_launcher.sh` files.
+- Modify [`Dockerfile`](./Dockerfile) and/or [`sarus_launcher.sh`](./sarus_launcher.sh) to use a local image instead of the provided image by substituting `spcleth/kgot:latest` with `kgot:latest`.
 
 - If you want to use the local image with Sarus an additional step is needed. You need to save the image as a tar file and load it into Sarus. You can do this with the following command:
 
@@ -50,5 +50,3 @@ docker build -t kgot:latest .
 docker save --output kgot.tar kgot:latest
 sarus load ./kgot.tar kgot:latest
 ```
-
-- Read steps above to run the KGoT image with Docker or Sarus.

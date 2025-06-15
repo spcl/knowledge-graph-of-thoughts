@@ -73,7 +73,7 @@ To use this tool, please set the API key within the [`kgot/config_tools.json`](k
 
 In order to provide a secure & consistent execution environment, we containerize critical modules such as the **Neo4j graph database**, the **RDF4J database** and the **Python Code Tool**. This allows the safe execution of LLM-generated code without security concerns.
 
-#### Running the Containers Instances
+#### Running the Container Instances
 
 We provide a Docker and Sarus setup for the KGoT framework. The Docker setup is recommended for local development, while Sarus is intended for HPC environments.
 
@@ -110,10 +110,10 @@ This will build and start:
 - KGoT image
 
 > [!NOTE]
-> Further instructions on RDF4J and on customizing the container images can be found under [Containers Image Setup](containers/README.md).
+> Further instructions on RDF4J and on customizing the container images can be found under [Container Image Setup](containers/README.md).
 
 > [!WARNING]
-> The initial building phase of the KGoT docker image can take a while (15 minutes), so be patient.
+> The initial building phase of the KGoT container image can take a while (15 minutes), so be patient.
 > If you need to make adjustments simply stop the instances and restart them with the following command `docker compose up --build` from the `containers/kgot` directory.
 > Changes to `README.md`, `LICENSE`, `pyproject.toml`, `kgot/__init__.py` and `kgot/__main__.py` will cause the Docker instance to be rebuilt from scratch.
 
@@ -121,14 +121,14 @@ This will build and start:
 
 We primarily evaluated the Knowledge Graph of Thoughts framework with the GAIA and SimpleQA benchmarks, which we discuss first and subsequently alternative ways to run KGoT.
 
-### Installing Datasets (GAIA and SimpleQA)
+### Installing Datasets
 
 To avoid sharing the GAIA and SimpleQA datasets in a crawlable format, we do not directly provide the datasets inside the repository. Instead, we offer a download script to help you acquire the datasets.
 Please refer to the [installation guide](benchmarks/datasets/README.md) inside the `benchmarks` directory for further instructions.
 
-#### Evaluating KGoT on the Datasets (GAIA and SimpleQA)
+#### Evaluating KGoT on the Datasets
 
-We provide two run scripts for evaluating KGoT on the datasets.
+We provide two run scripts for evaluating KGoT on the GAIA and SimpleQA datasets.
 
 ```bash
 chmod +x ./run_multiple_gaia.sh # grant permission for logging etc.
@@ -138,7 +138,7 @@ chmod +x ./run_multiple_simpleqa.sh # grant permission for logging etc.
 ./run_multiple_simpleqa.sh          # perform the actual run with default parameters
 ```
 
-The following instructions apply to the `run_multiple_gaia.sh` script, but are also applicable to the `run_multiple_simpleqa.sh` script, for more detailed instructions please refer to the coplete guide [here](benchmarks/README.md).
+The following instructions apply to the `run_multiple_gaia.sh` script, but are also applicable to the `run_multiple_simpleqa.sh` script; for more detailed instructions please refer to the complete guide [here](benchmarks/README.md).
 
 You can run `./run_multiple_gaia.sh --help` to check the supported arguments, that generally match the options found [here](benchmarks/README.md) for the `gaia.py` Python script.
 For optimal results, we recommend enabling the '--gaia_formatter' option, which will format the output in a GAIA-compatible format.
@@ -157,18 +157,18 @@ Arguments:
 Example: ./run_multiple_gaia.sh --log_base_folder logs/test_1 --controller_choice directRetrieve --backend_choice networkX --tools "tools_v2_3" --max_iterations 5 --gaia_formatter
 ```
 
-We offer three choices for storing the [knowledge graph](kgot/knowledge_graph/README.md) (Neo4j, NetworkX and Sparql) as well as two choices for the [retrieval type](kgot/controller#knowledge-extraction) (direct and query-based retrevial).
+We offer three choices for storing the [knowledge graph](kgot/knowledge_graph/README.md) (Neo4j, NetworkX and RDF4J) as well as two choices for the [retrieval type](kgot/controller#knowledge-extraction) (direct and query-based retrieval).
 
 ### Using Knowledge Graph of Thoughts
 
 We offer two ways to evaluate KGoT on the datasets as well as a way to use KGoT directly with any task description.
 
-As discussed above, you can use the `run_multiple_gaia.sh` or `run_multiple_simpleqa.sh` scripts to evaluate KGoT on the GAIA  and/or SimpleQA datasets, which act as frontends for the `gaia.py` and `simpleqa.py` Python scripts.
-It allows to evaluate multiple subsets of the GAIA datasets or to do multiple runs on these subsets, while also transfering the knowledge graph snapshots as well as plotting the results with various metrics.
-We further discuss the use of the script [here](GAIA#evaluating-multiple-subsets).
-Please note, that if you use your own Neo4j server instead of the one inside the Docker container, the transfer of the knowledge graph snapshots will fail or needs to be adapted.
+As discussed above, you can use the `run_multiple_gaia.sh` or `run_multiple_simpleqa.sh` scripts to evaluate KGoT on the GAIA and SimpleQA datasets respectively, which act as frontends for the `gaia.py` and `simpleqa.py` Python scripts.
+They allow to evaluate multiple subsets of the datasets or to do multiple runs on these subsets, while also transfering the knowledge graph snapshots as well as plotting the results with various metrics.
+We further discuss the use of the scripts [here](benchmarks#evaluating-multiple-subsets).
+Please note, that if you use your own Neo4j or RDF4J server instead of the one inside the Docker container, the transfer of the knowledge graph snapshots will fail or needs to be adapted.
 
-You can also directly run the Python script [gaia.py](GAIA/gaia.py), which we further discuss [here](GAIA#evaluate-kgot-on-gaia).
+You can also directly run the Python script [gaia.py](GAIA/gaia.py), which we further discuss [here](benchmarks#evaluate-kgot-on-gaia).
 This Python script will however not plot the resulting data nor move the snapshots of the knowledge graph.
 
 You can also directly use the command `kgot`, which is fully configurable and can be used to solve a single task:
@@ -192,9 +192,9 @@ When using this in your work, please reference us with the citation provided bel
 ```bibtex
 @misc{besta2025kgot,
   title = {{Affordable AI Assistants with Knowledge Graph of Thoughts}},
-  author = {Besta, Maciej and Paleari, Lorenzo and Hao, Jia and Jiang, Andrea and Gerstenberger, Robert and Wu, You and Iff, Patrick and Kubicek, Ales and Nyczyk, Piotr and Khimey, Diana and Hannesson, Jón Gunnar and Kwaśniewski, Grzegorz and Copik, Marcin and Niewiadomski, Hubert and Hoefler, Torsten},
+  author = {Besta, Maciej and Paleari, Lorenzo and Jiang, Jia Hao Andrea and Gerstenberger, Robert and Wu, You and Hannesson, Jón Gunnar and Iff, Patrick and Kubicek, Ales and Nyczyk, Piotr and Khimey, Diana and Blach, Nils and Zhang, Haiqiang and Zhang, Tao and Ma, Peiran and Kwaśniewski, Grzegorz and Copik, Marcin and Niewiadomski, Hubert and Hoefler, Torsten},
   year = 2025,
-  month = Apr,
+  month = Jun,
   doi = {10.48550/arXiv.2504.02670},
   url = {http://arxiv.org/abs/2504.02670},
   eprinttype = {arXiv},

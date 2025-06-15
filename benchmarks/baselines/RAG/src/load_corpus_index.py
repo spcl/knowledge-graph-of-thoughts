@@ -4,7 +4,7 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 #
-# Main authors: Tao Zhang
+# Main author: Tao Zhang
 
 import argparse
 import os
@@ -87,7 +87,7 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Load a saved FAISS index and test retrieval")
-    parser.add_argument("--index_path", type=str, default="vector_db_demo/corpus_demo.txt_faiss_index",
+    parser.add_argument("--index_path", type=str, default="vector_db/corpus_demo.txt_faiss_index",
                         help="Path to the saved FAISS index directory")
     parser.add_argument("--query", type=str, default="What is the oldest Blu-Ray?",
                         help="Query to test retrieval")
@@ -95,4 +95,4 @@ if __name__ == "__main__":
                         help="Number of chunks to retrieve")
                         
     args = parser.parse_args()
-    main(args) 
+    main(args)

@@ -14,7 +14,9 @@ authors = [
   { name="Ales Kubicek", email="akubicek@student.ethz.ch" },
   { name="Diana Khimey", email="dkhimey@student.ethz.ch" },
   { name="Jón Gunnar Hannesson", email="jhannesson@student.ethz.ch" },
-  { name="Haiqiang Zhang", email="zhaiqiang@student.ethz.ch" }
+  { name="Haiqiang Zhang", email="zhaiqiang@student.ethz.ch" },
+  { name="Tao Zhang", email="zhangta@ethz.ch" },
+  { name="Peiran Ma", email="peirma@ethz.ch" }
 ]
 description = "Python package for Knowledge Graph of Thoughts"
 readme = "README.md"

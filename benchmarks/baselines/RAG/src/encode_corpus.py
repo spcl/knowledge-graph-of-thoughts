@@ -4,7 +4,7 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 #
-# Main authors: Tao Zhang
+# Main author: Tao Zhang
 
 import argparse
 import os
@@ -57,11 +57,11 @@ def main():
     # Parse command line arguments
     parser = argparse.ArgumentParser(description='Encode a corpus file into a vector store')
     parser.add_argument('corpus_file', help='Path to the corpus file (e.g., corpus_4.txt)')
-    parser.add_argument('--save_dir', default='vector_db', help='Directory to save intermediate results')
+    parser.add_argument('--save_dir', default='vector_db', help='Directory to store vector database')
     
     args = parser.parse_args()
     
     encode_corpus(args.corpus_file, args.save_dir)
 
 if __name__ == "__main__":
-    main() 
+    main()

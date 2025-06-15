@@ -226,6 +226,6 @@ class CostPlot(PlotOperation):
                 
         plt.figtext(0.5, 0.94, subtitle, fontsize=PLOT_STYLE['SUBTITLE_SIZE'], ha='center', va='top')
         plt.tight_layout(rect=[0, 0, 1, 0.90])
-        plt.savefig(os.path.join(self.result_dir_path, f"{filename}.png"),
+        plt.savefig(os.path.join(self.result_dir_path, f"{filename}.pdf"),
                 bbox_inches='tight', dpi=300, facecolor='white')
         plt.close(fig)

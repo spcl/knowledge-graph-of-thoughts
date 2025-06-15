@@ -49,7 +49,6 @@ def merge_reasons_to_insert_base(llm_planning, list_reason_to_insert: List[str],
     response = invoke_with_retry(chain, completed_prompt)
     logger.info(f"New Reason to Insert:\n{pformat(response, width=160)}")
     
-    # logger.info(f"New Reason to Insert parsed:\n{pformat(response, width=160)}")
     return response.reason_to_insert
 
 
@@ -74,8 +73,8 @@ def define_retrieve_query_base(llm_planning, initial_query: str,
     chain = llm_planning.with_structured_output(RetrieveQuery, method="json_schema")
     response = invoke_with_retry(chain, completed_prompt)
     logger.info(f"New retrieve query:\n{pformat(response, width=160)}")
+
     # Return the wanted values
-    
     query = response.query
     return query
 

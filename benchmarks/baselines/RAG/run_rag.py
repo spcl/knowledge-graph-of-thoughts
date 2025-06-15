@@ -4,7 +4,7 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 #
-# Main authors: Tao Zhang
+# Main author: Tao Zhang
 
 #!/usr/bin/env python3
 """
@@ -41,7 +41,7 @@ def main():
     query_parser.add_argument("--corpus_path", help="Path to corpus file for direct query")
     query_parser.add_argument("--index_path", help="Path to saved FAISS index")
     query_parser.add_argument("--query", required=True, help="Query to run")
-    query_parser.add_argument("--n_retrieved", type=int, default=3, help="Number of docs to retrieve")
+    query_parser.add_argument("--n_retrieved", type=int, default=3, help="Number of documents to retrieve")
     query_parser.add_argument("--save_dir", default="vector_db", help="Directory to save/load vector store")
     query_parser.add_argument("--no_vectorize", action="store_true", 
                             help="Don't create vector DB if it doesn't exist (will raise error)")
@@ -51,7 +51,7 @@ def main():
     benchmark_parser.add_argument("--index_path", default="vector_db/corpus_2.txt_faiss_index", 
                                 help="Path to FAISS index")
     benchmark_parser.add_argument("--log_folder_base", required=True, help="Folder to store results")
-    benchmark_parser.add_argument("--gaia_file", default="benchmarks/datasets/GAIA/validation/merged_dataset.json",
+    benchmark_parser.add_argument("--gaia_file", default="../../datasets/GAIA/validation/merged_dataset.json",
                                help="Path to GAIA dataset")
     benchmark_parser.add_argument("--max_questions", type=int, default=3, 
                                help="Number of questions to evaluate (0 for all)")
@@ -95,4 +95,4 @@ def main():
     return 0
 
 if __name__ == "__main__":
-    sys.exit(main()) 
+    sys.exit(main())

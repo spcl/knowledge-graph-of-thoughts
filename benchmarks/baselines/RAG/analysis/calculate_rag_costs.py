@@ -4,7 +4,7 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 #
-# Main authors: Tao Zhang
+# Main author: Tao Zhang
 
 #!/usr/bin/env python3
 import argparse
@@ -135,7 +135,7 @@ def main():
                       help='Path to the corpus file')
     parser.add_argument('--index_path', type=str, default=os.path.join(PROJECT_ROOT, 'vector_db/corpus_1.txt_faiss_index'),
                       help='Path to the FAISS index')
-    parser.add_argument('--gaia_file', type=str, default='benchmarks/datasets/GAIA/validation/merged_dataset.json',
+    parser.add_argument('--gaia_file', type=str, default=os.path.join(PROJECT_ROOT, '../../datasets/GAIA/validation/merged_dataset.json'),
                       help='Path to the GAIA dataset file')
     parser.add_argument('--run_benchmark', action='store_true',
                       help='Run a small benchmark to get token usage statistics')
@@ -264,4 +264,4 @@ def main():
         print("Please either run a benchmark with --run_benchmark or provide --results_dir")
 
 if __name__ == "__main__":
-    main() 
+    main()
