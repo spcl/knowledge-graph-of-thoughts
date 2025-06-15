@@ -43,7 +43,7 @@ class KnowledgeGraph(KnowledgeGraphInterface):
         Export the current state of the graph database to a JSON file.
         """
         export_file = f"nx_snapshot_{self.current_snapshot_id}.json"
-        export_file_path = f"./containers/neo4j/snapshots/{self.current_folder_name}/{export_file}"
+        export_file_path = f"./kgot/knowledge_graph/_snapshots/{self.current_folder_name}/{export_file}"
 
         data = []
 

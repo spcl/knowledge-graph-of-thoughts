@@ -2,10 +2,10 @@
 
 The **Integrated Tools Module** is a key part of our KGoT framework and enables the multi-modal reasoning capabilities of the framework, which allows KGoT to tackle a wide range of tasks ranging from code execution, image recognition, audio parsing to web browsing.
 
-
 ## Available Tools
 
 KGoT provides several built-in tools:
+
 - `ExtractZipTool`: Handles extraction of compressed files (`.zip`).
 - `SearchTool`: The Surfer Agent which performs web searches.
 - `LangchainLLMTool`: Leverages an additional language model to provide extended knowledge beyond the constrained capabilities of the controller's LLM.
@@ -16,11 +16,11 @@ KGoT provides several built-in tools:
 > [!NOTE]
 > To focus on harnessing the knowledge graph, we reuse several utilities from [AutoGen](https://github.com/microsoft/autogen/tree/gaia_multiagent_v01_march_1st) such as the Browser and MDConverter tools as well as tools from [HuggingFace Agents](https://github.com/aymeric-roucher/GAIA) such as the Surfer Agent, web browsing tools, and the Text Inspector.
 
-
 ## Bookkeeping of Tools
 
 Tools in KGoT are managed through an object of the `ToolManager` class, which maintains the list of available tools.
 The `ToolManager` itself can be initialized as follows:
+
 ```python3
 tool_manager = ToolManager(
     usage_statistics,
@@ -33,10 +33,10 @@ Currently only the `SimpleTextBrowser` utility of the **Surfer Agent** requires 
 
 In our reference implementation, the tool manager is initialized within the **KGoT Controller** as an integrated part of the **LLM Tool Executor** component.
 
-
 ## Tool Integration
 
 **To add a new tool:**
+
 1. Initialize the tool
 2. Pass in the logger object for tool use statistics
 3. Append the tool to the list of the `ToolManager` object

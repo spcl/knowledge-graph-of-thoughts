@@ -43,7 +43,7 @@ def define_next_step(llm_planning, initial_query: str,
                      *args, **kwargs):
     # Define the output parser model
     class NextStepQuery(BaseModel):
-        query: str = Field(description="The new python code to retrieve data")
+        query: str = Field(description="The new Python code to retrieve data")
         query_type: str = Field(description="INSERT or RETRIEVE, depending on the given query")
 
     prompt_template = PromptTemplate(
@@ -79,7 +79,7 @@ def define_retrieve_query(llm_planning, initial_query: str,
                           *args, **kwargs):
     # Define the output parser model
     class RetrieveQuery(BaseModel):
-        query: str = Field(description="The new python code to retrieve data")
+        query: str = Field(description="The new Python code to retrieve data")
 
     prompt_template = PromptTemplate(
         input_variables=["initial_query",
@@ -106,7 +106,7 @@ def define_forced_retrieve_queries(llm_planning, initial_query: str,
                                    *args, **kwargs):
     # Define the output parser model
     class RetrieveQuery(BaseModel):
-        query: str = Field(description="The new python code to retrieve data")
+        query: str = Field(description="The new Python code to retrieve data")
 
     prompt_template = PromptTemplate(
         input_variables=["initial_query",

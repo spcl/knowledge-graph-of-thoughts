@@ -43,25 +43,27 @@ Citation
 Any published work which uses this software should include the
 following citation:
 
-----------------------------------------------------------------------
+------------------------------------------------------------------------
 Maciej Besta, Lorenzo Paleari, Jia Hao Andrea Jiang, Robert
-Gerstenberger, You Wu, Patrick Iff, Ales Kubicek, Piotr Nyczyk, Diana
-Khimey, Jón Gunnar Hannesson, Grzegorz Kwaśniewski, Marcin Copik,
-Hubert Niewiadomski, Torsten Hoefler: Affordable AI Assistants with
-Knowledge Graph of Thoughts. In: arXiv preprint arXiv:2504.02670
-----------------------------------------------------------------------
+Gerstenberger, You Wu, Jón Gunnar Hannesson, Patrick Iff, Ales Kubicek,
+Piotr Nyczyk, Diana Khimey, Nils Blach, Haiqiang Zhang, Tao Zhang,
+Peiran Ma, Grzegorz Kwaśniewski, Marcin Copik, Hubert Niewiadomski,
+Torsten Hoefler (2025): Affordable AI Assistants with Knowledge Graph of
+Thoughts. In: arXiv preprint arXiv:2504.02670
+------------------------------------------------------------------------
 
-Knowledge Graph of Thoughts uses code from Microsoft's Autogen team, 
-Huggingface's GAIA leaderboard repository as well as the Beating GAIA
-with Transformers Agents repository.
+Knowledge Graph of Thoughts uses code from Microsoft's Autogen team,
+Huggingface's GAIA leaderboard repository, OpenAI's simple-evals
+repository as well as the Beating GAIA with Transformers Agents
+repository.
 
 
 Microsoft's Autogen GAIA Multiagent
-(https://github.com/microsoft/autogen/tree/gaia_multiagent_v01_march_1st)
-=========================================================================
+(<https://github.com/microsoft/autogen/tree/gaia_multiagent_v01_march_1st>)
+===========================================================================
 
-Knowledge Graph of Thoughts uses browser and file conversion utilities from 
-Microsoft's Autogen team. Its license can be found below.
+Knowledge Graph of Thoughts uses browser and file conversion utilities from
+Microsoft's Autogen team. Their license can be found below.
 
 ------------------------------------------------------------------------
 Qingyun Wu, Gagan Bansal, Jieyu Zhang, Yiran Wu, Beibin Li, Erkang Zhu,
@@ -94,8 +96,47 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE
 
 
-Beating GAIA with Transformers Agents (https://github.com/aymeric-roucher/GAIA)
-===============================================================================
+Huggingface's GAIA Leaderboard Repository
+(<https://huggingface.co/spaces/gaia-benchmark/leaderboard/tree/main>)
+======================================================================
+
+Knowledge Graph of Thoughts uses code from the Huggingface GAIA leaderboard
+repository to evaluate the correctness of the results. No license for its code
+is provided.
+
+
+OpenAI's simple-evals (<https://github.com/openai/simple-evals>)
+================================================================
+
+Knowledge Graph of Thoughts uses the scorer functionality from OpenAI's
+simple-evals to evaluate the SimpleQA results. Their license can be
+found below.
+
+MIT License
+
+Copyright (c) 2024 OpenAI
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+
+Beating GAIA with Transformers Agents (<https://github.com/aymeric-roucher/GAIA>)
+=================================================================================
 
 Knowledge Graph of Thoughts uses code from the Beating GAIA with Transformers
 Agents repository for web surfing and inspection of files. Its license can be
@@ -302,12 +343,3 @@ found below.
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
-
-
-Huggingface's GAIA Leaderboard Repository
-(https://huggingface.co/spaces/gaia-benchmark/leaderboard/tree/main)
-====================================================================
-
-Knowledge Graph of Thoughts uses code from the Huggingface GAIA leaderboard
-repository to evaluate the correctness of the results. No license for its code
-is provided.

@@ -1,4 +1,3 @@
-# ruff: noqa: E722
 # Copyright (c) 2025 ETH Zurich.
 #                    All rights reserved.
 #
@@ -103,7 +102,7 @@ class AudioConverter(DocumentConverter):
             text_content=result,
         )
 
-# All functions below are copied from the Beating the GAIA benchmark with Transformers Agents 🚀 repository.
+# All functions below are copied from the Beating the GAIA benchmark with Transformers Agents repository.
 # https://github.com/aymeric-roucher/GAIA/blob/main/scripts/tools/mdconvert.py
 #
 # Copyright 2024 Aymeric Roucher
@@ -291,8 +290,6 @@ class PdfConverter(DocumentConverter):
             title=None,
             text_content=pdfminer.high_level.extract_text(local_path),
         )
-
-
 
 
 class DocxConverter(HtmlConverter):
