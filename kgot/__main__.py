@@ -58,7 +58,7 @@ def load_variables() -> None:
 
 
 # Command Implementations
-def single_command(args: Any, neo4j_uri: str, neo4j_user: str, neo4j_password: str, python_executor_uri: str, sparql_read_uri: str, sparql_write_uri: str) -> None:
+def single_command(args: Any, neo4j_uri: str, neo4j_user: str, neo4j_password: str, python_executor_uri: str, rdf4j_read_uri: str, rdf4j_write_uri: str) -> None:
     """
     Run the 'single' command to solve a single problem given a statement and optional associated files.
     
@@ -67,11 +67,11 @@ def single_command(args: Any, neo4j_uri: str, neo4j_user: str, neo4j_password: s
     :param neo4j_user: The username to access the Neo4j database.
     :param neo4j_password: The password to access the Neo4j database.
     :param python_executor_uri: The URI to the Python execution server.
-    :param sparql_read_uri: The URI for the SPARQL read access.
-    :param sparql_write_uri: The URI for the SPARQL write access.
+    :param rdf4j_read_uri: The URI for the RDF4J read access.
+    :param rdf4j_write_uri: The URI for the RDF4J write access.
     """
-    if(args.db_choice == "sparql" and args.controller_choice == "directRetrieve"):
-        print("\033[1;31m\033[4mDirect retrieve with a SPARQL based database has not been implemented\033[0m")
+    if(args.db_choice == "rdf4j" and args.controller_choice == "directRetrieve"):
+        print("\033[1;31m\033[4mDirect retrieve with a RDF4J based database has not been implemented\033[0m")
         sys.exit(1)
 
     for file_path in args.files:
@@ -91,8 +91,8 @@ def single_command(args: Any, neo4j_uri: str, neo4j_user: str, neo4j_password: s
         neo4j_username=neo4j_user,
         neo4j_pwd=neo4j_password,
         python_executor_uri=python_executor_uri,
-        sparql_read_uri=sparql_read_uri,
-        sparql_write_uri=sparql_write_uri,
+        rdf4j_read_uri=rdf4j_read_uri,
+        rdf4j_write_uri=rdf4j_write_uri,
         llm_planning_model=args.llm_plan,
         llm_planning_temperature=args.llm_plan_temp,
         llm_execution_model=args.llm_exec,
@@ -137,16 +137,16 @@ def main() -> None:
     neo4j_user = os.getenv('NEO4J_USER', 'neo4j')
     neo4j_password = os.getenv('NEO4J_PASSWORD', 'password')
     python_executor_uri = os.getenv('PYTHON_EXECUTOR_URI', 'http://localhost:16000/run')
-    sparql_read_uri = os.getenv('SPARQL_READ_URI', 'http://localhost:8080/rdf4j-server/repositories/kgot')
-    sparql_write_uri = os.getenv('SPARQL_WRITE_URI', 'http://localhost:8080/rdf4j-server/repositories/kgot/statements')
+    rdf4j_read_uri = os.getenv('RDF4J_READ_URI', 'http://localhost:8080/rdf4j-server/repositories/kgot')
+    rdf4j_write_uri = os.getenv('RDF4J_WRITE_URI', 'http://localhost:8080/rdf4j-server/repositories/kgot/statements')
     epilog_text = (
         "Environment Variables:\n"
         f"  NEO4J_URI             Neo4j database URI.\t\t(current: {neo4j_uri})\n"
         f"  NEO4J_USER            Neo4j database user.\t\t(current: {neo4j_user})\n"
         f"  NEO4J_PASSWORD        Neo4j database password.\t(current: {neo4j_password})\n"
         f"  PYTHON_EXECUTOR_URI   Python execution server URI.\t(current: {python_executor_uri})\n\n"
-        f"  SPARQL_READ_URI       SPARQL read endpoint URI.\t(current: {sparql_read_uri})\n\n"
-        f"  SPARQL_WRITE_URI      SPARQL write endpoint URI.\t(current: {sparql_write_uri})\n\n"
+        f"  RDF4J_READ_URI       RDF4J read endpoint URI.\t(current: {rdf4j_read_uri})\n\n"
+        f"  RDF4J_WRITE_URI      RDF4J write endpoint URI.\t(current: {rdf4j_write_uri})\n\n"
         "Note: You can set these variables in a .env file in the current directory.\n"
         "For more details, refer to the official documentation at:\n"
         "https://github.com/spcl/knowledge-graph-of-thoughts"
@@ -221,7 +221,7 @@ def main() -> None:
         parser.print_help(sys.stderr)
     else:
         args = parser.parse_args()
-        args.func(args, neo4j_uri, neo4j_user, neo4j_password, python_executor_uri, sparql_read_uri, sparql_write_uri)
+        args.func(args, neo4j_uri, neo4j_user, neo4j_password, python_executor_uri, rdf4j_read_uri, rdf4j_write_uri)
 
 
 

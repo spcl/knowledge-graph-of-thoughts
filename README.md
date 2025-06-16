@@ -27,7 +27,7 @@ The KGoT system is designed as a modular and flexible framework that consists of
 </p>
 
 - The [Controller](kgot/controller/README.md) component offers fine-grained control over the customizable parameters in the KGoT pipeline and orchestrates the KG-based reasoning procedure.
-- The [Graph Store](kgot/knowledge_graph/README.md) component provides a modular interface for supporting various *Knowledge Graph Backends*. We initially support Neo4j, NetworkX and SPARQL.
+- The [Graph Store](kgot/knowledge_graph/README.md) component provides a modular interface for supporting various *Knowledge Graph Backends*. We initially support Neo4j, NetworkX and RDF4J.
 - The [Integrated Tools](kgot/tools/README.md) component allows for flexible and extensible *Tool Usage* and enables the multi-modal reasoning capabilities of the framework.
 
 ## Setup Guide
@@ -149,7 +149,7 @@ The following are the most commonly used arguments:
 Arguments:
   --log_base_folder     - Directory where logs will be stored [path/to/log_folder]
   --controller_choice   - Type of solver to use               [directRetrieve/queryRetrieve]
-  --backend_choice      - Backend database type               [neo4j/networkX/sparql]
+  --backend_choice      - Backend database type               [neo4j/networkX/rdf4j]
   --tool_choice         - Tool configuration                  [tools_v2_3]
   --max_iterations      - Max iterations for KGoT             [integers > 0]
   --gaia_formatter      - Use GAIA formatter for the output   [True/False]

@@ -52,8 +52,8 @@ if [ "$1" == "--help" ]  || [ "$1" = "-h" ]; then
     echo "  --neo4j_username               Neo4j username (default: neo4j)"
     echo "  --neo4j_password               Neo4j password (default: password)"
     echo "  --python_executor_uri          URI for Python tool executor (default: http://localhost:16000/run)"
-    echo "  --sparql_read_uri              URI for SPARQL read endpoint (default: http://localhost:8080/rdf4j-server/repositories/kgot)"
-    echo "  --sparql_write_uri             URI for SPARQL write endpoint (default: http://localhost:8080/rdf4j-server/repositories/kgot/statements)"
+    echo "  --rdf4j_read_uri               URI for RDF4J read endpoint (default: http://localhost:8080/rdf4j-server/repositories/kgot)"
+    echo "  --rdf4j_write_uri              URI for RDF4J write endpoint (default: http://localhost:8080/rdf4j-server/repositories/kgot/statements)"
     echo ""
     echo "  --max_iterations               Max iterations for KGoT (default: 7)"
     echo "  --num_next_steps_decision      Number of next steps decision (default: 5)"
@@ -69,7 +69,7 @@ if [ "$1" == "--help" ]  || [ "$1" = "-h" ]; then
     echo "  --llm_execution_temperature    LLM execution temperature (default: 0.0)"
     echo ""
     echo "  --controller_choice            Controller choice (options: queryRetrieve, directRetrieve; default: queryRetrieve)"
-    echo "  --db_choice                    Database choice (options: neo4j, networkX, sparql; default: neo4j)"
+    echo "  --db_choice                    Database choice (options: neo4j, networkX, rdf4j; default: neo4j)"
     echo "  --tool_choice                  Tool choice (default: tools_v2_3)"
     echo "  --gaia_formatter               Use GAIA formatter"
     echo ""
@@ -88,8 +88,8 @@ DB_CHOICE_DEFAULT="neo4j"
 TOOL_CHOICE_DEFAULT="tools_v2_3"
 MAX_ITERATIONS_DEFAULT=7
 NEO4J_URI_DEFAULT="bolt://localhost:7687"
-SPARQL_READ_URI_DEFAULT="http://localhost:8080/rdf4j-server/repositories/kgot"
-SPARQL_WRITE_URI_DEFAULT="http://localhost:8080/rdf4j-server/repositories/kgot/statements"
+RDF4J_READ_URI_DEFAULT="http://localhost:8080/rdf4j-server/repositories/kgot"
+RDF4J_WRITE_URI_DEFAULT="http://localhost:8080/rdf4j-server/repositories/kgot/statements"
 PYTHON_EXECUTOR_URI_DEFAULT="http://localhost:16000/run"
 LLM_EXECUTION_MODEL_DEFAULT="gpt-4o-mini"
 LLM_EXECUTION_TEMPERATURE_DEFAULT=0.0
@@ -105,8 +105,8 @@ NEO4J_URI=""
 PYTHON_EXECUTOR_URI=""
 LLM_EXECUTION_MODEL=""
 LLM_EXECUTION_TEMPERATURE=""
-SPARQL_READ_URI=""
-SPARQL_WRITE_URI=""
+RDF4J_READ_URI=""
+RDF4J_WRITE_URI=""
 GAIA_FORMATTER=false
 ZERO_SHOT=false
 
@@ -114,7 +114,7 @@ ZERO_SHOT=false
 OPTS=$($GETOPT -o "" \
   --long log_folder_base:,attachment_folder:,config_llm_path:,logger_level:,logger_file_mode:,\
 neo4j_uri:,neo4j_username:,neo4j_password:,python_executor_uri:,\
-sparql_read_uri:,sparql_write_uri:,\
+rdf4j_read_uri:,rdf4j_write_uri:,\
 max_iterations:,num_next_steps_decision:,max_retrieve_query_retry:,max_cypher_fixing_retry:,\
 max_final_solution_parsing:,max_tool_retries:,max_llm_retries:,\
 llm_planning_model:,llm_planning_temperature:,llm_execution_model:,llm_execution_temperature:,\
@@ -140,8 +140,8 @@ while true; do
         --max_iterations) MAX_ITERATIONS="$2"; shift 2 ;;
         --neo4j_uri) NEO4J_URI="$2"; shift 2 ;;
         --python_executor_uri) PYTHON_EXECUTOR_URI="$2"; shift 2 ;;
-        --sparql_read_uri) SPARQL_READ_URI="$2"; shift 2 ;;
-        --sparql_write_uri) SPARQL_WRITE_URI="$2"; shift 2 ;;
+        --rdf4j_read_uri) RDF4J_READ_URI="$2"; shift 2 ;;
+        --rdf4j_write_uri) RDF4J_WRITE_URI="$2"; shift 2 ;;
         --llm_execution_model) LLM_EXECUTION_MODEL="$2"; shift 2 ;;
         --llm_execution_temperature) LLM_EXECUTION_TEMPERATURE="$2"; shift 2 ;;
         --gaia_formatter) GAIA_FORMATTER=true; shift ;;
@@ -177,8 +177,8 @@ fi
 : "${TOOL_CHOICE:=$TOOL_CHOICE_DEFAULT}"
 : "${NEO4J_URI:=$NEO4J_URI_DEFAULT}"
 : "${PYTHON_EXECUTOR_URI:=$PYTHON_EXECUTOR_URI_DEFAULT}"
-: "${SPARQL_READ_URI:=$SPARQL_READ_URI_DEFAULT}"
-: "${SPARQL_WRITE_URI:=$SPARQL_WRITE_URI_DEFAULT}"
+: "${RDF4J_READ_URI:=$RDF4J_READ_URI_DEFAULT}"
+: "${RDF4J_WRITE_URI:=$RDF4J_WRITE_URI_DEFAULT}"
 : "${LLM_EXECUTION_MODEL:=$LLM_EXECUTION_MODEL_DEFAULT}"
 : "${LLM_EXECUTION_TEMPERATURE:=$LLM_EXECUTION_TEMPERATURE_DEFAULT}"
 
@@ -239,8 +239,8 @@ for ((run=1; run<=num_runs; run++)); do
         --file $gaia_file \
         --attachment_folder $ATTACHMENT_FOLDER \
         --neo4j_uri $NEO4J_URI \
-        --sparql_read_uri $SPARQL_READ_URI \
-        --sparql_write_uri $SPARQL_WRITE_URI \
+        --rdf4j_read_uri $RDF4J_READ_URI \
+        --rdf4j_write_uri $RDF4J_WRITE_URI \
         --python_executor_uri $PYTHON_EXECUTOR_URI \
         --controller_choice $CONTROLLER_CHOICE \
         --db_choice $DB_CHOICE \

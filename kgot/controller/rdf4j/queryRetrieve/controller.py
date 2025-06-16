@@ -17,7 +17,7 @@ from typing import List, Tuple
 from langchain_core.tools import BaseTool
 
 from kgot.controller import ControllerInterface
-from kgot.controller.sparql.queryRetrieve.llm_invocation_handle import (
+from kgot.controller.rdf4j.queryRetrieve.llm_invocation_handle import (
     define_final_solution,
     define_forced_retrieve_queries,
     define_math_tool_call,
@@ -55,20 +55,20 @@ class Controller(ControllerInterface):
     For other attributes, see ControllerInterface.
     """
 
-    def __init__(self, sparql_read_uri: str,
-                 sparql_write_uri: str,
+    def __init__(self, rdf4j_read_uri: str,
+                 rdf4j_write_uri: str,
                  python_executor_uri: str,
                  llm_execution_model: str ,
                  llm_execution_temperature: float,
                  statistics_file_name: str,
-                 db_choice: str = "sparql",
+                 db_choice: str = "rdf4j",
                  tool_choice: str = "tools_v2_3",
                  *args, **kwargs) -> None:
         """
         Initializes the Controller with the specified parameters.
         Args:
-            sparql_read_uri (str): The URI of the SPARQL read endpoint.
-            sparql_write_uri (str): The URI of the SPARQL write endpoint.
+            rdf4j_read_uri (str): The URI of the RDF4J read endpoint.
+            rdf4j_write_uri (str): The URI of the RDF4J write endpoint.
             python_executor_uri (str): The URI of the Python tool executor.
             llm_execution_model (str): The model used for executing tasks.
             llm_execution_temperature (float): The temperature parameter for the execution model.
@@ -81,7 +81,7 @@ class Controller(ControllerInterface):
         super().__init__(llm_execution_model=llm_execution_model, llm_execution_temperature=llm_execution_temperature, *args, **kwargs)
 
         ensure_file_path_exists(statistics_file_name)
-        self.graph = State.knowledge_graph(db_choice, sparql_read_uri, sparql_write_uri)
+        self.graph = State.knowledge_graph(db_choice, rdf4j_read_uri, rdf4j_write_uri)
         self.usage_statistics = State.usage_statistics(statistics_file_name)
 
         # Set up the tools

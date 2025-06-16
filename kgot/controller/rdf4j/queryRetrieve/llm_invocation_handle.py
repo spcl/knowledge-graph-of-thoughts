@@ -15,7 +15,7 @@ from typing import List
 from langchain.prompts import PromptTemplate
 from pydantic import BaseModel, Field
 
-from kgot.controller.sparql.llm_invocation_base import (
+from kgot.controller.rdf4j.llm_invocation_base import (
     define_sparql_query_given_new_information_base,
     define_final_solution_base,
     define_math_tool_call_base,
@@ -26,7 +26,7 @@ from kgot.controller.sparql.llm_invocation_base import (
     merge_reasons_to_insert_base,
     parse_solution_with_llm_base,
 )
-from kgot.prompts.sparql.queryRetrieve.prompts import (
+from kgot.prompts.rdf4j.queryRetrieve.prompts import (
     DEFINE_FORCED_RETRIEVE_QUERY_TEMPLATE,
     DEFINE_FORCED_SOLUTION_TEMPLATE,
     DEFINE_NEXT_STEP_PROMPT_TEMPLATE,

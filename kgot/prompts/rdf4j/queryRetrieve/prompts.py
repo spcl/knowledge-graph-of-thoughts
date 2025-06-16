@@ -8,7 +8,7 @@
 #               Andrea Jiang
 #               Jón Gunnar Hannesson
 
-from kgot.prompts.sparql.base_prompts import (
+from kgot.prompts.rdf4j.base_prompts import (
     DEFINE_SPARQL_QUERY_GIVEN_NEW_INFORMATION_PROMPT_TEMPLATE,
     DEFINE_MATH_TOOL_CALL_PROMPT_TEMPLATE,
     DEFINE_NEED_FOR_MATH_PROMPT_TEMPLATE,

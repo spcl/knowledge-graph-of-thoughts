@@ -115,8 +115,8 @@ def main(
         neo4j_username: str = "neo4j",
         neo4j_password: str = "password",
         python_executor_uri: str = "http://localhost:16000/run",
-        sparql_read_uri: str = "http://localhost:8080/rdf4j-server/repositories/kgot",
-        sparql_write_uri: str = "http://localhost:8080/rdf4j-server/repositories/kgot/statements",
+        rdf4j_read_uri: str = "http://localhost:8080/rdf4j-server/repositories/kgot",
+        rdf4j_write_uri: str = "http://localhost:8080/rdf4j-server/repositories/kgot/statements",
         max_iterations: int = 7,
         num_next_steps_decision: int = 5,
         max_retrieve_query_retry: int = 3,
@@ -135,8 +135,8 @@ def main(
         zero_shot: bool = False,
     ):
 
-    if(db_choice == "sparql" and controller_choice == "directRetrieve"):
-        print("\033[1;31m\033[4mDirect retrieve with a SPARQL based database has not been implemented\033[0m")
+    if(db_choice == "rdf4j" and controller_choice == "directRetrieve"):
+        print("\033[1;31m\033[4mDirect retrieve with a RDF4J based database has not been implemented\033[0m")
         sys.exit(1)
 
 
@@ -192,8 +192,8 @@ def main(
 
             controller_object = importlib.import_module(f"kgot.controller.{db_choice}.{controller_choice}").Controller
             controller = controller_object(
-                sparql_read_uri=sparql_read_uri,
-                sparql_write_uri=sparql_write_uri,
+                rdf4j_read_uri=rdf4j_read_uri,
+                rdf4j_write_uri=rdf4j_write_uri,
                 neo4j_uri=neo4j_uri,
                 neo4j_username=neo4j_username,
                 neo4j_pwd= neo4j_password,
@@ -237,8 +237,8 @@ if __name__ == "__main__":
     parser.add_argument('--neo4j_username', type=str, required=False, help='Neo4j username', default="neo4j")
     parser.add_argument('--neo4j_password', type=str, required=False, help='Neo4j password', default="password")
     parser.add_argument('--python_executor_uri', type=str, required=False, help='URI for Python tool executor', default="http://localhost:16000/run")
-    parser.add_argument('--sparql_read_uri', type=str, required=False, help='SPARQL endpoint for querying', default="http://localhost:8080/rdf4j-server/repositories/kgot")
-    parser.add_argument('--sparql_write_uri', type=str, required=False, help='SPARQL endpoint for update statements', default="http://localhost:8080/rdf4j-server/repositories/kgot/statements")
+    parser.add_argument('--rdf4j_read_uri', type=str, required=False, help='RDF4J endpoint for querying', default="http://localhost:8080/rdf4j-server/repositories/kgot")
+    parser.add_argument('--rdf4j_write_uri', type=str, required=False, help='RDF4J endpoint for update statements', default="http://localhost:8080/rdf4j-server/repositories/kgot/statements")
 
     parser.add_argument('--max_iterations', type=int, required=False, help='Max iterations for KGoT', default=7)
     parser.add_argument('--num_next_steps_decision', type=int, required=False, help='Number of next steps decision', default=5)
@@ -274,8 +274,8 @@ if __name__ == "__main__":
         neo4j_username=args.neo4j_username,
         neo4j_password=args.neo4j_password,
         python_executor_uri=args.python_executor_uri,
-        sparql_read_uri=args.sparql_read_uri,
-        sparql_write_uri=args.sparql_write_uri,
+        rdf4j_read_uri=args.rdf4j_read_uri,
+        rdf4j_write_uri=args.rdf4j_write_uri,
         max_iterations=args.max_iterations,
         num_next_steps_decision=args.num_next_steps_decision,
         max_retrieve_query_retry=args.max_retrieve_query_retry,
