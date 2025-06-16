@@ -57,7 +57,7 @@ Then rename them as follows:
 - `config_llms.template.json` → `config_llms.json`
 - `config_tools.template.json` → `config_tools.json`
 
-Please update the API keys, if necessary, for the language models you intend to use in the [`kgot/config_llms.json`](kgot/config_llms.json) file.
+Please update the API keys, if necessary, for the language models you intend to use in the `kgot/config_llms.json` file.
 You can also add new models by incorporating their information into the JSON file.
 The object key is the language model identifier used in KGoT, and the various attributes contain the information needed to run the model.
 
@@ -67,7 +67,7 @@ Local models are expected to be hosted using **[Ollama](https://ollama.com/)**. 
 > **Please be aware** that the values for `num_ctx`, `num_predict`, and `num_batch` in the configuration are based on the specific GPU type and VRAM capacity used during our experiments. You may need to adjust these parameters based on your own hardware setup to avoid out-of-memory errors or suboptimal performance.
 
 For the `SurferAgent` tool we rely on SerpAPI for browsing necessary external information from the Internet.
-To use this tool, please set the API key within the [`kgot/config_tools.json`](kgot/config_tools.json) file.
+To use this tool, please set the API key within the `kgot/config_tools.json` file.
 
 ### Setting Up the Containerized Environment
 
@@ -121,10 +121,10 @@ This will build and start:
 
 We primarily evaluated the Knowledge Graph of Thoughts framework with the GAIA and SimpleQA benchmarks, which we discuss first and subsequently alternative ways to run KGoT.
 
-### Installing Datasets
+### Datasets Download
 
 To avoid sharing the GAIA and SimpleQA datasets in a crawlable format, we do not directly provide the datasets inside the repository. Instead, we offer a download script to help you acquire the datasets.
-Please refer to the [installation guide](benchmarks/datasets/README.md) inside the `benchmarks` directory for further instructions.
+Please refer to the [download guide](benchmarks/datasets/README.md) inside the `benchmarks` directory for further instructions.
 
 #### Evaluating KGoT on the Datasets
 
@@ -168,7 +168,7 @@ They allow to evaluate multiple subsets of the datasets or to do multiple runs o
 We further discuss the use of the scripts [here](benchmarks#evaluating-multiple-subsets).
 Please note, that if you use your own Neo4j or RDF4J server instead of the one inside the Docker container, the transfer of the knowledge graph snapshots will fail or needs to be adapted.
 
-You can also directly run the Python script [gaia.py](GAIA/gaia.py), which we further discuss [here](benchmarks#evaluate-kgot-on-gaia).
+You can also directly run the Python script [gaia.py](benchmarks/gaia.py), which we further discuss [here](benchmarks#evaluate-kgot-on-gaia).
 This Python script will however not plot the resulting data nor move the snapshots of the knowledge graph.
 
 You can also directly use the command `kgot`, which is fully configurable and can be used to solve a single task:

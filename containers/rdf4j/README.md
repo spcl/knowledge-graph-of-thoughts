@@ -4,7 +4,7 @@
 
 ### Docker
 
-In order to build and run the KGoT Docker image, please navigate to the `kgot` directory and execute:
+In order to build and run the RDF4J Docker image, please navigate to the `rdf4j` directory and execute:
 
 ```bash
 docker-compose up 
@@ -12,16 +12,16 @@ docker-compose up
 
 ### Sarus
 
-In order to build and run the KGoT Sarus image, please navigate to the `kgot` directory and execute:
+In order to build and run the RDF4J Sarus image, please navigate to the `rdf4j` directory and execute:
 
 ```bash
 chmod +x sarus_launcher.sh     # If needed
 ./sarus_launcher.sh
 ```
 
-## Steps to Create a Local KGoT Image
+## Steps to Create a Local RDF4J Image
 
-We provide an already built KGoT image `spcleth/kgot-rdf4j:latest`, that is the default image used in the [`docker-compose`](./docker-compose.yaml) file.
+We provide an already built RDF4J image `spcleth/kgot-rdf4j:latest`, that is the default image used in the [`docker-compose`](./docker-compose.yaml) file.
 If you want to build the image locally, please follow these steps:
 
 - Create a local image with the following command:

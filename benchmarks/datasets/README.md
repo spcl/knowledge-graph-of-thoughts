@@ -29,7 +29,7 @@ To reproduce the results in the paper please use the default seed `123456` and a
 
 ### Usage
 
-After fulfilling the preconditions (if necessary), please make sure to run the script from the current folder:
+Please make sure to run the script from the current folder:
 
 ```bash
 python3 fetch_dataset.py [--benchmark <bench>] [--dataset <split>] [--dummy | --no_dummy] [--random_sample <sample_size>] [--random_seed <seed>]
