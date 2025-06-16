@@ -7,20 +7,13 @@
 # Main author: Tao Zhang
 
 import argparse
-import os
 import time
 
-import openai
-from dotenv import load_dotenv
 from langchain_community.vectorstores import FAISS
 from langchain_openai import OpenAIEmbeddings
 
-# Load environment variables
-load_dotenv()
+from benchmarks.baselines.RAG.src.utils.simplified_utils import get_model_configurations
 
-# Set OpenAI credentials from environment
-openai.api_key = os.getenv("OPENAI_API_KEY")
-openai.organization = os.getenv("OPENAI_ORG_ID")
 
 def load_faiss_index(index_path):
     """
@@ -33,7 +26,8 @@ def load_faiss_index(index_path):
         FAISS: The loaded vector store.
     """
     print(f"Loading FAISS index from {index_path}...")
-    embeddings = OpenAIEmbeddings()
+    config = get_model_configurations('openai-embedding')
+    embeddings = OpenAIEmbeddings(**config)
     vectorstore = FAISS.load_local(index_path, embeddings, allow_dangerous_deserialization=True)
     return vectorstore
 

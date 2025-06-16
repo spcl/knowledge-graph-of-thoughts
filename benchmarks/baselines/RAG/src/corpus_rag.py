@@ -11,19 +11,11 @@ import os
 import time
 from pathlib import Path
 
-import openai
-from dotenv import load_dotenv
 from langchain_community.vectorstores import FAISS
 from langchain_openai import OpenAIEmbeddings
 
 from benchmarks.baselines.RAG.src.utils import encode_corpus_file
-
-# Load environment variables from a .env file (e.g., OpenAI API key)
-load_dotenv()
-
-# Set OpenAI credentials from .env
-openai.api_key = os.getenv("OPENAI_API_KEY")
-openai.organization = os.getenv("OPENAI_ORG_ID")
+from benchmarks.baselines.RAG.src.utils.simplified_utils import get_model_configurations
 
 
 def create_vector_db(corpus_path, save_dir="vector_db", force=False):
@@ -53,10 +45,13 @@ def create_vector_db(corpus_path, save_dir="vector_db", force=False):
     if os.path.exists(faiss_index_path) and not force:
         print(f"Vector database already exists at: {faiss_index_path}")
         print("Use --force to recreate the vector database")
-        
+
+        # Get OpenAI embedding keys
+        config = get_model_configurations('openai-embedding')
+
         # Load and return the existing vector store
         start_time = time.time()
-        embeddings = OpenAIEmbeddings()
+        embeddings = OpenAIEmbeddings(**config)
         try:
             vector_store = FAISS.load_local(faiss_index_path, embeddings, allow_dangerous_deserialization=True)
             load_time = time.time() - start_time
@@ -110,8 +105,11 @@ class CorpusRAG:
         # Check if the FAISS index already exists
         if os.path.exists(faiss_index_path):
             print(f"Loading existing vector store from: {faiss_index_path}")
+
+            config = get_model_configurations('openai-embedding')
+            
             start_time = time.time()
-            embeddings = OpenAIEmbeddings()
+            embeddings = OpenAIEmbeddings(**config)
             try:
                 self.vector_store = FAISS.load_local(faiss_index_path, embeddings, allow_dangerous_deserialization=True)
                 self.time_records['Loading'] = time.time() - start_time

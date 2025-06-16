@@ -15,6 +15,8 @@ Provides easy access to key functionality from a single script.
 import argparse
 import sys
 
+from benchmarks.baselines.RAG.src.utils.simplified_utils import init_llm_utils
+
 
 def main():
     parser = argparse.ArgumentParser(description="RAG System for Tool Call Logs and GAIA Benchmark")
@@ -46,19 +48,7 @@ def main():
     query_parser.add_argument("--no_vectorize", action="store_true", 
                             help="Don't create vector DB if it doesn't exist (will raise error)")
     
-    # Benchmark command
-    benchmark_parser = subparsers.add_parser("benchmark", help="Run GAIA benchmark")
-    benchmark_parser.add_argument("--index_path", default="vector_db/corpus_2.txt_faiss_index", 
-                                help="Path to FAISS index")
-    benchmark_parser.add_argument("--log_folder_base", required=True, help="Folder to store results")
-    benchmark_parser.add_argument("--gaia_file", default="../../datasets/GAIA/validation/merged_dataset.json",
-                               help="Path to GAIA dataset")
-    benchmark_parser.add_argument("--max_questions", type=int, default=3, 
-                               help="Number of questions to evaluate (0 for all)")
-    benchmark_parser.add_argument("--num_retrieved", type=int, default=5,
-                               help="Number of documents to retrieve per question")
-    benchmark_parser.add_argument("--llm_model", default="gpt-4o-mini", help="LLM model to use")
-    
+    init_llm_utils('src/utils/config_llms.json')
     args = parser.parse_args()
     
     if args.command == "process":
@@ -83,10 +73,6 @@ def main():
         else:
             print("Error: Either --corpus_path or --index_path must be provided")
             return 1
-    
-    elif args.command == "benchmark":
-        from benchmarks.baselines.RAG.src.benchmark.rag_gaia_benchmark import main
-        main()
     
     else:
         parser.print_help()

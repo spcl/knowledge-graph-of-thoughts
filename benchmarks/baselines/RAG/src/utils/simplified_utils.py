@@ -61,7 +61,7 @@ def setup_logger(
 # Simple LLM configuration
 _MODEL_CONFIGURATIONS = {}
 
-def init_llm_utils(config_path: str = "llm_config.json"):
+def init_llm_utils(config_path: str = "src/utils/config_llms.json"):
     """
     Initialize LLM configurations from a JSON file.
     """
@@ -83,14 +83,16 @@ def get_model_configurations(model_name: str) -> Dict[str, Any]:
     else:
         # Default configuration
         config = {
-            "model_family": "OpenAI",
             "model": model_name,
             "temperature": 0.0,
+            "model_family": "OpenAI",
         }
     
-    # Always use API keys from environment
-    config["api_key"] = os.getenv("OPENAI_API_KEY")
-    config["organization"] = os.getenv("OPENAI_ORG_ID")
+    # Use API keys from environment variables if config is empty for them
+    if "api_key" not in config or not config["api_key"]:
+        config["api_key"] = os.getenv("OPENAI_API_KEY", "")
+    if "organization" not in config or not config["organization"]:
+        config["organization"] = os.getenv("OPENAI_ORG_ID", "")
     
     return config
 

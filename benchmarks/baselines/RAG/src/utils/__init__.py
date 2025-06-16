@@ -28,6 +28,8 @@ from openai import RateLimitError
 from pydantic import BaseModel, Field
 from rank_bm25 import BM25Okapi
 
+from benchmarks.baselines.RAG.src.utils.simplified_utils import get_model_configurations
+
 
 def replace_t_with_space(list_of_documents):
     """
@@ -86,7 +88,8 @@ def encode_pdf(path, chunk_size=1000, chunk_overlap=200):
     cleaned_texts = replace_t_with_space(texts)
 
     # Create embeddings and vector store
-    embeddings = OpenAIEmbeddings()
+    config = get_model_configurations('openai-embedding')
+    embeddings = OpenAIEmbeddings(**config)
     vectorstore = FAISS.from_documents(cleaned_texts, embeddings)
 
     return vectorstore
@@ -135,7 +138,8 @@ def encode_from_string(content, chunk_size=1000, chunk_overlap=200):
             chunk.metadata['relevance_score'] = 1.0
 
         # Generate embeddings and create the vector store
-        embeddings = OpenAIEmbeddings()
+        config = get_model_configurations('openai-embedding')
+        embeddings = OpenAIEmbeddings(**config)
         vectorstore = FAISS.from_documents(chunks, embeddings)
 
     except Exception as e:
@@ -433,8 +437,9 @@ def encode_corpus_file(corpus_path, save_dir=None):
     
     # Generate embeddings
     print("Generating embeddings...")
-    embeddings = OpenAIEmbeddings()
-    
+    config = get_model_configurations('openai-embedding')
+    embeddings = OpenAIEmbeddings(**config)
+
     # Create vector store
     vectorstore = FAISS.from_documents(documents, embeddings)
     

@@ -104,9 +104,9 @@ def process_logs(num_files=None):
     if num_files is None:
         num_files = -1
     
-    # Path to the log directory - use the specific logs/success_log path
+    # Path to the log directory - use the specific data/success_log path
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    log_dir = os.path.join(project_root, "logs", "success_log")
+    log_dir = os.path.join(project_root, "data", "success_log")
     
     # If success_log directory doesn't exist, try alternative paths
     if not os.path.exists(log_dir):

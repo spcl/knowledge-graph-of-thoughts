@@ -18,11 +18,8 @@ import time
 from concurrent.futures import ThreadPoolExecutor
 from typing import List, Tuple
 
-import openai
-
 # Add tiktoken for manual token counting
 import tiktoken
-from dotenv import load_dotenv
 from langchain_community.callbacks import get_openai_callback
 from langchain_community.vectorstores import FAISS
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
@@ -37,13 +34,6 @@ from benchmarks.baselines.RAG.src.utils.simplified_utils import (
     setup_logger,
 )
 from benchmarks.scorers.gaia_scorer import check_close_call, question_scorer
-
-# Load environment variables
-load_dotenv()
-
-# Set OpenAI credentials from environment
-openai.api_key = os.getenv("OPENAI_API_KEY")
-openai.organization = os.getenv("OPENAI_ORG_ID")
 
 # Similar to the system prompt in ZeroShot
 system_prompt = """
@@ -65,7 +55,8 @@ def load_faiss_index(index_path: str):
         FAISS: The loaded vector store.
     """
     print(f"Loading FAISS index from {index_path}...")
-    embeddings = OpenAIEmbeddings()
+    config = get_model_configurations('openai-embedding')
+    embeddings = OpenAIEmbeddings(**config)
     vectorstore = FAISS.load_local(index_path, embeddings, allow_dangerous_deserialization=True)
     return vectorstore
 
@@ -91,7 +82,7 @@ class RAGBenchmark:
                  llm_model: str = "gpt-4o-mini",
                  llm_temperature: float = None,
                  num_retrieved: int = 5,
-                 config_llm_path: str = "llm_config.json",
+                 config_llm_path: str = "src/utils/config_llms.json",
                  logger_level: int = logging.INFO,
                  logger_file_name: str = "output.log",
                  logger_file_mode: str = "a",
@@ -99,6 +90,7 @@ class RAGBenchmark:
                  max_concurrent: int = 5):
         
         # Initialize the vector store
+        init_llm_utils(config_llm_path)
         self.vectorstore = load_faiss_index(index_path)
         self.retriever = self.vectorstore.as_retriever(search_kwargs={"k": num_retrieved})
         self.max_concurrent = max_concurrent
@@ -121,7 +113,6 @@ class RAGBenchmark:
             self.cost_per_1k_output_tokens = 0.015
         
         # Initialize LLM
-        init_llm_utils(config_llm_path)
         model_config = get_model_configurations(llm_model)
         
         if model_config["model_family"] == "OpenAI":
@@ -561,7 +552,7 @@ async def main_async():
                         help='LLM temperature')
     parser.add_argument('--num_retrieved', type=int, default=5,
                         help='Number of documents to retrieve')
-    parser.add_argument('--config_llm_path', type=str, default="llm_config.json",
+    parser.add_argument('--config_llm_path', type=str, default="src/utils/config_llms.json",
                         help='Path to LLM configuration file')
     parser.add_argument('--max_questions', type=int, default=3,
                         help='Maximum number of questions to process (default: 3, use 0 for all)')

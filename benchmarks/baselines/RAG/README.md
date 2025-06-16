@@ -4,6 +4,22 @@
 
 Please refer to the [main README](../../../README.md) for instructions on setting up the environment and installing dependencies.
 
+### Configuring API Keys and Models
+
+To get started make a copy of the following template files inside the `src/utils` directory:
+
+- `src/utils/config_llms.template.json`
+- `src/utils/config_tools.template.json`
+
+Then rename them as follows:
+
+- `config_llms.template.json` → `config_llms.json`
+- `config_tools.template.json` → `config_tools.json`
+
+Please update the API keys, if necessary, for the language models you intend to use in the [`src/utils/config_llms.json`](src/utils/config_llms.json) file.
+You can also add new models by incorporating their information into the JSON file.
+The object key is the language model identifier used in KGoT, and the various attributes contain the information needed to run the model.
+
 ## Project Structure
 
 We first provide an overview over the directory structure of the RAG baselines:
@@ -44,8 +60,8 @@ All operations can be performed through the `run_rag.py` script, which provides 
 ### 1. Process Log Files to Corpus
 
 The RAG baselines rely on the tool call logs from previous KGoT runs.
-Simple RAG expects these logs inside the `logs/success_log` directory and their naming should follow the pattern `cmd_log_N.log`, where `N` is a non-negative integer number.
-For transparency reasons, we provide the log files inside that directory as well as all temporary files for the subsequent stages, that were used during the evaluation of the RAG baseline for the paper.
+Simple RAG expects these logs inside the `data/success_log` directory and their naming should follow the pattern `cmd_log_N.log`, where `N` is a non-negative integer number.
+For transparency reasons, we provide the log files inside that directory.
 
 ```bash
 # Process all log files
