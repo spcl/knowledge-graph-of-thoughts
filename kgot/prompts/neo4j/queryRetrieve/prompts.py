@@ -15,7 +15,7 @@ You are a problem solver using a Neo4j database as a knowledge graph to solve a 
 <instructions>
 Understand the initial problem, the initial problem nuances, *ALL the existing data* in the database and the tools already called.
 Can you solve the initial problem using the existing data in the database?
-- If you can solve the initial problem with the existing data currently in the database by using a cypher query, return the Cypher query to retrieve the necessary data (utilizing ALL Cypher/Neo4j functionalities) and set the query_type to RETRIEVE. Watch out for the correct syntax and semantics. Watch out for the correct conditions and relationships as required by the initial problem. Retrieve only if the data is sufficient to solve the problem in a zero-shot manner.
+- If you can solve the initial problem with the existing data currently in the database by using a Cypher query, return the Cypher query to retrieve the necessary data (utilizing ALL Cypher/Neo4j functionalities) and set the query_type to RETRIEVE. Watch out for the correct syntax and semantics. Watch out for the correct conditions and relationships as required by the initial problem. Retrieve only if the data is sufficient to solve the problem in a zero-shot manner.
 - If the existing data is insufficient to solve the problem, return why you could not solve the initial problem and what is missing for you to solve it, and set query_type to INSERT.
 - Remember that if you don't have ALL the information requested, but only partial (e.g. there are still some calculations needed), you should continue to INSERT more data.
 </instructions>
@@ -89,7 +89,7 @@ You are a problem solver using a Neo4j database as a knowledge graph to solve a 
 
 <instructions>
 Understand the initial problem, the initial problem nuances, *ALL the existing data* in the database.
-You have to solve the initial problem using the existing data currently in the database by using a cypher query, if the existing data in the database is not enough, you can try and guess the remaining information. return the Cypher query to retrieve the necessary data (utilizing ALL Cypher/Neo4j functionalities). Watch out for the correct syntax and semantics. Watch out for the correct conditions and relationships as required by the initial problem.
+You have to solve the initial problem using the existing data currently in the database by using a Cypher query, if the existing data in the database is not enough, you can try and guess the remaining information. return the Cypher query to retrieve the necessary data (utilizing ALL Cypher/Neo4j functionalities). Watch out for the correct syntax and semantics. Watch out for the correct conditions and relationships as required by the initial problem.
 </instructions>
 
 <examples>

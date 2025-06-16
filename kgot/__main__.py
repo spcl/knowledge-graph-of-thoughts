@@ -58,7 +58,7 @@ def load_variables() -> None:
 
 
 # Command Implementations
-def single_command(args: Any, neo4j_uri: str, neo4j_user: str, neo4j_password: str, python_executor_uri: str) -> None:
+def single_command(args: Any, neo4j_uri: str, neo4j_user: str, neo4j_password: str, python_executor_uri: str, rdf4j_read_uri: str, rdf4j_write_uri: str) -> None:
     """
     Run the 'single' command to solve a single problem given a statement and optional associated files.
     
@@ -67,7 +67,13 @@ def single_command(args: Any, neo4j_uri: str, neo4j_user: str, neo4j_password: s
     :param neo4j_user: The username to access the Neo4j database.
     :param neo4j_password: The password to access the Neo4j database.
     :param python_executor_uri: The URI to the Python execution server.
+    :param rdf4j_read_uri: The URI for the RDF4J read access.
+    :param rdf4j_write_uri: The URI for the RDF4J write access.
     """
+    if(args.db_choice == "rdf4j" and args.controller_choice == "directRetrieve"):
+        print("\033[1;31m\033[4mDirect retrieve with a RDF4J based database has not been implemented\033[0m")
+        sys.exit(1)
+
     for file_path in args.files:
         if not os.path.isfile(file_path):
             print(f"\033[1;31m\033[4mFile '{file_path}' does not exist\033[0m")
@@ -85,6 +91,8 @@ def single_command(args: Any, neo4j_uri: str, neo4j_user: str, neo4j_password: s
         neo4j_username=neo4j_user,
         neo4j_pwd=neo4j_password,
         python_executor_uri=python_executor_uri,
+        rdf4j_read_uri=rdf4j_read_uri,
+        rdf4j_write_uri=rdf4j_write_uri,
         llm_planning_model=args.llm_plan,
         llm_planning_temperature=args.llm_plan_temp,
         llm_execution_model=args.llm_exec,
@@ -106,7 +114,7 @@ def single_command(args: Any, neo4j_uri: str, neo4j_user: str, neo4j_password: s
         num_next_steps_decision=args.num_next_steps_decision,
     )
 
-    # get the first file path(excluding the file name only the path)
+    # get the first file path (only the path excluding the file name)
     file_path = ""
     file_names = []
 
@@ -117,24 +125,28 @@ def single_command(args: Any, neo4j_uri: str, neo4j_user: str, neo4j_password: s
         print("file name:", file_names)
 
     # Set a default snapshots directory if None
-    snapshot_dir = args.snapshots if args.snapshots is not None else "snapshots"
+    snapshot_dir = args.snapshots if args.snapshots is not None else ""
     controller.run(problem=args.problem, attachments_file_path=file_path, attachments_file_names=file_names, snapshot_subdir=snapshot_dir)
 
 
 def main() -> None:
     """Main function to parse command line arguments and run the appropriate version."""
-
+    load_variables()
     # Default environment variables for help message
     neo4j_uri = os.getenv('NEO4J_URI', 'bolt://localhost:7687')
     neo4j_user = os.getenv('NEO4J_USER', 'neo4j')
     neo4j_password = os.getenv('NEO4J_PASSWORD', 'password')
     python_executor_uri = os.getenv('PYTHON_EXECUTOR_URI', 'http://localhost:16000/run')
+    rdf4j_read_uri = os.getenv('RDF4J_READ_URI', 'http://localhost:8080/rdf4j-server/repositories/kgot')
+    rdf4j_write_uri = os.getenv('RDF4J_WRITE_URI', 'http://localhost:8080/rdf4j-server/repositories/kgot/statements')
     epilog_text = (
         "Environment Variables:\n"
         f"  NEO4J_URI             Neo4j database URI.\t\t(current: {neo4j_uri})\n"
         f"  NEO4J_USER            Neo4j database user.\t\t(current: {neo4j_user})\n"
         f"  NEO4J_PASSWORD        Neo4j database password.\t(current: {neo4j_password})\n"
         f"  PYTHON_EXECUTOR_URI   Python execution server URI.\t(current: {python_executor_uri})\n\n"
+        f"  RDF4J_READ_URI       RDF4J read endpoint URI.\t(current: {rdf4j_read_uri})\n\n"
+        f"  RDF4J_WRITE_URI      RDF4J write endpoint URI.\t(current: {rdf4j_write_uri})\n\n"
         "Note: You can set these variables in a .env file in the current directory.\n"
         "For more details, refer to the official documentation at:\n"
         "https://github.com/spcl/knowledge-graph-of-thoughts"
@@ -190,9 +202,6 @@ def main() -> None:
                             help="Tool choice for the agent.")
     parser.add_argument("--gaia_formatter", action="store_true",
                             help="Use GAIA formatter instead of the default one. GAIA formatter is used to output GAIA benchmark compatible results, which consist in the final solution in a numeric, list or string format, no paragraph or other text.")
-    
-    parser.add_argument("--zero_shot", action="store_true",
-                            help="Use zero-shot instead of the agent.")
 
     subparsers = parser.add_subparsers(title="Commands", dest="command", required=True)
 
@@ -212,10 +221,9 @@ def main() -> None:
         parser.print_help(sys.stderr)
     else:
         args = parser.parse_args()
-        args.func(args, neo4j_uri, neo4j_user, neo4j_password, python_executor_uri)
+        args.func(args, neo4j_uri, neo4j_user, neo4j_password, python_executor_uri, rdf4j_read_uri, rdf4j_write_uri)
 
 
 
 if __name__ == "__main__":
-    load_variables()
     main()

@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "kgot"
-version = "1.0.0"
+version = "1.1.0"
 authors = [
   { name="Maciej Besta", email="maciej.besta@inf.ethz.ch" },
   { name="Lorenzo Paleari", email="lpaleari@student.ethz.ch" },
@@ -14,6 +14,9 @@ authors = [
   { name="Ales Kubicek", email="akubicek@student.ethz.ch" },
   { name="Diana Khimey", email="dkhimey@student.ethz.ch" },
   { name="Jón Gunnar Hannesson", email="jhannesson@student.ethz.ch" },
+  { name="Haiqiang Zhang", email="zhaiqiang@student.ethz.ch" },
+  { name="Tao Zhang", email="zhangta@ethz.ch" },
+  { name="Peiran Ma", email="peirma@ethz.ch" }
 ]
 description = "Python package for Knowledge Graph of Thoughts"
 readme = "README.md"
@@ -24,15 +27,17 @@ classifiers = [
   "Operating System :: OS Independent",
 ]
 dependencies = [
+  "asyncio>=3.4.3",
   "beautifulsoup4>=4.12.3",
   "cairosvg", # svg file for ImageQuestion
   "docx2txt",
   "fastapi>=0.111.0",
+  "faiss-cpu>=1.7.4",
   "flask", # Python tool
   "google-search-results>=2.4.2,<3.0.0",
   "html5lib>=1.1",
   "huggingface_hub==0.30.1",
-  "kaleido",
+  "kaleido==1.0.0rc13",
   "jq", # json files
   "langchain>=0.2.11",
   "langchain_community>=0.2.10",
@@ -50,6 +55,7 @@ dependencies = [
   "pandas==2.2.2",
   "pathvalidate>=3.2.1,<4.0.0",
   "pillow_heif", # png files
+  "pymupdf>=1.22.0",
   "pydantic>=2.8.2",
   "pypdf", # pdf files
   "python-dotenv==1.1.0",
@@ -59,6 +65,7 @@ dependencies = [
   "pdfminer.six", # pdf files
   "plotly",
   "puremagic>=1.27,<2.0",
+  "rank-bm25>=0.2.2",
   "rapidocr-onnxruntime",
   "tabulate>=0.9.0",
   "tenacity>=8.3.0",
@@ -71,6 +78,7 @@ dependencies = [
   "unstructured", # pptx and images
   "unstructured_inference", # pptx and images
   "unstructured_pytesseract", # pptx and images
+  "sparqlwrapper",
   "wikipedia>=1.4.0",
   "xlrd>=2.0.1", # xls files
   "youtube-transcript-api>=0.6.2,<0.7.0"

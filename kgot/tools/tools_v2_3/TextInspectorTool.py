@@ -7,15 +7,15 @@
 # Main authors: Lorenzo Paleari
 #               Jón Gunnar Hannesson
 #
-# Most of the code below is from the Beating GAIA with Transformers Agents 🚀 repository.
+# Most of the code below is from the Beating GAIA with Transformers Agents repository.
 # https://github.com/aymeric-roucher/GAIA/blob/main/gaia_custom_multiagent.py
 #
 # Copyright 2024 Aymeric Roucher
 #
 # Some minor modification to adapt the code to our needs were performed
 
-import os
 import logging
+import os
 from typing import Any, Optional, Type
 
 from langchain.tools import BaseTool
@@ -56,7 +56,7 @@ This tool handles the following file extensions: [".html", ".htm", ".xlsx", ".pp
         self.usage_statistics = usage_statistics
         self.llm = llm_utils.get_llm(model_name=model_name, temperature=temperature)
         self.md_converter = MarkdownConverter(self.usage_statistics)
-        self.default_data_folder = "GAIA/dataset/attachments/validation/"
+        self.default_data_folder = "benchmarks/datasets/GAIA/attachments/validation/"
 
 
     @collect_stats("inspect_file_as_text")

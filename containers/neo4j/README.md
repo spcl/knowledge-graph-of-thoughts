@@ -10,7 +10,7 @@ If you are running inside a virtual machine and using a `shared folder`, please 
 ### Example
 
 ```bash
-cd containers/neo4j/neo4j/
+cd containers/neo4j/
 
 ls -la
 # drwxrwx---  3 root  vboxsf  96 Jun 25 17:12 .
@@ -31,9 +31,9 @@ We do not want applications inside the Docker image to run with sudo permission.
 cd neo4j
 
 # Allow everyone to have access
-chmod -R 777 snapshots 
+chmod -R 777 ../../kgot/knowledge_graph/_snapshots 
 # Change ownership of the folder
-chown -R [OWNER]:[GROUP] snapshots
+chown -R [OWNER]:[GROUP] ../../kgot/knowledge_graph/_snapshots
 ```
 
 Now that the owner of the folder has been established, we can proceed in looking up their **UID/GID**.

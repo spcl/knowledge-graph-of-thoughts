@@ -40,7 +40,7 @@ class Controller(ControllerInterface):
     Controller class for managing the interaction between the LLM and the Neo4j database.
     This class is responsible for executing tasks, retrieving information, and managing the state of the knowledge graph.
 
-    The retrieve method is Cypher-based, meaning it uses Cypher queries to interact with the Neo4j database.
+    The retrieve method is direct retrieve, meaning it directly loads the content of the Neo4j graph database into the LLM context.
 
     Attributes:
         graph (State.knowledge_graph): The knowledge graph instance for interacting with the Neo4j database.
@@ -193,7 +193,7 @@ class Controller(ControllerInterface):
                         f"Failed the write query. Retry number: {retry_i} out of {self.max_cypher_fixing_retry}")
 
                     self.logger.error(
-                        f"trying to fix error encountered when executing cypher query: {single_query}\nError: {write_response[1]}")
+                        f"Trying to fix error encountered when executing Cypher query: {single_query}\nError: {write_response[1]}")
                     single_query = fix_cypher(self.llm_planning, single_query, write_response[1],
                                                 self.usage_statistics)
                     write_response = self.graph.write_query(single_query)
@@ -271,9 +271,9 @@ class Controller(ControllerInterface):
                         solution)) and fix_retry_i < self.max_cypher_fixing_retry:
                     fix_retry_i += 1
                     self.logger.info(
-                        f"Failed the retrieve query. Trying to fix the cypher. Retry number: {fix_retry_i} out of {self.max_cypher_fixing_retry} of cypher query fixes")
+                        f"Failed the retrieve query. Trying to fix the Cypher query. Retry number: {fix_retry_i} out of {self.max_cypher_fixing_retry} of Cypher query fixes")
                     self.logger.error(
-                        f"Trying to fix error encountered when executing RETRIEVE cypher query: {retrieve_query}\nError: {get_result[2]}")
+                        f"Trying to fix error encountered when executing RETRIEVE Cypher query: {retrieve_query}\nError: {get_result[2]}")
                     retrieve_query = fix_cypher(self.llm_planning, retrieve_query, get_result[2],
                                                 self.usage_statistics)
 

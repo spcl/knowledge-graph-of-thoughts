@@ -84,7 +84,7 @@ def run_code() -> tuple[requests.Response, int]:
             """
             Check whether the returned output is an error string.
 
-            PythonREPL does not throw an error, so need to use a regex to check if the code is
+            PythonREPL does not throw an error, so we need to use a regex to check if the code is
             valid.
 
             :param s: Returned output.

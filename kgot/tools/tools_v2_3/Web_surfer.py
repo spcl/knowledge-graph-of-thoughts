@@ -7,7 +7,7 @@
 # Main authors: Lorenzo Paleari
 #               Jón Gunnar Hannesson
 #
-# Most of the code below is from the Beating GAIA with Transformers Agents 🚀 repository.
+# Most of the code below is from the Beating GAIA with Transformers Agents repository.
 # https://github.com/aymeric-roucher/GAIA/blob/main/scripts/tools/web_surfer.py
 #
 # Copyright 2024 Aymeric Roucher
@@ -140,7 +140,7 @@ class FullPageSummaryTool(Tool):
         return result['informations']
 
 
-# All functions below are copied from the Beating the GAIA benchmark with Transformers Agents 🚀 repository.
+# All functions below are copied from the Beating the GAIA benchmark with Transformers Agents repository.
 # https://github.com/aymeric-roucher/GAIA/blob/main/scripts/tools/web_surfer.py
 #
 # Copyright 2024 Aymeric Roucher
@@ -256,6 +256,7 @@ class PageUpTool(Tool):
         browser.page_up()
         header, content = _browser_state()
         return header.strip() + "\n=======================\n" + content
+
 
 class ArchiveSearchTool(Tool):
     name="find_archived_url"

@@ -44,7 +44,7 @@ class ControllerInterface(ABC):
         num_next_steps_decision (int): Number of next steps to decide on.
         max_retrieve_query_retry (int): Maximum retries for retrieving queries.
         max_cypher_fixing_retry (int): Maximum retries for fixing Cypher queries.
-        max_final_solution_parsing (int): Maximum retries for parsing final solutions
+        max_final_solution_parsing (int): Maximum retries for parsing final solutions.
     """
 
     def __init__(self,
@@ -125,7 +125,6 @@ class ControllerInterface(ABC):
         """
         Run the controller with the given problem and attachments.
         This method is responsible for executing the main logic of the controller,
-
         including initializing the graph database, processing the problem, and
         returning the solution.
 
@@ -253,7 +252,7 @@ class ControllerInterface(ABC):
             query (str): The query to be executed.
             existing_entities_and_relationships (str): Existing entities and relationships in the graph.
             current_iteration (int): The current iteration number.
-            solutions: Solutions obtained from previous iterations.
+            solutions (List[str]): Solutions obtained from previous iterations.
 
         Returns:
             str: The solution obtained from the graph database.

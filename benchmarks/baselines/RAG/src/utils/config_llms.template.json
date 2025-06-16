@@ -1,0 +1,31 @@
+{
+  "openai-embedding": {
+    "model": "text-embedding-ada-002",
+    "organization": "",
+    "api_key": ""
+  },
+  "gpt-4o": {
+    "model_family": "OpenAI",
+    "model": "gpt-4o",
+    "organization": "",
+    "api_key": "",
+    "temperature": 0.0,
+    "max_tokens": 4000
+  },
+  "gpt-4o-mini": {
+    "model_family": "OpenAI",
+    "model": "gpt-4o-mini",
+    "organization": "",
+    "api_key": "",
+    "temperature": 0.0,
+    "max_tokens": 4000
+  },
+  "gpt-3.5-turbo": {
+    "model_family": "OpenAI",
+    "model": "gpt-3.5-turbo",
+    "organization": "",
+    "api_key": "",
+    "temperature": 0.0,
+    "max_tokens": 4000
+  }
+}

@@ -1,0 +1,8 @@
+GAIA/attachments
+GAIA/validation
+GAIA/test
+GAIA/validation_subsets
+GAIA/test_subsets
+.env
+SimpleQA/*.csv
+SimpleQA/*.json

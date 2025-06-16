@@ -25,7 +25,6 @@ from urllib.parse import unquote, urljoin, urlparse
 import pathvalidate
 import requests
 from serpapi import GoogleSearch
-
 from kgot.tools.tools_v2_3.Cookies import COOKIES
 from kgot.tools.tools_v2_3.MdConverter import (
     FileConversionException,
