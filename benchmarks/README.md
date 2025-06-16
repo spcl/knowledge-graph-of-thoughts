@@ -22,7 +22,7 @@ python3 GAIA/gaia.py --log_folder_base log --gaia_file [path_to_json]
 The full command line interface has the following options:
 
 ```bash
-python3 GAIA/gaia.py --help
+python3 benchmarks/gaia.py --help
 usage: gaia.py [-h] --log_folder_base LOG_FOLDER_BASE --gaia_file GAIA_FILE
                [--attachment_folder ATTACHMENT_FOLDER] [--config_llm_path CONFIG_LLM_PATH]
                [--logger_level LOGGER_LEVEL] [--logger_file_mode LOGGER_FILE_MODE]

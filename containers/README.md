@@ -2,7 +2,7 @@
 
 ## Installing GAIA Attachments
 
-If you intend to evaluate Knowledge Graph of Thoughts with the GAIA benchmark, please update the Python image with the GAIA attachments. You find the respective instructions [here](/benchmarks/dataset/README.md).
+If you intend to evaluate Knowledge Graph of Thoughts with the GAIA benchmark, please update the Python image with the GAIA attachments. You find the respective instructions [here](/benchmarks/datasets/README.md).
 
 ## Docker
 

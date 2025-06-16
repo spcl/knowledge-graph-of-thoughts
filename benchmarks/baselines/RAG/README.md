@@ -20,12 +20,12 @@ The object key is the language model identifier used in KGoT, and the various at
 
 ## Project Structure
 
-We first provide an overview over the directory structure of the RAG baselines:
+We first provide an overview over the directory structure of the Simple RAG baseline:
 
 ```
 .
-├── analysis/                # Cost analysis tools and results
-│   └── calculate_rag_costs.py  # Script to calculate RAG costs
+├── analysis/                # Cost analysis tools
+│   └── calculate_rag_costs.py
 ├── corpus/                  # Processed corpus files
 ├── vector_db/               # Vector store indices
 ├── results/
@@ -120,7 +120,7 @@ The benchmark will generate detailed token usage and cost statistics in the resu
 
 - `--index_path`: Path to your FAISS index (default: `vector_db/corpus_2.txt_faiss_index`)
 - `--log_folder_base`: Folder to store results (required)
-- `--gaia_file`: Path to GAIA dataset (default: `../../benchmarks/datasets/GAIA/validation/merged_dataset.json`)
+- `--gaia_file`: Path to GAIA dataset (default: `../../datasets/GAIA/validation/merged_dataset.json`)
 - `--max_questions`: Number of questions to evaluate (default: 3, use 0 for all)
 - `--num_retrieved`: Number of documents to retrieve per question (default: 5)
 - `--llm_model`: LLM model to use (default: gpt-4o-mini)
