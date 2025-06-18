@@ -17,6 +17,9 @@ import networkx as nx
 from kgot.knowledge_graph.kg_interface import KnowledgeGraphInterface
 
 
+#TODO: if needed, move to the config file
+SNAPSHOT_DIR = "./kgot/knowledge_graph/_snapshots"
+
 class KnowledgeGraph(KnowledgeGraphInterface):
     """
     A class to manage a knowledge graph using NetworkX.
@@ -43,7 +46,12 @@ class KnowledgeGraph(KnowledgeGraphInterface):
         Export the current state of the graph database to a JSON file.
         """
         export_file = f"nx_snapshot_{self.current_snapshot_id}.json"
-        export_file_path = f"./kgot/knowledge_graph/_snapshots/{self.current_folder_name}/{export_file}"
+        export_file_path = os.path.join(SNAPSHOT_DIR, self.current_folder_name, export_file)
+        
+        # Ensure the directory exists
+        export_dir = os.path.dirname(export_file_path)
+        if not os.path.exists(export_dir):
+            raise FileNotFoundError(f"Snapshot directory {export_dir} does not exist")
 
         data = []
 
@@ -92,7 +100,7 @@ class KnowledgeGraph(KnowledgeGraphInterface):
         folder_name += f"snapshot_{index}"
         self.current_folder_name = folder_name
 
-        folder_dir = os.path.join("./containers/neo4j/snapshots", folder_name)
+        folder_dir = os.path.join(SNAPSHOT_DIR, folder_name)
         if not os.path.exists(folder_dir):
             os.makedirs(folder_dir)
 

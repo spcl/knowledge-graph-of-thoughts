@@ -48,6 +48,7 @@ logs/*
 snapshots/
 !logs/current_runs/**/snapshots
 apicache/
+kgot/knowledge_graph/_snapshots/*
 
 results/current_runs/*
 !results/current_runs/archive.tar.*
