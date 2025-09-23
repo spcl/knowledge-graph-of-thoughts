@@ -93,7 +93,6 @@ class WikipediaTool:
 
         logger.info(f"Articles to search response: {pformat(response, width=160)}")
 
-        
         return response.chosen_articles
 
     def _clean_parse(self, text: str) -> Tuple[str, List[str]]:
@@ -353,7 +352,7 @@ class WikipediaTool:
 
         logger.debug(f"Tables: {table_data}")
 
-        # ASK LLM For the most relevant information to extract
+        # Ask a LLM for the most relevant information to extract
         class QueryAnswer(BaseModel):
             relevant_information: str = Field(
                 description="The most relevant information inside the Wikipedia article relative to the query")
@@ -380,14 +379,14 @@ class WikipediaTool:
     def query_wikipedia(self, article_name: str, query: str, date: str, initial_problem: str) -> Dict[str, str]:
         self.llm = llm_utils.get_llm(model_name=self.model_name, temperature=self.temperature)
 
-        # Search for Articles and Their Summaries
+        # Search for articles and their summaries
         search_results = self.search(article_name)
 
         result = {}
-        # continue if search results are found
+        # Continue if search results are found
         if search_results:
             first_article = list(search_results.keys())[0]
-            #Ask the LLM for the best match
+            # Ask the LLM for the best match
             article_to_search = self.ask_LLM_which_article_to_explore(search_results, query)
 
             if first_article not in article_to_search:
@@ -449,7 +448,7 @@ information_to_retrieve="Summary of causes, effects, and recent research."
         self.wikipedia_tool = WikipediaTool(model_name, temperature, usage_statistics=self.usage_statistics)
 
     def _run(self, article_name: str, information_to_retrieve: str, date: str, initial_problem: str) -> Dict[str, str]:
-        # wikipedia regulary throws a GuessedAtParser warning. This hasn't been fixed since 2015 so we just suppress them
+        # Wikipedia regulary throws a GuessedAtParser warning. This hasn't been fixed since 2015 so we just suppress them.
         with warnings.catch_warnings(action='ignore'):
             return self.wikipedia_tool.query_wikipedia(article_name, information_to_retrieve, date, initial_problem)
 

@@ -22,7 +22,6 @@ from kgot.utils import UsageStatistics
 
 
 def check_answers(solver_function, simpleqa_data, already_solved, log_folder_base, correct_stats_json_file_path, attachments_folder):
-    
     # Get API key from config_llms.json
     with open("kgot/config_llms.json", 'r') as f:
         config_llms = json.load(f)
@@ -49,7 +48,7 @@ def check_answers(solver_function, simpleqa_data, already_solved, log_folder_bas
         # Process the question
         print(f"\n\n\nSolving question {row_idx}:")
         try:
-            # the snapshot(s) will be saved in a subfolder with the same path as log_folder_base,
+            # The snapshot(s) will be saved in a subfolder with the same path as log_folder_base,
             # but from kgot/knowledge_graph/_snapshots/
             returned_answer, iterations_taken = solver_function(question,
                                               file_path,
@@ -168,7 +167,7 @@ def main(
     llm_cost_json_file_total = os.path.join(log_folder, "llm_cost_total.json")
 
     with open(cmd_log, 'a') as redirected_stdout:
-        with contextlib.redirect_stdout(redirected_stdout):  # redirect stdout to log file
+        with contextlib.redirect_stdout(redirected_stdout):  # Redirect stdout to log file
             print("#####################################")
             print("############# Doing KGoT ############")
             print("#####################################")

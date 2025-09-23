@@ -72,6 +72,7 @@ class OpenAIModel:
 class SearchToolSchema(BaseModel):
     query: str = Field("Your question, as a natural language sentence with a verb! You are talking to an human, so provide them with as much context as possible! DO NOT ASK a google-like query like 'paper about fish species 2011': instead ask a real sentence like: 'What appears on the last figure of a paper about fish species published in 2011?'")
 
+
 class SearchTool(BaseTool):
     name : str = "ask_search_agent"
     description: str = ("""

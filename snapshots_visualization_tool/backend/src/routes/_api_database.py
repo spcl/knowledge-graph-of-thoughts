@@ -32,7 +32,7 @@ class _API_DATABASE:
             json_content = params.content
             name = params.name.replace(".", " ").replace(" ", "_").replace("-", "_").replace("/", "_").replace("\\", "_").replace(":", "_").replace(";", "_").replace("?", "_").replace("!", "_").replace(",", "_").replace("(", "_").replace(")", "_").replace("[", "_").replace("]", "_").replace("json", "")
             
-            # change all id parameters adding the max_id to ensure that the ids are unique
+            # Change all id parameters adding the max_id to ensure that the ids are unique
             max_id_json = 0
             min_id_json = 999999999
             for line in json_content.split("\n"):
@@ -47,7 +47,7 @@ class _API_DATABASE:
                         min_id_json = id_value
             
             self.max_id = get_max_id()
-            # change all id parameters adding the max_id starting from max_id to min_id using replace
+            # Change all id parameters adding the max_id starting from max_id to min_id using replace
             for i in range(max_id_json, min_id_json-1, -1):
                 json_content = json_content.replace(f'"id":"{i}"', f'"id":"{i+self.max_id}"')
             

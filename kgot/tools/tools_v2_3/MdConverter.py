@@ -57,6 +57,7 @@ class DocumentConverter(ABC):
     def convert(self, local_path, **kwargs) -> Union[None, DocumentConverterResult]:
         raise NotImplementedError()
 
+
 class AudioConverter(DocumentConverter):
     usage_statistics = None
     def __init__(self, usage_statistics: Optional[UsageStatistics] = None):
@@ -101,6 +102,7 @@ class AudioConverter(DocumentConverter):
             title=None,
             text_content=result,
         )
+
 
 # All functions below are copied from the Beating the GAIA benchmark with Transformers Agents repository.
 # https://github.com/aymeric-roucher/GAIA/blob/main/scripts/tools/mdconvert.py
@@ -477,6 +479,7 @@ class PptxConverter(HtmlConverter):
 class FileConversionException(Exception):
     pass
 
+
 class UnsupportedFormatException(Exception):
     pass
 
@@ -663,4 +666,3 @@ class MarkdownConverter:
     def register_page_converter(self, converter: DocumentConverter) -> None:
         """Register a page text converter."""
         self._page_converters.append(converter)
-

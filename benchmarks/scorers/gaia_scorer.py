@@ -41,6 +41,7 @@ def is_float(element: any) -> bool:
     except ValueError:
         return False
 
+
 def question_scorer(
     model_answer: str,
     ground_truth: str,
@@ -78,6 +79,7 @@ def question_scorer(
     # if gt is a str
     else:
         return normalize_str(model_answer) == normalize_str(ground_truth)
+
 
 def check_prediction_contains_answer_letters_in_order(prediction, true_answer):
     prediction = prediction.lower()

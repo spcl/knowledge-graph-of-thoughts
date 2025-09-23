@@ -109,7 +109,7 @@ class ToolPlot(PlotOperation):
             pd.DataFrame: DataFrame containing the analyzed tool usage statistics.
         """
         max_iterations = kwargs.get('max_iterations', 1)
-        # would be better to put this in gaia_data_analyst 
+        # Would be better to put this in gaia_data_analyst
         answer_df = AnswerPlotGAIA.analyze(df_dict, max_iterations=max_iterations)
         q_status = {}
         total_questions = 0
@@ -152,7 +152,7 @@ class ToolPlot(PlotOperation):
             elif ref_categories:
                 coverage = len(set(kgot_categories) & set(ref_categories)) / len(ref_categories)
             else:
-                coverage = 0.0 # no tools needed but tool used
+                coverage = 0.0 # No tools needed but tool used
 
             # Quartile-based thresholds
             match =ToolMatch.categorize(coverage)
@@ -163,7 +163,7 @@ class ToolPlot(PlotOperation):
             successes.append(q_status[question_number])
 
         # Add coverage and match as new columns in the dataframe
-        df['tool_correctness']    = matches
+        df['tool_correctness'] = matches
         df['coverage_percentage'] = coverages
         df['question_success'] = successes
 
@@ -213,7 +213,7 @@ class ToolPlot(PlotOperation):
         """
         # Fetch custom input
         df_analyzed = custom_inputs.get('df_analyzed')
-        category    = custom_inputs.get('category')
+        category = custom_inputs.get('category')
 
         # Create plots
         self._plot_tool_match(df_analyzed, f'{category}_tool_match')
@@ -362,7 +362,7 @@ class ToolPlot(PlotOperation):
                 line=dict(color='white', width=2)
             ),
             rotation=90,
-            domain=dict(x=[0.15, 0.85], y=[0.15, 0.85])  # pie chart size
+            domain=dict(x=[0.15, 0.85], y=[0.15, 0.85])  # Pie chart size
         ))
         
         # Update layout with title and annotations

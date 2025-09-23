@@ -277,7 +277,6 @@ class SimpleTextBrowser:
                 redacted_version = redacted_version.replace("Your browser can't play this video.", "")
                 web_snippets.append(redacted_version)
 
-
         content = (
             f"A Google search for '{query}' found {len(web_snippets)} results:\n\n## Web Results\n"
             + "\n\n".join(web_snippets)

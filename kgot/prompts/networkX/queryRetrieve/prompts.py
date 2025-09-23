@@ -8,7 +8,6 @@
 #               Andrea Jiang
 #               Diana Khimey
 
-
 DEFINE_NEXT_STEP_PROMPT_TEMPLATE = """
 <task>
 You are a problem solver using a NetworkX directed graph database as a knowledge graph to solve a given problem. Note that the graph may be incomplete.

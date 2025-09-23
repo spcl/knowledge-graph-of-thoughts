@@ -85,7 +85,7 @@ def default_plots(data_dir_path: str, categories: list = None, max_iterations: i
                     df_dict = plotter.locate(dir_path)
                     df_array_temp = []
 
-                    # analyze the data
+                    # Analyze the data
                     df_analyzed = plotter.analyze(df_dict, max_iterations=max_iterations)
                     df_array_temp.append(df_analyzed)
 
@@ -94,7 +94,7 @@ def default_plots(data_dir_path: str, categories: list = None, max_iterations: i
                         'category': category
                     }
 
-                    # performs actual plotting
+                    # Performs actual plotting
                     plotter.execute(custom_inputs=inputs)
                     print(f"Plots for category '{category}' using {op.__name__} have been generated.")
             

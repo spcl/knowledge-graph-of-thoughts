@@ -36,6 +36,7 @@ def init_llm_utils(config_path: str = CONFIG_LLM_PATH,
     NUM_LLM_RETRIES = num_retries
     logger.info(f"LLM utils initialized with config path: {CONFIG_LLM_PATH} and num retries: {NUM_LLM_RETRIES}")
 
+
 def _get_llm_retries():
     """
     Get the number of retries for LLM requests.

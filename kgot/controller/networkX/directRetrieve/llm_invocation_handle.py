@@ -71,6 +71,7 @@ def define_next_step(llm_planning, initial_query: str,
 def merge_reasons_to_insert(llm_planning, list_reason_to_insert: List[str], *args, **kwargs):
     return merge_reasons_to_insert_base(llm_planning, list_reason_to_insert, *args, **kwargs)
 
+
 @collect_stats("Controller.define_forced_retrieve_queries")
 def define_forced_retrieve_queries(llm_planning, initial_query: str,
                                    existing_entities_and_relationships: str,

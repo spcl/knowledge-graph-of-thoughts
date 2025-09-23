@@ -129,7 +129,7 @@ export default function Home() {
     }
   };
 
-  //function to wipe out the dbms
+  // Function to wipe out the dbms
   const reset_dbms = async () => {
     const response = await fetch("/api/reset", {
       method: "POST",

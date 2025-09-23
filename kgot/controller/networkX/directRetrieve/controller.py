@@ -38,13 +38,13 @@ from kgot.utils.utils import ensure_file_path_exists, is_empty_solution
 
 class Controller(ControllerInterface):
     """
-    Controller class for managing the interaction between the LLM and the Neo4j database.
+    Controller class for managing the interaction between the LLM and the NetworkX graph storage.
     This class is responsible for executing tasks, retrieving information, and managing the state of the knowledge graph.
 
     The retrieve method is direct retrieve, meaning it directly loads the content of the NetworkX graph storage into the LLM context.
 
     Attributes:
-        graph (State.knowledge_graph): The knowledge graph instance for interacting with the Neo4j database.
+        graph (State.knowledge_graph): The knowledge graph instance for interacting with the NetworkX graph storage.
         usage_statistics (State.usage_statistics): The usage statistics instance for tracking usage.
         tool_manager (ToolManager): The tool manager instance for managing tools.
         tools (list[BaseTool]): The list of tools available for use.
@@ -226,7 +226,7 @@ class Controller(ControllerInterface):
                 forced_solution = generate_forced_solution(self.llm_planning, query, existing_entities_and_relationships, self.usage_statistics)
                 solution = parse_solution_with_llm(self.llm_planning, query, forced_solution, self.gaia_formatter, self.usage_statistics)
             else:
-                # we have a series of solutions, we need to choose the best one
+                # We have a series of solutions, we need to choose the best one
                 self.logger.info(f"Solution list for final solution choose: {str(solutions)} {str(array_parsed_solutions)}")
                 solution = define_final_solution(self.llm_planning, query, str(solutions), array_parsed_solutions,
                                                  self.usage_statistics)
@@ -285,4 +285,3 @@ class Controller(ControllerInterface):
             outputs.append(tool_output)
 
         return outputs
-
