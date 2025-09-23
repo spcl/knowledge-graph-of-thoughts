@@ -31,6 +31,7 @@ class SamplerResponse:
     actual_queried_message_list: MessageList
     response_metadata: dict[str, Any]
 
+
 class SamplerBase:
     """
     Base class for defining a sampling model, which can be evaluated,

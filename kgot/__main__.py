@@ -49,12 +49,12 @@ class CustomFormatter(argparse.RawTextHelpFormatter, argparse.ArgumentDefaultsHe
 
         return help
 
+
 def load_variables() -> None:
     """Load environment variables from .env file."""
 
     load_dotenv(override=False)
     # User specific environment variables (place in .env file if possible)
-
 
 
 # Command Implementations
@@ -114,7 +114,7 @@ def single_command(args: Any, neo4j_uri: str, neo4j_user: str, neo4j_password: s
         num_next_steps_decision=args.num_next_steps_decision,
     )
 
-    # get the first file path (only the path excluding the file name)
+    # Get the first file path (only the path excluding the file name)
     file_path = ""
     file_names = []
 
@@ -130,7 +130,9 @@ def single_command(args: Any, neo4j_uri: str, neo4j_user: str, neo4j_password: s
 
 
 def main() -> None:
-    """Main function to parse command line arguments and run the appropriate version."""
+    """
+    Main function to parse command line arguments and run the appropriate version.
+    """
     load_variables()
     # Default environment variables for help message
     neo4j_uri = os.getenv('NEO4J_URI', 'bolt://localhost:7687')
@@ -145,8 +147,8 @@ def main() -> None:
         f"  NEO4J_USER            Neo4j database user.\t\t(current: {neo4j_user})\n"
         f"  NEO4J_PASSWORD        Neo4j database password.\t(current: {neo4j_password})\n"
         f"  PYTHON_EXECUTOR_URI   Python execution server URI.\t(current: {python_executor_uri})\n\n"
-        f"  RDF4J_READ_URI       RDF4J read endpoint URI.\t(current: {rdf4j_read_uri})\n\n"
-        f"  RDF4J_WRITE_URI      RDF4J write endpoint URI.\t(current: {rdf4j_write_uri})\n\n"
+        f"  RDF4J_READ_URI        RDF4J read endpoint URI.\t(current: {rdf4j_read_uri})\n\n"
+        f"  RDF4J_WRITE_URI       RDF4J write endpoint URI.\t(current: {rdf4j_write_uri})\n\n"
         "Note: You can set these variables in a .env file in the current directory.\n"
         "For more details, refer to the official documentation at:\n"
         "https://github.com/spcl/knowledge-graph-of-thoughts"
@@ -222,7 +224,6 @@ def main() -> None:
     else:
         args = parser.parse_args()
         args.func(args, neo4j_uri, neo4j_user, neo4j_password, python_executor_uri, rdf4j_read_uri, rdf4j_write_uri)
-
 
 
 if __name__ == "__main__":

@@ -4,10 +4,9 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 #
-# authors:
-# Andrea Jiang
-# Lorenzo Paleari
-# You Wu
+# authors: Andrea Jiang
+#          Lorenzo Paleari
+#          You Wu
 
 import re
 import subprocess

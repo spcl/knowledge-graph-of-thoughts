@@ -36,6 +36,7 @@ class ImageQuestionSchema(BaseModel):
 def is_url(file_path):
     return file_path.startswith("http://") or file_path.startswith("https://")
 
+
 class ImageQuestionTool(BaseTool):
     name: str = "image_inspector"
     # description has a limit of 1024 chars
@@ -73,7 +74,7 @@ class ImageQuestionTool(BaseTool):
 
     @collect_stats("image_inspector")
     def _run(self, question: str, full_path_to_image: str) -> str:
-        url = full_path_to_image  # If the image is from URL, it doesn't need to be decoded https://platform.openai.com/docs/guides/vision
+        url = full_path_to_image  # If the image is from a URL, it doesn't need to be decoded https://platform.openai.com/docs/guides/vision
 
         if full_path_to_image.endswith('.mp3'):
             return "Cannot use image_question tool with .mp3 files: use inspect_file_as_text instead!"
@@ -83,7 +84,7 @@ class ImageQuestionTool(BaseTool):
             
         is_img_local = True
         if is_url(full_path_to_image):
-            # check if the URL is valid, if not return an error
+            # Check if the URL is valid, if not return an error
             is_img_local = False
             try:
                 response = requests.get(full_path_to_image)
@@ -113,7 +114,7 @@ class ImageQuestionTool(BaseTool):
                 image_format = self.get_image_type(full_path_to_image).lower()  # Usually PNG or JPEG, but need png or jpeg
                 # print(f"Image format: {image_format}")
                 if not image_format:
-                    image_format = "png"  # default to png
+                    image_format = "png"  # Default to png
 
                 image_base64 = self.encode_image(full_path_to_image)
                 url = f"data:image/{image_format};base64,{image_base64}"

@@ -348,6 +348,7 @@ class EmbeddingProvider(Enum):
     COHERE = "cohere"
     AMAZON_BEDROCK = "bedrock"
 
+
 # Enum class representing different model providers
 class ModelProvider(Enum):
     OPENAI = "openai"

@@ -4,9 +4,8 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 #
-# authors:
-# Andrea Jiang
-# Lorenzo Paleari
+# authors: Andrea Jiang
+#          Lorenzo Paleari
 
 import inspect
 import logging

@@ -59,6 +59,7 @@ def init_browser():
 
     return True
 
+
 class FullPageSummaryTool(Tool):
     name="get_full_page_summary"
     description="Given a url and a prompt, returns a summary of the information from the full webpage which pertains to the prompt."
@@ -108,6 +109,7 @@ class FullPageSummaryTool(Tool):
                     "keep_alive": -1
                 },
             }
+
     def forward(self, url, prompt) -> str:
         class QueryAnswer(BaseModel):
             informations: str = Field(description="Extracted information from the website.")

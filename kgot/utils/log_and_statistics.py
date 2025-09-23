@@ -225,11 +225,11 @@ def setup_logger(name: str, level: int = logging.INFO, log_file: str = None, log
     # Create a list of handlers
     handlers = []
     if log_file:
-        # Add File Handler for the logger
+        # Add file handler for the logger
         file_handler = logging.FileHandler(log_file, encoding='utf-8', mode=log_file_mode)
         handlers.append(file_handler)
     else:
-        # Add Console handler
+        # Add console handler
         console_handler = logging.StreamHandler()
         handlers.append(console_handler)
 

@@ -24,8 +24,6 @@ from kgot.utils import UsageStatistics
 
 
 def check_answers(solver_function, gaia_data, already_solved, log_folder_base, correct_stats_json_file_path, attachments_folder):
-    
-
     # Iterate over rows using tqdm with a dynamic description
     for row in tqdm(gaia_data['rows'][already_solved:], desc="Processing questions", unit="question"):
         row_idx = row['row_idx']
@@ -42,14 +40,14 @@ def check_answers(solver_function, gaia_data, already_solved, log_folder_base, c
         # Process the question
         print(f"\n\n\nSolving question {row_idx}:")
         try:
-            # the snapshot(s) will be saved in a subfolder with the same path as log_folder_base,
-            #   but from kgot/knowledge_graph/_snapshots/
+            # The snapshot(s) will be saved in a subfolder with the same path as log_folder_base,
+            # but from kgot/knowledge_graph/_snapshots/
             returned_answer, iterations_taken = solver_function(question,
                                               file_path,
                                               [file_name],
                                               row_idx, log_folder_base)
         except Exception as e:
-            # If modifying this error code, please modify also the plot_maker.py in GAIA
+            # If this error code is modified, please modify also the plot_maker.py in GAIA
             returned_answer = f"error during execution, skipped. {e}\n{traceback.format_exc()}"
             iterations_taken = -1
 

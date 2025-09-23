@@ -82,6 +82,7 @@ def load_reference_tools(df: pd.DataFrame) -> pd.DataFrame:
     
     return result_df
 
+
 @dataclass
 class ToolMapping:
     """Mapping of tools to their categories and equivalent tools"""
@@ -98,11 +99,11 @@ class ToolMapping:
         ],
         "load_documents_and_query": ["spreadsheet_tools"],
 
-        # tools
+        # Tools
         "visualizer": ["image_recognition_processing_tools"],
         "image_question": ["image_recognition_processing_tools"],
         "run_python_code": ["programming_code_tools", "calculator"],
-        "llm_query": [], # no tools used
+        "llm_query": [], # No tools used
         "inspect_file_as_text": ["document_access_tools", "pdf_tools", "spreadsheet_tools", "text_processing_analysis_tools"],
         "ask_search_agent": ["search_information_tools"],
         "extract_zip": ["spreadsheet_tools", "pdf_tools", "document_access_tools"],
