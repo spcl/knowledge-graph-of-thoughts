@@ -10,7 +10,7 @@ If you are running inside a virtual machine and using a `shared folder`, please 
 ### Example
 
 ```bash
-cd visualization/backend/db/
+cd snapshot_visualization_tool/backend/db/
 
 ls -la
 # drwxrwx---  3 root  vboxsf  96 Jun 25 17:12 .
@@ -25,7 +25,7 @@ We do not want applications inside the Docker image to run with sudo permission.
 `vboxsf` should be used as user for the Docker image because of its **rw** access. If this situation does not correspond to yours, please *change permissions or ownership* of the folder.
 
 ```bash
-cd visualization
+cd snapshot_visualization_tool
 
 # Allow everyone to have access
 chmod -R 777 backend/db/import 
@@ -47,7 +47,7 @@ id
 Please execute the following commands. Depending on the operating system you may need privileged rights.
 
 ```bash
-cd visualization
+cd snapshot_visualization_tool
 
 docker compose up -d 
 # or

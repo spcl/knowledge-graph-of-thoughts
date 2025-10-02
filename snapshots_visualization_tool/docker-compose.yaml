@@ -1,5 +1,3 @@
-version: "3"
-
 services:
   neo4j:
     container_name: visualization_tool_neo4j
@@ -28,7 +26,7 @@ services:
       visualization_tool:
         aliases:
           - neo4j
-  
+
   next-app:
     container_name: visualization_tool_frontend
     build:
