@@ -194,7 +194,7 @@ When using this in your work, please reference us with the citation provided bel
   title = {{Affordable AI Assistants with Knowledge Graph of Thoughts}},
   author = {Besta, Maciej and Paleari, Lorenzo and Jiang, Jia Hao Andrea and Gerstenberger, Robert and Wu, You and Hannesson, Jón Gunnar and Iff, Patrick and Kubicek, Ales and Nyczyk, Piotr and Khimey, Diana and Blach, Nils and Zhang, Haiqiang and Zhang, Tao and Ma, Peiran and Kwaśniewski, Grzegorz and Copik, Marcin and Niewiadomski, Hubert and Hoefler, Torsten},
   year = 2025,
-  month = Jun,
+  month = Oct,
   doi = {10.48550/arXiv.2504.02670},
   url = {http://arxiv.org/abs/2504.02670},
   eprinttype = {arXiv},
