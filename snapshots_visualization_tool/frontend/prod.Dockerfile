@@ -18,7 +18,7 @@ RUN \
 
 COPY src ./src
 COPY public ./public
-COPY .eslintrc.json .
+COPY eslint.config.mjs .
 COPY .prettierrc .
 COPY next.config.mjs .
 COPY postcss.config.mjs .
