@@ -1,6 +1,6 @@
 fastapi==0.95.1
 neo4j==5.20.0
-pip==23.3
+pip==25.3
 setuptools>=78.1.1
 uvicorn==0.22.0
 pydantic==1.10.13
