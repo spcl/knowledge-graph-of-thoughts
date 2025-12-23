@@ -11,6 +11,7 @@
 import argparse
 import ast
 import csv
+import glob
 import json
 import math
 import os
@@ -18,6 +19,7 @@ import random
 import shutil
 
 import pandas
+import pandas as pd  # you already import pandas; this alias is just clearer
 from dotenv import load_dotenv
 from huggingface_hub import snapshot_download
 
@@ -42,10 +44,25 @@ def download_simpleqa_dataset(target_dir: str):
     df.to_csv(os.path.join(target_dir, "simple_qa_test_set.csv"), index=False)
 
 
-def load_jsonl_with_index(path: str):
-    """Load a .jsonl file and return a list of dicts with row indices"""
-    with open(path, "r", encoding="utf-8") as f:
-        return [{"row_idx": i, "row": json.loads(line)} for i, line in enumerate(f)]
+def load_parquet_rows_with_index(parquet_path: str):
+    df = pd.read_parquet(parquet_path)
+    records = df.to_dict(orient="records")
+    return [{"row_idx": i, "row": r} for i, r in enumerate(records)]
+
+
+def discover_metadata_parquets(data_dir: str):
+    patterns = [
+        os.path.join(data_dir, "**", "metadata.parquet"),
+        os.path.join(data_dir, "**", "metadata_*.parquet"),
+        os.path.join(data_dir, "**", "*metadata*.parquet"),
+    ]
+    paths = []
+    for pat in patterns:
+        paths.extend(glob.glob(pat, recursive=True))
+
+    # de-dup + stable order
+    paths = sorted(set(paths))
+    return paths
 
 
 def save_json(data: object, path: str):
@@ -64,23 +81,105 @@ def split_by_level(rows: list):
     return grouped
 
 
+def infer_level_from_path_or_row(parquet_path: str, row: dict):
+    # 1) prefer explicit Level column if present
+    lvl = row.get("Level")
+    if lvl is not None and str(lvl).strip() != "":
+        return str(lvl)
+
+    # 2) infer from folder name like .../level_2/metadata.parquet
+    parts = parquet_path.replace("\\", "/").split("/")
+    for p in parts:
+        if p.lower().startswith("level_"):
+            return p.split("_", 1)[1]
+
+    # 3) infer from filename like metadata_level_2.parquet
+    base = os.path.basename(parquet_path).lower()
+    if "level_" in base:
+        # e.g. metadata_level_2.parquet
+        try:
+            after = base.split("level_", 1)[1]
+            num = "".join(ch for ch in after if ch.isdigit())
+            if num:
+                return num
+        except Exception:
+            pass
+
+    return "N/A"
+
+def nest_prefixed_fields(row: dict, prefix: str) -> dict:
+    out = dict(row)
+    nested = {}
+
+    prefix_dot = prefix + "."
+    to_delete = []
+
+    for k, v in out.items():
+        if k.startswith(prefix_dot):
+            subkey = k[len(prefix_dot):]
+            nested[subkey] = v
+            to_delete.append(k)
+
+    for k in to_delete:
+        del out[k]
+
+    if nested:
+        # If there's already a dict there, merge (dict wins on conflicts)
+        existing = out.get(prefix)
+        if isinstance(existing, dict):
+            existing.update(nested)
+            out[prefix] = existing
+        else:
+            out[prefix] = nested
+
+    return out
+
+
 def setup_question_json(input_dir: str, split: str, with_dummy: bool = False):
-    """Convert and split metadata.jsonl into full, per-level, and optional dummy datasets"""
-    metadata_path = os.path.join(input_dir, "metadata.jsonl")
-    rows = load_jsonl_with_index(metadata_path)
+    parquet_paths = discover_metadata_parquets(input_dir)
+    if not parquet_paths:
+        raise FileNotFoundError(f"No metadata parquet files found under: {input_dir}")
+
+    all_rows = []
+    global_idx = 0
+
+    for p in parquet_paths:
+        rows = load_parquet_rows_with_index(p)
+
+        for item in rows:
+            # item is {"row_idx": ..., "row": {...}}
+            row = item["row"]
+
+            # nest annotator metadata
+            row = nest_prefixed_fields(row, "Annotator Metadata")
+
+            # write back normalized row
+            item["row"] = row
+
+            # overwrite row_idx globally
+            item["row_idx"] = global_idx
+            all_rows.append(item)
+            global_idx += 1
 
     merged_dir = os.path.join("GAIA", split)
     os.makedirs(merged_dir, exist_ok=True)
-    save_json({"rows": rows}, os.path.join(merged_dir, "merged_dataset.json"))
+    save_json({"rows": all_rows}, os.path.join(merged_dir, "merged_dataset.json"))
+
+    grouped = {}
+    for item in all_rows:
+        # infer level from row content or path (no need to store _source_parquet)
+        lvl = infer_level_from_path_or_row("", item["row"])
+        key = f"level_{lvl}"
+        grouped.setdefault(key, []).append(item)
 
     subsets_dir = os.path.join("GAIA", f"{split}_subsets")
     os.makedirs(subsets_dir, exist_ok=True)
-
-    for level, group in split_by_level(rows).items():
-        save_json(group, os.path.join(subsets_dir, f"{level}.json"))
+    for level_key, group in grouped.items():
+        save_json(group, os.path.join(subsets_dir, f"{level_key}.json"))
 
     if with_dummy:
-        save_json({"rows": rows[:5]}, os.path.join(subsets_dir, "dummy.json"))
+        save_json({"rows": all_rows[:5]}, os.path.join(subsets_dir, "dummy.json"))
+
 
 
 def convert_csv_to_gaia_json(csv_filepath, json_filepath):
