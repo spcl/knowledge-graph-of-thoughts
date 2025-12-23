@@ -62,6 +62,7 @@ You can also add new models by incorporating their information into the JSON fil
 The object key is the language model identifier used in KGoT, and the various attributes contain the information needed to run the model.
 
 Local models are expected to be hosted using **[Ollama](https://ollama.com/)**. KGoT assumes that the model is accessible at the default Ollama API endpoint (`http://localhost:11434`) and integrates with it through **ChatOllama** via the [LangChain](https://www.langchain.com/) framework.
+You can change the endpoint URL in the `config_llms.json` file if needed by adding the `base_url` attribute to the respective model configuration.
 
 > [!NOTE]
 > **Please be aware** that the values for `num_ctx`, `num_predict`, and `num_batch` in the configuration are based on the specific GPU type and VRAM capacity used during our experiments. You may need to adjust these parameters based on your own hardware setup to avoid out-of-memory errors or suboptimal performance.

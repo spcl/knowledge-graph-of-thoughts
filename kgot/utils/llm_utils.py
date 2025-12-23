@@ -110,7 +110,7 @@ def get_llm(model_name: str, temperature: float = None, max_tokens: int = None):
         llm_to_return = ChatOllama(
             model=model_config["model"],
             temperature=model_config["temperature"],
-            base_url="localhost:11434",
+            base_url=model_config["base_url"] if "base_url" in model_config else "localhost:11434",
             num_ctx=model_config["num_ctx"],
             num_predict=model_config["num_predict"],
             num_batch=model_config["num_batch"],
