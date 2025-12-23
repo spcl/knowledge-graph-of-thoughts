@@ -21,16 +21,20 @@ from benchmarks.scorers.simple_qa_scorer import ChatCompletionSampler, grade_ans
 from kgot.utils import UsageStatistics
 
 
-def check_answers(solver_function, simpleqa_data, already_solved, log_folder_base, correct_stats_json_file_path, attachments_folder):
+def check_answers(solver_function, simpleqa_data, already_solved, log_folder_base, correct_stats_json_file_path, attachments_folder, disable_grader=False):
     # Get API key from config_llms.json
-    with open("kgot/config_llms.json", 'r') as f:
-        config_llms = json.load(f)
-    model = config_llms['gpt-4o']
-    if 'api_key' in model:
-        api_key = model['api_key']
+    if disable_grader:
+        print("Grader is disabled. All answers will be marked as NOT_ATTEMPTED.")
+        grader = None
     else:
-        raise ValueError("API key not found in the configuration file.")
-    grader = ChatCompletionSampler(model="gpt-4o", api_key=api_key)
+        with open("kgot/config_llms.json", 'r') as f:
+            config_llms = json.load(f)
+        model = config_llms['gpt-4o']
+        if 'api_key' in model:
+            api_key = model['api_key']
+        else:
+            raise ValueError("API key not found in the configuration file.")
+        grader = ChatCompletionSampler(model="gpt-4o", api_key=api_key)
 
     # Iterate over rows using tqdm with a dynamic description
     for row in tqdm(simpleqa_data['rows'][already_solved:], desc="Processing questions", unit="question"):
@@ -60,15 +64,19 @@ def check_answers(solver_function, simpleqa_data, already_solved, log_folder_bas
             iterations_taken = -1
 
         # Check if the returned answer matches the final answer
-        successful = grade_answer(question, final_answer, returned_answer, grader)
-        if successful == "CORRECT":
-            print(f"Row {row_idx}: Correct (Expected: {final_answer}, Got: {returned_answer})", flush=True)
-        elif successful == "INCORRECT":
-            print(f"Row {row_idx}: Incorrect (Expected: {final_answer}, Got: {returned_answer})", flush=True)
-        elif successful == "NOT_ATTEMPTED":
-            print(f"Row {row_idx}: Not attempted (Expected: {final_answer}, Got: {returned_answer})", flush=True)
+        if disable_grader:
+            successful = "NOT_ATTEMPTED"
+            print(f"Row {row_idx}: Grader disabled, marking as Not attempted (Expected: {final_answer}, Got: {returned_answer})", flush=True)
         else:
-            print(f"Row {row_idx}: UNKNOWN (Expected: {final_answer}, Got: {returned_answer})", flush=True)
+            successful = grade_answer(question, final_answer, returned_answer, grader)
+            if successful == "CORRECT":
+                print(f"Row {row_idx}: Correct (Expected: {final_answer}, Got: {returned_answer})", flush=True)
+            elif successful == "INCORRECT":
+                print(f"Row {row_idx}: Incorrect (Expected: {final_answer}, Got: {returned_answer})", flush=True)
+            elif successful == "NOT_ATTEMPTED":
+                print(f"Row {row_idx}: Not attempted (Expected: {final_answer}, Got: {returned_answer})", flush=True)
+            else:
+                print(f"Row {row_idx}: UNKNOWN (Expected: {final_answer}, Got: {returned_answer})", flush=True)
 
         # Append the result to the results list
         result = {
@@ -122,6 +130,8 @@ def main(
         neo4j_username: str = "neo4j",
         neo4j_password: str = "password",
         python_executor_uri: str = "http://localhost:16000/run",
+        rdf4j_read_uri: str = "http://localhost:8080/rdf4j-server/repositories/kgot",
+        rdf4j_write_uri: str = "http://localhost:8080/rdf4j-server/repositories/kgot/statements",
         max_iterations: int = 7,
         num_next_steps_decision: int = 5,
         max_retrieve_query_retry: int = 3,
@@ -137,6 +147,7 @@ def main(
         tool_choice: str = "tools_v2_3",
         db_choice: str = "neo4j",
         gaia_formatter: bool = True,
+        disable_grader: bool = False,
     ):
 
     with open(simpleqa_file, 'r') as file:
@@ -174,6 +185,8 @@ def main(
 
             controller_object = importlib.import_module(f"kgot.controller.{db_choice}.{controller_choice}").Controller
             controller = controller_object(
+                rdf4j_read_uri=rdf4j_read_uri,
+                rdf4j_write_uri=rdf4j_write_uri,
                 neo4j_uri=neo4j_uri,
                 neo4j_username=neo4j_username,
                 neo4j_pwd= neo4j_password,
@@ -199,7 +212,7 @@ def main(
                 max_llm_retries=max_llm_retries,
                 num_next_steps_decision=num_next_steps_decision,
             )
-            check_answers(controller.run, simpleqa_data, already_solved, log_folder_base, log_file_correct_stats, attachments_folder)
+            check_answers(controller.run, simpleqa_data, already_solved, log_folder_base, log_file_correct_stats, attachments_folder, disable_grader=disable_grader)
             UsageStatistics.calculate_total_cost(llm_cost_json_file, llm_cost_json_file_total)
 
 
@@ -217,6 +230,8 @@ if __name__ == "__main__":
     parser.add_argument('--neo4j_username', type=str, required=False, help='Neo4j username', default="neo4j")
     parser.add_argument('--neo4j_password', type=str, required=False, help='Neo4j password', default="password")
     parser.add_argument('--python_executor_uri', type=str, required=False, help='URI for Python tool executor', default="http://localhost:16000/run")
+    parser.add_argument('--rdf4j_read_uri', type=str, required=False, help='RDF4J endpoint for querying', default="http://localhost:8080/rdf4j-server/repositories/kgot")
+    parser.add_argument('--rdf4j_write_uri', type=str, required=False, help='RDF4J endpoint for update statements', default="http://localhost:8080/rdf4j-server/repositories/kgot/statements")
 
     parser.add_argument('--max_iterations', type=int, required=False, help='Max iterations for KGoT', default=7)
     parser.add_argument('--num_next_steps_decision', type=int, required=False, help='Number of next steps decision', default=5)
@@ -236,6 +251,7 @@ if __name__ == "__main__":
     parser.add_argument('--tool_choice', type=str, required=False, help='Tool choice', default="tools_v2_3")
 
     parser.add_argument('--gaia_formatter', action='store_true', help='Use GAIA formatter', default="Enabled")
+    parser.add_argument('--disable_grader', action='store_true', help='Disable grader', default=False)
 
     args = parser.parse_args()
 
@@ -265,4 +281,5 @@ if __name__ == "__main__":
         db_choice=args.db_choice,
         tool_choice=args.tool_choice,
         gaia_formatter=args.gaia_formatter,
+        disable_grader=args.disable_grader,
     )
