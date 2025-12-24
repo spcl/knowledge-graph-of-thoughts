@@ -32,6 +32,7 @@ dependencies = [
   "cairosvg", # svg file for ImageQuestion
   "docx2txt",
   "fastapi>=0.111.0",
+  "fastparquet==2025.12.0",  
   "faiss-cpu>=1.7.4",
   "flask", # Python tool
   "google-search-results>=2.4.2,<3.0.0",
