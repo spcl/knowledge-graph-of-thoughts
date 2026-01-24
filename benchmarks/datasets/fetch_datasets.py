@@ -150,13 +150,13 @@ def setup_question_json(input_dir: str, split: str, with_dummy: bool = False):
             # item is {"row_idx": ..., "row": {...}}
             row = item["row"]
 
-            # nest annotator metadata
+            # Nest annotator metadata
             row = nest_prefixed_fields(row, "Annotator Metadata")
 
-            # write back normalized row
+            # Write back normalized row
             item["row"] = row
 
-            # overwrite row_idx globally
+            # Overwrite row_idx globally
             item["row_idx"] = global_idx
             all_rows.append(item)
             global_idx += 1
@@ -167,7 +167,7 @@ def setup_question_json(input_dir: str, split: str, with_dummy: bool = False):
 
     grouped = {}
     for item in all_rows:
-        # infer level from row content or path (no need to store _source_parquet)
+        # Infer level from row content or path (no need to store _source_parquet)
         lvl = infer_level_from_path_or_row("", item["row"])
         key = f"level_{lvl}"
         grouped.setdefault(key, []).append(item)
@@ -216,7 +216,7 @@ def convert_csv_to_gaia_json(csv_filepath, json_filepath):
                     print(f"Warning: Error parsing metadata on row {row_idx_counter + 1} ('{metadata_str}'): {e}. Using raw string.")
                     annotator_metadata_from_csv = {"raw_metadata": metadata_str}
 
-                # Build Annotator Metadata, includes metadata from CSV, and provides GAIA-specific fields with default values
+                # Build annotator metadata, includes metadata from CSV, and provides GAIA-specific fields with default values
                 annotator_metadata_final = {
                     "Number of steps": "N/A",   # Typically not available in SimpleQA
                     "Tools": "N/A",             # Typically not available in SimpleQA

@@ -53,7 +53,6 @@ class UsageStatistics:
             completion_tokens (int): Number of completion tokens.
             cost (float): Cost.
         """
-        
         cost = ({
             'FunctionName': function_name,
             'StartTime': start_time,

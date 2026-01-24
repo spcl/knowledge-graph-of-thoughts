@@ -65,6 +65,7 @@ class Controller(ControllerInterface):
                  *args, **kwargs) -> None:
         """
         Initializes the Controller with the specified parameters.
+
         Args:
             python_executor_uri (str): The URI of the Python tool executor.
             llm_execution_model (str): The model used for executing tasks.
@@ -74,7 +75,7 @@ class Controller(ControllerInterface):
             tool_choice (str): The choice of tool to use.
             *args: Additional arguments. See ControllerInterface for details.
             **kwargs: Additional keyword arguments. See ControllerInterface for details.
-            """
+        """
         super().__init__(llm_execution_model=llm_execution_model, llm_execution_temperature=llm_execution_temperature, *args, **kwargs)
 
         ensure_file_path_exists(statistics_file_name)

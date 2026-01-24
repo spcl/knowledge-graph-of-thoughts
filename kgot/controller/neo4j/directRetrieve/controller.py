@@ -64,6 +64,7 @@ class Controller(ControllerInterface):
                  *args, **kwargs) -> None:
         """
         Initializes the Controller with the specified parameters.
+
         Args:
             neo4j_uri (str): The URI of the Neo4j database.
             neo4j_username (str): The username for the Neo4j database.
@@ -76,7 +77,7 @@ class Controller(ControllerInterface):
             tool_choice (str): The choice of tool to use.
             *args: Additional arguments. See ControllerInterface for details.
             **kwargs: Additional keyword arguments. See ControllerInterface for details.
-            """
+        """
         super().__init__(llm_execution_model=llm_execution_model, llm_execution_temperature=llm_execution_temperature, *args, **kwargs)
 
         ensure_file_path_exists(statistics_file_name)

@@ -4,7 +4,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 //
-// Main authors: Lorenzo Paleari
+// Author: Lorenzo Paleari
 
 import { ReactNode } from "react";
 import { FaTimes } from "react-icons/fa";

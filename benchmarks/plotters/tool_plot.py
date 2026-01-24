@@ -167,7 +167,7 @@ class ToolPlot(PlotOperation):
         df['coverage_percentage'] = coverages
         df['question_success'] = successes
 
-        # Add meta data
+        # Add metadata
         category_counts = df['tool_correctness'].value_counts()
         df._metadata = {
             'total_questions': total_questions,
