@@ -1,4 +1,5 @@
-# The code below is from the Beating GAIA with Transformers Agents repository.
+# The code below is from the Beating GAIA with Transformers Agents repository,
+# which is the official Hugging Faces Agents repository.
 # https://github.com/aymeric-roucher/GAIA/blob/main/scripts/tools/cookies.py
 #
 # Copyright 2024 Aymeric Roucher

@@ -104,12 +104,14 @@ class AudioConverter(DocumentConverter):
         )
 
 
-# All functions below are copied from the Beating the GAIA benchmark with Transformers Agents repository.
+# All functions below are copied from the Beating the GAIA benchmark with Transformers Agents repository,
+# which is the official Hugging Faces Agents repository.
 # https://github.com/aymeric-roucher/GAIA/blob/main/scripts/tools/mdconvert.py
 #
 # Copyright 2024 Aymeric Roucher
 #
 # Some minor modification to adapt the code to our needs were performed.
+
 class PlainTextConverter(DocumentConverter):
     """Anything with content type text/plain"""
 

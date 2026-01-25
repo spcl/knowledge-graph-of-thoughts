@@ -139,8 +139,8 @@ Beating GAIA with Transformers Agents (<https://github.com/aymeric-roucher/GAIA>
 =================================================================================
 
 Knowledge Graph of Thoughts uses code from the Beating GAIA with Transformers
-Agents repository for web surfing and inspection of files. Its license can be
-found below.
+Agents repository, which is the official Hugging Face Agents repository, for web
+surfing and inspection of files. Its license can be found below.
 
                                  Apache License
                            Version 2.0, January 2004
