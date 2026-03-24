@@ -4,7 +4,7 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 #
-# Main author: Tao Zhang
+# Author: Tao Zhang
 
 import asyncio
 import os
@@ -33,7 +33,7 @@ from benchmarks.baselines.RAG.src.utils.simplified_utils import get_model_config
 
 def replace_t_with_space(list_of_documents):
     """
-    Replaces all tab characters ('\t') with spaces in the page content of each document
+    Replaces all tab characters ('\t') with spaces in the page content of each document.
 
     Args:
         list_of_documents: A list of document objects, each with a 'page_content' attribute.
@@ -184,7 +184,7 @@ def create_question_answer_from_context_chain(llm):
     # Initialize the ChatOpenAI model with specific parameters
     question_answer_from_context_llm = llm
 
-    # Define the prompt template for chain-of-thought reasoning
+    # Define the prompt template for Chain-of-Thought reasoning
     question_answer_prompt_template = """ 
     For the question below, provide a concise but suffice answer based ONLY on the provided context:
     {context}

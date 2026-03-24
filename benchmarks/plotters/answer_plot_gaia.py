@@ -19,7 +19,7 @@ from benchmarks.plotters.plot_operations import PlotOperation
 
 class AnswerPlotGAIA(PlotOperation):
     """
-    The AnswerPlot class handles the plotting of results from querying the GAIA benchmark.
+    The AnswerPlotGAIA class handles the plotting of results from querying the GAIA benchmark.
 
     Inherits from the PlotOperation class and implements its abstract methods.
     """
@@ -45,7 +45,7 @@ class AnswerPlotGAIA(PlotOperation):
             level_df = df[df['level'] == level]
             total = len(level_df)
 
-            # Collect question numbers for all metrics for better json overview & debugging
+            # Collect question numbers for all metrics for better JSON overview & debugging
             correct_idx = level_df[(level_df['successful']) & (level_df['iterations_taken'] < max_iterations)]['question_number'].tolist()
             correct_forced_idx = level_df[(level_df['successful']) & (level_df['iterations_taken'] == max_iterations)]['question_number'].tolist()
             close_call_idx = level_df[(~level_df['successful']) & level_df['close_call']]['question_number'].tolist()

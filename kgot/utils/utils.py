@@ -44,12 +44,12 @@ def is_empty_solution(solution: Any) -> bool:
     
     # Check if the solution is a dictionary
     if isinstance(solution, dict):
-        # Check if the dictionary is empty and if not, all its values are empty
+        # Check if the dictionary is empty and if not, whether all its values are empty
         return not solution or all(is_empty_solution(value) for value in solution.values())
     
     # Check if the solution is a list
     if isinstance(solution, list):
-        # Check if the list is empty and if not, all its elements are empty
+        # Check if the list is empty and if not, whether all its elements are empty
         return not solution or all(is_empty_solution(element) for element in solution)
     
     # If the solution is not None, a dictionary, or a list, return False

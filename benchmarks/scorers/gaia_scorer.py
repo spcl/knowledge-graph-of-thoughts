@@ -4,18 +4,17 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 #
-# Main author: Lorenzo Paleari
+# Author: Lorenzo Paleari
 #
 # The code below is taken from the GAIA leaderboard repository with slight modifications
 # https://huggingface.co/spaces/gaia-benchmark/leaderboard/blob/main/scorer.py
-
 
 import re
 import string
 
 
 def normalize_number_str(number_str: str) -> float:
-    # we replace these common units and commas to allow
+    # We replace these common units and commas to allow
     # conversion to float
     for char in ["$", "%", ","]:
         number_str = number_str.replace(char, "")
@@ -46,37 +45,37 @@ def question_scorer(
     model_answer: str,
     ground_truth: str,
 ) -> bool:
-    # if gt is a number
+    # If gt is a number
     if is_float(ground_truth):
         normalized_answer = normalize_number_str(str(model_answer))
         return normalized_answer == float(ground_truth)
 
-    # if gt is a list
+    # If gt is a list
     elif any(char in ground_truth for char in [",", ";"]):
-        # question with the fish: normalization removes punct
+        # Question with the fish: normalization removes punct
 
         gt_elems = split_string(ground_truth)
         ma_elems = split_string(model_answer)
 
-        # check length is the same
+        # Check length is the same
         if len(gt_elems) != len(ma_elems):
             return False
 
-        # compare each element as float or str
+        # Compare each element as float or str
         comparisons = []
         for ma_elem, gt_elem in zip(ma_elems, gt_elems):
             if is_float(gt_elem):
                 normalized_ma_elem = normalize_number_str(ma_elem)
                 comparisons.append(normalized_ma_elem == float(gt_elem))
             else:
-                # we do not remove punct since comparisons can include punct
+                # We do not remove punct since comparisons can include punct
                 comparisons.append(
                     normalize_str(ma_elem, remove_punct=False)
                     == normalize_str(gt_elem, remove_punct=False)
                 )
         return all(comparisons)
 
-    # if gt is a str
+    # If gt is a str
     else:
         return normalize_str(model_answer) == normalize_str(ground_truth)
 

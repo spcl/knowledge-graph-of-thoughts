@@ -104,7 +104,7 @@ def default_plots(data_dir_path: str, categories: list = None, max_iterations: i
         df_merged = plotter.summarize(df_array)
         plotter.execute({'df_analyzed': df_merged, 'category': "all"})
 
-        # Store the json file as overview
+        # Store the JSON file as overview
         df_merged.to_json(f"{res}/{op.__name__}.json", orient='records', indent=4)
 
 if __name__ == '__main__':

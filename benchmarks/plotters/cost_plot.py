@@ -20,7 +20,7 @@ from benchmarks.plotters.plot_operations import PlotOperation
 
 class CostPlot(PlotOperation):
     """
-    The CostPlot class handles the plotting of cost statistics from querying LLM.
+    The CostPlot class handles the plotting of cost statistics from querying LLMs.
 
     Inherits from the PlotOperation class and implements its abstract methods.
     """    

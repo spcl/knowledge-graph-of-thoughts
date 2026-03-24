@@ -19,7 +19,7 @@ from benchmarks.plotters.plot_operations import PlotOperation
 
 class AnswerPlotSimpleQA(PlotOperation):
     """
-    The AnswerPlot class handles the plotting of results from querying the SimpleQA benchmark.
+    The AnswerPlotSimpleQA class handles the plotting of results from querying the SimpleQA benchmark.
 
     Inherits from the PlotOperation class and implements its abstract methods.
     """
@@ -45,7 +45,7 @@ class AnswerPlotSimpleQA(PlotOperation):
             level_df = df[df['level'] == level]
             total = len(level_df)
 
-            # Collect question numbers for all metrics for better json overview & debugging
+            # Collect question numbers for all metrics for better JSON overview & debugging
             correct_idx = level_df[(level_df['successful']) & (level_df['iterations_taken'] < max_iterations)]['question_number'].tolist()
             correct_forced_idx = level_df[(level_df['successful']) & (level_df['iterations_taken'] == max_iterations)]['question_number'].tolist()
             not_attempted_idx = level_df[level_df['not_attempted']]['question_number'].tolist()

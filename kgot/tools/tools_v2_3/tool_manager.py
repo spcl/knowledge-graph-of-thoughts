@@ -4,7 +4,7 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 #
-# Main authors: Lorenzo Paleari
+# Author: Lorenzo Paleari
 
 from kgot.tools.PythonCodeTool import RunPythonCodeTool
 from kgot.tools.tool_manager_interface import ToolManagerInterface

@@ -14,7 +14,7 @@ KGoT provides several built-in tools:
 - `RunPythonCodeTool`: Executes Python code in a sandboxed Docker environment, in which external files from the GAIA tasks are mounted directly into the file system.
 
 > [!NOTE]
-> To focus on harnessing the knowledge graph, we reuse several utilities from [AutoGen](https://github.com/microsoft/autogen/tree/gaia_multiagent_v01_march_1st) such as the Browser and MDConverter tools as well as tools from [HuggingFace Agents](https://github.com/aymeric-roucher/GAIA) such as the Surfer Agent, web browsing tools, and the Text Inspector.
+> To focus on harnessing the knowledge graph, we reuse several utilities from [AutoGen](https://github.com/microsoft/autogen/tree/gaia_multiagent_v01_march_1st) such as the Browser and MDConverter tools as well as tools from [Hugging Face Agents](https://github.com/aymeric-roucher/GAIA) such as the Surfer Agent, web browsing tools, and the Text Inspector.
 
 ## Bookkeeping of Tools
 

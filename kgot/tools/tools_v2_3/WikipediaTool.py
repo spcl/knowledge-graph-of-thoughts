@@ -44,7 +44,6 @@ pywikibot.config.maxlag = None
 class WikipediaTool:
     def __init__(self, model_name, temperature, usage_statistics: UsageStatistics,
                  language: str = 'en'):
-        
         wikipedia.set_lang(language)
         self.llm = None
         self.usage_statistics = usage_statistics

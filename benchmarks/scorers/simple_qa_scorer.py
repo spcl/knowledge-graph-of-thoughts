@@ -10,7 +10,6 @@
 # The code below is taken from the simple-evals repository with slight modifications
 # https://github.com/openai/simple-evals
 
-
 import re
 import time
 from dataclasses import dataclass
@@ -18,6 +17,7 @@ from typing import Any
 
 import openai
 from openai import OpenAI
+
 
 Message = dict[str, Any]  # keys role, content
 MessageList = list[Message]
