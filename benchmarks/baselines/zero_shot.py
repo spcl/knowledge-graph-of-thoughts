@@ -7,11 +7,13 @@
 # authors: Andrea Jiang
 #          Lorenzo Paleari
 
+import base64
 import inspect
 import logging
+import mimetypes
 import os
 from time import time
-from typing import List, Tuple
+from typing import Any, List, Tuple
 
 from langchain_community.callbacks import get_openai_callback
 from langchain_community.document_loaders import (
@@ -25,6 +27,7 @@ from langchain_community.document_loaders import (
     UnstructuredXMLLoader,
 )
 from langchain_core.documents import Document
+from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_ollama import ChatOllama
 from langchain_openai import ChatOpenAI
 
@@ -41,14 +44,83 @@ If you are asked for a string, don’t use articles, neither abbreviations (e.g.
 If you are asked for a comma separated list, apply the above rules depending of whether the element to be put in the list is a number or a string.
 """
 
+IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".gif", ".webp"}
+TEXT_DOCUMENT_EXTENSIONS = {
+    ".pdf",
+    ".docx",
+    ".doc",
+    ".txt",
+    ".py",
+    ".csv",
+    ".pptx",
+    ".xlsx",
+    ".xls",
+    ".xml",
+    ".json",
+    ".jsonl",
+    ".jsonld",
+}
+
+
+def _attachment_path(directory_path: str, file_name: str) -> str:
+    return os.path.join(directory_path, file_name)
+
+
+def _file_extension(file_path: str) -> str:
+    return os.path.splitext(file_path)[1].lower()
+
+
+def _is_image_file(file_path: str) -> bool:
+    return _file_extension(file_path) in IMAGE_EXTENSIONS
+
+
+def _is_text_document_file(file_path: str) -> bool:
+    return _file_extension(file_path) in TEXT_DOCUMENT_EXTENSIONS
+
+
+def load_image_blocks(directory_path: str, file_names: List[str]) -> List[dict[str, Any]]:
+    image_blocks = []
+    for file_name in file_names:
+        if file_name == "":
+            continue
+
+        file_path = _attachment_path(directory_path, file_name)
+        if not _is_image_file(file_path):
+            continue
+
+        mime_type, _ = mimetypes.guess_type(file_path)
+        if mime_type is None:
+            mime_type = "image/png"
+
+        with open(file_path, "rb") as image_file:
+            image_base64 = base64.b64encode(image_file.read()).decode("utf-8")
+
+        image_blocks.append({
+            "type": "image_url",
+            "image_url": {
+                "url": f"data:{mime_type};base64,{image_base64}",
+                "detail": "high",
+            },
+        })
+
+    return image_blocks
+
+
 def load_documents(directory_path: str, file_names: List[str]) -> List[Document]:
     docs: List[Document] = []
     for file_name in file_names:
         if file_name == "":
             continue
 
+        file_path = _attachment_path(directory_path, file_name)
+        if _is_image_file(file_path):
+            continue
+        if not _is_text_document_file(file_path):
+            print(f"Skipping unsupported attachment for zero-shot document loading: {file_path}")
+            continue
+
         print(f"File Path: {directory_path} and File Name: {file_name}")
-        docs.extend(load_document(os.path.join(directory_path, file_name)))
+        docs.extend(load_document(file_path))
     print(f"Docs: {docs}")
     return docs
 
@@ -155,8 +227,9 @@ class ZeroShot:
         print(f"Query: {query}")
 
         docs: List[Document] = load_documents(file_path, file_names)
+        image_blocks = load_image_blocks(file_path, file_names)
 
-        if len(docs) >= 0:
+        if len(docs) > 0:
             # Wrap each document with <doc> tags and add the attached_docs to the query
             wrapped_docs = ["<doc>\n{}\n</doc>".format(doc.page_content) for doc in docs]
             attached_docs = "\n\n".join(wrapped_docs)
@@ -165,14 +238,11 @@ class ZeroShot:
             print(f"Query with Attached Docs: {query}")
 
         messages = [
-            {
-                "role": "system",
-                "content": system_prompt
-            },
-            {
-                "role": "user",
-                "content": query
-            }
+            SystemMessage(content=system_prompt),
+            HumanMessage(content=[
+                {"type": "text", "text": query},
+                *image_blocks,
+            ]),
         ]
 
         # Invoke the chain with the given query

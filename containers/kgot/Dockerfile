@@ -48,9 +48,9 @@ RUN python3 -m venv venv && . venv/bin/activate && \
 
 RUN . venv/bin/activate && kaleido_get_chrome
 
-# langchain-community may not know this dated model name yet. Add the same
-# pricing entries as gpt-5-mini so get_openai_callback can compute costs.
-RUN venv/bin/python -c "from pathlib import Path; import langchain_community.callbacks.openai_info as oi; path = Path(oi.__file__); text = path.read_text(); marker = '    # GPT-5-mini output\n'; model = '\"gpt-5.4-mini-2026-03-17\"'; insert = '    # GPT-5.4-mini input\n    \"gpt-5.4-mini-2026-03-17\": 0.00075,\n    \"gpt-5.4-mini-2026-03-17-cached\": 0.000075,\n    # GPT-5.4-mini output\n    \"gpt-5.4-mini-2026-03-17-completion\": 0.0045,\n'; text.index(marker) if model not in text else None; path.write_text(text if model in text else text.replace(marker, insert + marker))"
+# langchain-community may not know these model names yet. Add pricing entries
+# so get_openai_callback can compute costs.
+RUN venv/bin/python -c "from pathlib import Path; import langchain_community.callbacks.openai_info as oi; path = Path(oi.__file__); text = path.read_text(); marker = '    # GPT-5-mini output\n'; updates = [('\"gpt-5-mini-2025-08-07\"', '    # GPT-5-mini dated input\n    \"gpt-5-mini-2025-08-07\": 0.00025,\n    \"gpt-5-mini-2025-08-07-cached\": 0.000025,\n    # GPT-5-mini dated output\n    \"gpt-5-mini-2025-08-07-completion\": 0.002,\n'), ('\"gpt-5.4-mini-2026-03-17\"', '    # GPT-5.4-mini input\n    \"gpt-5.4-mini-2026-03-17\": 0.00075,\n    \"gpt-5.4-mini-2026-03-17-cached\": 0.000075,\n    # GPT-5.4-mini output\n    \"gpt-5.4-mini-2026-03-17-completion\": 0.0045,\n'), ('\"gpt-5.6-sol\"', '    # GPT-5.6 Sol input\n    \"gpt-5.6-sol\": 0.005,\n    \"gpt-5.6-sol-cached\": 0.0005,\n    # GPT-5.6 Sol output\n    \"gpt-5.6-sol-completion\": 0.03,\n')]; insert = ''.join(block for model, block in updates if model not in text); text.index(marker) if insert else None; path.write_text(text if not insert else text.replace(marker, insert + marker))"
 
 # The copy process is done later, so that all Python dependencies are installed before copying the code and thus cached if code changes.
 # Copy KGoT code to the container
